@@ -1,0 +1,165 @@
+# ===================================
+# ☁️ Wrangler
+# Production config for cloudflare is done via nitro.cloudflare.wrangler, but NuxtHub still needs wrangler file for local dev. So exclude it in git 
+# ===================================
+wrangler.json
+wrangler.jsonc
+
+# ===================================
+# 👤 User Preferences
+# ===================================
+.DS_Store
+.fleet
+
+# ===================================
+# 📦 Dependencies
+# ===================================
+node_modules/
+jspm_packages/
+bower_components/
+web_modules/
+
+# ===================================
+# 🏗️ Builds / Caches / Artifacts
+# ===================================
+dist/
+coverage/
+coverage
+.nyc_output
+.histoire/
+*.tsbuildinfo
+**/.vitepress/cache/
+**/.vitepress/.temp/
+.eslintcache
+.stylelintcache
+.rpt2_cache/
+.rts2_cache_cjs/
+.rts2_cache_es/
+.rts2_cache_umd/
+.cache
+.parcel-cache
+.temp
+.tmp
+.docusaurus
+.vuepress/dist
+.vuepress/.temp
+.dynamodb/
+.serverless/
+.fusebox/
+.grunt
+.build/
+build/
+build-info.json
+.next
+.nuxt
+.nitro
+.output
+.nitro
+.out
+.out/
+.out/*
+.out
+.out.*
+.unlighthouse
+.data
+registry/
+.registry
+nuxt-build.cpuprofile
+
+# ===================================
+# ⚙️ Dotenv / Config Files
+# ===================================
+.env
+.env.*
+!.env.schema
+!.env.example
+!.env.development
+!.env.preview
+!.env.production
+!.env.next
+!.env.test
+!.env.staging
+!envs/schemas/*
+
+
+# ===================================
+# 🧪 Diagnostic / Reports
+# ===================================
+report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
+
+# ===================================
+# 🪵 Logs
+# ===================================
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+lerna-debug.log*
+.pnpm-debug.log*
+debug
+.clinic
+.code-review.md
+
+# ===================================
+# 🧠 IDE / Editors
+# ===================================
+.devcontainer/
+.idea/
+*.code-workspace
+.history/
+*.sublime-settings
+.*.swp
+.vscode-test
+# Keep VS Code settings (customize as needed)
+# .vscode/*
+# !.vscode/extensions.json
+
+# ===================================
+# 🖥️ Environments / Deployment
+# ===================================
+.gitpod.yml
+.netlify
+.wrangler
+.deno.lock
+.secrets
+.infrastructure/internal-scripts/
+
+# ===================================
+# 🐳 Docker
+# ===================================
+.data
+**/docker-compose*.backup.*
+
+# ===================================
+# 📂 Misc / Temporary
+# ===================================
+TODO
+.tmp
+.pids
+*.pid
+*.seed
+*.pid.lock
+node_repl_history
+package-lock.json
+yarn.lock
+.yarn-integrity
+.yarn/cache
+.yarn/unplugged
+.yarn/build-state.yml
+.yarn/install-state.gz
+.pnp.*
+.pnpm-store
+
+# ===================================
+# 🧰 Internal Tools / Scripts
+# ===================================
+infrastructure/internal-scripts/
+
+# ===================================
+# 🧹 Miscellaneous
+# ===================================
+.DS_Store
+.fleet
+build-info.json
+code-review.md

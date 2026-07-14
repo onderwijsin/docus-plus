@@ -1,0 +1,27 @@
+name: Pull Request
+
+on:
+  pull_request:
+    branches: [main]
+
+permissions:
+  id-token: write
+  contents: read
+  deployments: write
+  issues: write
+  pull-requests: write
+
+concurrency:
+  group: pr-${{ github.event.pull_request.head.ref }}
+  cancel-in-progress: true
+
+jobs:
+  code-quality:
+    uses: ./.github/workflows/code_quality.yml
+    with:
+      runner: blacksmith-4vcpu-ubuntu-2404
+      build-command: pnpm nuxt:prepare
+      build-before-lint: false
+      build-before-typecheck: false
+      typecheck-command: pnpm typecheck
+      lint-command: pnpm lint

@@ -1,0 +1,4 @@
+interface:
+  display_name: "MDC Syntax"
+  short_description: "Write and repair valid Nuxt MDC"
+  default_prompt: "Use $mdc-syntax to validate and repair the MDC in these Markdown files."

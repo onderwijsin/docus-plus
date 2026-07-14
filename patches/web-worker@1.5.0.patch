@@ -1,0 +1,13 @@
+diff --git a/src/node/index.js b/src/node/index.js
+index e41d2ea46a3484ac760e5302ccc5725cdec6834d..6d48def9d3fff534a3f5b3e5ffb86fd55cd8aca2 100644
+--- a/src/node/index.js
++++ b/src/node/index.js
+@@ -138,7 +138,7 @@ function workerThread() {
+ 	if (typeof global.WorkerGlobalScope === 'function') {
+ 		return;
+ 	}
+-	let { mod, name, type } = threads.workerData;
++	let { mod, name, type } = threads.workerData ?? {};
+ 	if (!mod) return mainThread();
+ 
+ 	// turn global into a mock WorkerGlobalScope

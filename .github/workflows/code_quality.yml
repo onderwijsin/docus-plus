@@ -1,0 +1,66 @@
+name: Code Quality
+
+on:
+  workflow_call:
+    inputs:
+      build-command:
+        description: "Build command to run before typechecking"
+        required: false
+        type: string
+      build-before-lint:
+        description: "Whether to build before linting"
+        required: false
+        default: false
+        type: boolean
+      lint-command:
+        description: "Lint command to run instead of default"
+        required: false
+        default: pnpm lint
+        type: string
+      build-before-typecheck:
+        description: "Whether to build before typechecking"
+        required: false
+        default: false
+        type: boolean
+      typecheck-command:
+        description: "Typecheck command to run instead of default"
+        required: false
+        default: pnpm typecheck
+        type: string
+      runner:
+        description: "Runner to execute the job on"
+        required: false
+        default: ubuntu-latest
+        type: string
+
+jobs:
+  lint:
+    runs-on: ${{ inputs.runner }}
+    if: ${{ github.actor != 'dependabot[bot]' }}
+    steps:
+      - uses: actions/checkout@v7
+
+      - name: Setup node, pnpm and install dependencies
+        uses: ./.github/actions/setup
+
+      - name: Build packages before linting
+        if: ${{ inputs.build-command && inputs.build-before-lint }}
+        run: ${{ inputs.build-command }}
+
+      - name: Lint
+        run: ${{ inputs.lint-command }}
+
+  # typecheck:
+  #   runs-on: ${{ inputs.runner }}
+  #   if: ${{ github.actor != 'dependabot[bot]' }}
+  #   steps:
+  #     - uses: actions/checkout@v7
+
+  #     - name: Setup node, pnpm and install dependencies
+  #       uses: ./.github/actions/setup
+
+  #     - name: Build packages before typechecking
+  #       if: ${{ inputs.build-command && inputs.build-before-typecheck }}
+  #       run: ${{ inputs.build-command }}
+  #     - name: Typecheck
+  #       run: ${{ inputs.typecheck-command }}

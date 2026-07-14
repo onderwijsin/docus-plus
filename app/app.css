@@ -1,0 +1,90 @@
+@theme {
+  --font-sans: "Figtree", sans-serif;
+  --font-mono:
+    "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+    "Liberation Mono", "Courier New", monospace;
+
+  --animate-shimmer: shimmer 8s ease-in-out infinite alternate;
+
+  @keyframes shimmer {
+    0% {
+      background-position: 0% center;
+    }
+    100% {
+      background-position: 200% center;
+    }
+  }
+}
+
+:root {
+  --scalar-custom-header-height: var(--ui-header-height);
+  --scalar-font: var(--font-sans);
+  --scalar-font-code: var(--font-mono);
+}
+.dark-mode {
+  color-scheme: dark;
+
+  --scalar-background-1: var(--ui-color-neutral-900) !important;
+  --scalar-background-2: var(--ui-color-neutral-800) !important;
+  --scalar-background-3: var(--ui-color-neutral-700) !important;
+  --scalar-background-accent: var(--ui-color-neutral-700) !important;
+  --scalar-color-1: var(--ui-color-neutral-50) !important;
+  --scalar-color-2: var(--ui-color-neutral-200) !important;
+  --scalar-color-3: var(--ui-color-neutral-400) !important;
+  --scalar-color-accent: var(--ui-color-primary-400) !important;
+  --scalar-border-color: var(--ui-color-neutral-700) !important;
+  --scalar-color-green: var(--ui-color-success-500) !important;
+  --scalar-color-red: var(--ui-color-error-500) !important;
+  --scalar-color-yellow: #fde68a !important;
+  --scalar-color-blue: var(--ui-color-info-500) !important;
+  --scalar-color-orange: var(--ui-color-warning-500) !important;
+  --scalar-color-purple: var(--ui-color-secondary-500) !important;
+}
+.light-mode {
+  --scalar-background-1: #fff;
+  --scalar-background-2: var(--ui-color-neutral-50) !important;
+  --scalar-background-3: var(--ui-color-neutral-100) !important;
+  --scalar-background-accent: var(--ui-color-accented) !important;
+  --scalar-color-1: var(--ui-color-neutral-950) !important;
+  --scalar-color-2: var(--ui-color-neutral-600) !important;
+  --scalar-color-3: var(--ui-color-neutral-500) !important;
+  --scalar-color-accent: var(--ui-color-primary-500) !important;
+  --scalar-border-color: var(--ui-color-neutral-200) !important;
+  --scalar-color-green: var(--ui-color-success-400) !important;
+  --scalar-color-red: var(--ui-color-error-400) !important;
+  --scalar-color-yellow: #f59e0b !important;
+  --scalar-color-blue: var(--ui-color-info-400) !important;
+  --scalar-color-orange: var(--ui-color-warning-400) !important;
+  --scalar-color-purple: var(--ui-color-secondary-400) !important;
+}
+
+/* Hide 'powered by' */
+.scalar-app aside > div:last-child {
+  display: none;
+}
+
+.gradient-text {
+  background-image: linear-gradient(
+    135deg,
+    var(--color-primary-600),
+    var(--color-primary-400),
+    var(--color-primary-300),
+    var(--color-primary-400),
+    var(--color-primary-600)
+  );
+  @apply animate-shimmer bg-size-[200%_auto] bg-clip-text text-transparent;
+}
+.dark {
+  .gradient-text {
+    background-image: linear-gradient(
+      135deg,
+      var(--color-primary-400),
+      var(--color-primary-300),
+      var(--color-primary-200),
+      var(--color-primary-100),
+      var(--color-primary-200),
+      var(--color-primary-300),
+      var(--color-primary-400)
+    );
+  }
+}
