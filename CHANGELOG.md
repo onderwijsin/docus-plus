@@ -1,3 +1,10 @@
+## [1.1.2](https://github.com/onderwijsin/docus-plus/compare/v1.1.1...v1.1.2) (2026-07-14)
+
+
+### Bug Fixes
+
+* Cn import and siteUrl ([1e977cc](https://github.com/onderwijsin/docus-plus/commit/1e977ccbab9af11682b745fed540cfa94e797f05))
+
 ## [1.1.1](https://github.com/onderwijsin/docus-plus/compare/v1.1.0...v1.1.1) (2026-07-14)
 
 
