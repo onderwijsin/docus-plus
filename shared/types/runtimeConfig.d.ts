@@ -10,18 +10,9 @@ declare module "nuxt/schema" {
     mistral: {
       apiKey: string;
     };
-    mailchimp: {
-      apiKey?: string;
-      listId?: string;
-      server?: string;
-    };
   }
   interface SharedPublicRuntimeConfig {
     siteUrl: string;
-    mcp: {
-      siteName: string;
-      siteDescription: string;
-    };
     mode: {
       isDev: boolean;
       isProd: boolean;

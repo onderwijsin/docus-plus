@@ -1,6 +1,6 @@
 import { defineContentConfig, defineCollection, z } from "@nuxt/content";
-import { createOpenApiContentSource } from "./modules/openapi/runtime/openapi-content";
-import { getOpenApiSource, hasOpenApiSource } from "./modules/openapi/runtime/openapi";
+import { createOpenApiContentSource } from "./modules/openapi/build/openapi-content";
+import { getOpenApiSource, hasOpenApiSource } from "./modules/openapi/build/openapi";
 
 import { useNuxt } from "@nuxt/kit";
 import { joinURL } from "ufo";

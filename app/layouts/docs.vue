@@ -1,3 +1,8 @@
+<script setup lang="ts">
+const { public: publicConfig } = useRuntimeConfig();
+const mailchimp = publicConfig.mailchimp;
+</script>
+
 <template>
   <UMain>
     <UContainer>
@@ -10,7 +15,7 @@
         </template>
         <slot />
       </UPage>
-      <InlineNewsletterSignup class="mt-12 mb-6" />
+      <InlineNewsletterSignup v-if="mailchimp.enabled" class="mt-12 mb-6" />
     </UContainer>
   </UMain>
 </template>

@@ -10,8 +10,9 @@ import identity from "./config/identity";
 import { SITE_MCP_BROWSER_REDIRECT, SITE_MCP_ROUTE } from "./config/siteMcp";
 
 // Runtime environments
-const { environment, isDebug, isProd, isPreview, isDev, isTest } =
-  resolveEnvironment(process.env.MODE);
+const { environment, isDebug, isProd, isPreview, isDev, isTest } = resolveEnvironment(
+  process.env.MODE
+);
 
 // Resolve Turnstile keys
 const { turnstileSiteKey, turnstileSecretKey } = resolveTurnstile(environment);
@@ -21,7 +22,7 @@ const appUrl = process.env.NUXT_PUBLIC_SITE_URL;
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   $meta: {
-    name: "docus-plus",
+    name: "docus-plus"
   },
   extends: ["docus"],
   devtools: { enabled: true },
@@ -40,21 +41,21 @@ export default defineNuxtConfig({
       nitroConfig.handlers = nitroConfig.handlers?.filter(
         (handler) =>
           handler?.route !== assistantApiPath ||
-          !String(handler?.handler).includes("/docus/modules/assistant/"),
+          !String(handler?.handler).includes("/docus/modules/assistant/")
       );
-    },
+    }
   },
 
   components: [
     {
       path: join(currentDir, "./app/components"),
-      pathPrefix: false,
-    },
+      pathPrefix: false
+    }
   ],
 
   app: {
     keepalive: true,
-    head: app.head,
+    head: app.head
   },
 
   vite: {
@@ -67,19 +68,19 @@ export default defineNuxtConfig({
         "@unhead/schema-org/vue",
         "class-variance-authority",
         "clsx",
-        "tailwind-merge",
-      ],
-    },
+        "tailwind-merge"
+      ]
+    }
   },
 
   nitro: {
     experimental: {
-      asyncContext: true,
+      asyncContext: true
     },
     minify: !isDebug,
     prerender: {
-      ignore: ["/dev"],
-    },
+      ignore: ["/dev"]
+    }
   },
 
   debug: {
@@ -91,14 +92,14 @@ export default defineNuxtConfig({
     modules: isDebug,
     hooks: {
       server: isDebug,
-      client: isDebug,
-    },
+      client: isDebug
+    }
   },
 
   $development: {
     routeRules: {
-      "/**": { cache: false },
-    },
+      "/**": { cache: false }
+    }
   },
 
   site: {
@@ -107,28 +108,28 @@ export default defineNuxtConfig({
     defaultLocale: "en", // not needed if you have @nuxtjs/i18n installed
     language: "en_US",
     indexable: isProd && process.env.DISABLE_INDEXING !== "true",
-    trailingSlash: false,
+    trailingSlash: false
   },
 
   docus: {
     assistant: {
       // API endpoint path
-      apiPath: "/api/assistent",
-    },
+      apiPath: "/api/assistent"
+    }
   },
 
   mcp: {
     route: SITE_MCP_ROUTE,
-    browserRedirect: SITE_MCP_BROWSER_REDIRECT,
+    browserRedirect: SITE_MCP_BROWSER_REDIRECT
   },
 
   turnstile: {
     siteKey: turnstileSiteKey,
-    secretKey: turnstileSecretKey,
+    secretKey: turnstileSecretKey
   },
 
   schemaOrg: {
-    identity: isTest ? undefined : identity,
+    identity: isTest ? undefined : identity
   },
 
   robots: {
@@ -140,40 +141,38 @@ export default defineNuxtConfig({
           bots: "y",
           "train-ai": "n",
           "ai-output": "y",
-          search: "y",
+          search: "y"
         },
         contentSignal: {
           search: "yes",
           "ai-input": "yes",
-          "ai-train": "no",
-        },
-      },
-    ],
+          "ai-train": "no"
+        }
+      }
+    ]
   },
 
   icon: {
     serverBundle: {
-      collections: ["lucide", "simple-icons", "bxl", "vscode-icons"],
-    },
+      collections: ["lucide", "simple-icons", "bxl", "vscode-icons"]
+    }
   },
 
   fonts: {
     families: [
       { name: "Figtree", weights: [400, 700], global: true },
-      { name: "JetBrains Mono", weights: [400, 700], global: true },
-    ],
+      { name: "JetBrains Mono", weights: [400, 700], global: true }
+    ]
   },
 
   plausible: {
-    domain:
-      process.env.PLAUSIBLE_DOMAIN ||
-      (appUrl ? new URL(appUrl).host : undefined),
+    domain: process.env.PLAUSIBLE_DOMAIN || (appUrl ? new URL(appUrl).host : undefined),
     // https://github.com/nuxt-modules/plausible?tab=readme-ov-file#proxy-configuration
     proxy: true,
     proxyBaseEndpoint: "/api/_plausible",
     ignoredHostnames: ["localhost"],
     autoPageviews: true,
-    autoOutboundTracking: true,
+    autoOutboundTracking: true
   },
 
   healthcheck: {
@@ -181,48 +180,40 @@ export default defineNuxtConfig({
     cache: {
       threshold: {
         warn: 50,
-        error: 200,
-      },
+        error: 200
+      }
     },
-    directus: process.env.DIRECTUS_URL ? {} : false,
-    // directus: {
-    //   threshold: {
-    //     warn: 200,
-    //     error: 1000
-    //   }
-    // }
+    directus: process.env.DIRECTUS_URL
+      ? {
+          threshold: {
+            warn: 200,
+            error: 1000
+          }
+        }
+      : false
   },
 
   runtimeConfig: {
     apiToken: process.env.API_TOKEN,
-    mailchimp: {
-      apiKey: process.env.MAILCHIMP_API_KEY,
-      listId: process.env.MAILCHIMP_LIST,
-      server: process.env.MAILCHIMP_SERVER,
-    },
     mistral: {
-      apiKey: process.env.MISTRAL_API_KEY,
+      apiKey: process.env.MISTRAL_API_KEY
     },
     directus: {
       baseUrl: process.env.DIRECTUS_URL,
-      publicToken: process.env.DIRECTUS_PUBLIC_TOKEN,
+      publicToken: process.env.DIRECTUS_PUBLIC_TOKEN
     },
     public: {
-      mcp: {
-        siteName: "",
-        siteDescription: "",
-      },
       mode: {
         isDev,
         isProd,
         isPreview,
         isDebug,
         isTest,
-        value: environment,
+        value: environment
       },
       tracking: {
-        disabled: process.env.DISABLE_TRACKING === "true",
-      },
-    },
-  },
+        disabled: process.env.DISABLE_TRACKING === "true"
+      }
+    }
+  }
 });

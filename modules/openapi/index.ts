@@ -1,4 +1,4 @@
-import type { ModuleOptions } from "./runtime/types/options";
+import type { ModuleOptions } from "./build/types/options";
 import type { ModuleOptions as ScalarModuleOptions } from "@scalar/nuxt";
 
 import { moduleSetup } from "#layers/docus-plus/config/modules";
@@ -7,7 +7,7 @@ import {
   getOpenApiScalarUrl,
   getOpenApiSource,
   hasOpenApiSource,
-} from "./runtime/openapi";
+} from "./build/openapi";
 import {
   addTypeTemplate,
   createResolver,
@@ -84,7 +84,7 @@ export default defineNuxtModule<ModuleOptions>({
     const resolver = createResolver(import.meta.url);
     addTypeTemplate({
       filename: "types/openapi-config.d.ts",
-      src: resolver.resolve("./runtime/types/config.d.ts"),
+      src: resolver.resolve("./build/types/config.d.ts"),
     });
 
     const isConfigured = isEnabled() && hasOpenApiSource();

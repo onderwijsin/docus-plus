@@ -5,17 +5,6 @@ import { APP_IDENTITY } from "./config/constants";
 export default defineNuxtConfig({
   extends: [".."],
 
-  // css: ["~/app/assets/css/main.css"],
-
-  runtimeConfig: {
-    public: {
-      mcp: {
-        siteName: SITE_MCP_NAME,
-        siteDescription: SITE_MCP_DESCRIPTION,
-      },
-    },
-  },
-
   vite: {
     // plugins: [varlockVitePlugin({ ssrInjectMode: "auto-load" })],
   },

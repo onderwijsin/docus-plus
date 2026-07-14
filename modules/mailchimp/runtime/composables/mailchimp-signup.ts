@@ -1,8 +1,8 @@
-import type { MailchimpSubscriberSchema } from "#layers/docus-plus/schema/mailchimp/subscribe";
-import type { SubmitMailchimpSignupOptions } from "#layers/docus-plus/app/types/mailchimp";
+import type { MailchimpSubscriberSchema } from "../schema/subscribe";
+import type { SubmitMailchimpSignupOptions } from "../types/mailchimp";
 
 import { SECURITY_HEADERS } from "#layers/docus-plus/config/constants";
-import { mailchimpSubscribeErrorDataSchema } from "#layers/docus-plus/schema/mailchimp/errors";
+import { mailchimpSubscribeErrorDataSchema } from "../schema/errors";
 import { getIcon } from "#layers/docus-plus/shared/utils/icons";
 
 /**
@@ -25,7 +25,7 @@ export function useMailchimpSignup() {
     reset: resetTurnstile,
     showPendingHint,
     showMissingTokenErrorHint,
-    captureTurnstileError,
+    captureTurnstileError
   } = useTurnstile();
 
   const toast = useToast();
@@ -41,7 +41,7 @@ export function useMailchimpSignup() {
    */
   async function submitMailchimpSignup(
     formData: MailchimpSubscriberSchema,
-    options?: SubmitMailchimpSignupOptions,
+    options?: SubmitMailchimpSignupOptions
   ): Promise<void> {
     isSubmitting.value = true;
 
@@ -61,17 +61,16 @@ export function useMailchimpSignup() {
         body: formData,
         headers: token
           ? {
-              [SECURITY_HEADERS.turnstileToken]: token,
+              [SECURITY_HEADERS.turnstileToken]: token
             }
-          : undefined,
+          : undefined
       });
 
       toast.add({
         title: "You're in!",
-        description:
-          "Thanks for signing up! You'll receive updates from us soon.",
+        description: "Thanks for signing up! You'll receive updates from us soon.",
         color: "success",
-        icon: getIcon("success"),
+        icon: getIcon("success")
       });
 
       isDone.value = true;
@@ -81,8 +80,7 @@ export function useMailchimpSignup() {
       }
 
       const mailchimpError = parseMailchimpSubscribeError(error);
-      const isMemberExistsError =
-        mailchimpError?.code === "MAILCHIMP_MEMBER_EXISTS";
+      const isMemberExistsError = mailchimpError?.code === "MAILCHIMP_MEMBER_EXISTS";
 
       if (!isMemberExistsError) {
         console.error("Error submitting form:", error);
@@ -96,7 +94,7 @@ export function useMailchimpSignup() {
         title: "Something went wrong",
         description: "We couldn't sign you up. Please try again later.",
         color: "error",
-        icon: getIcon("warn"),
+        icon: getIcon("warn")
       });
     } finally {
       isSubmitting.value = false;
@@ -108,7 +106,7 @@ export function useMailchimpSignup() {
     turnstileToken,
     isSubmitting,
     isDone,
-    submitMailchimpSignup,
+    submitMailchimpSignup
   };
 }
 
@@ -120,10 +118,7 @@ export function useMailchimpSignup() {
  * @param getIcon - Icon resolver used by the project icon system.
  * @returns `true` when a toast was shown for a recognized Mailchimp error.
  */
-function showMailchimpErrorToast(
-  error: unknown,
-  toast: ReturnType<typeof useToast>,
-): boolean {
+function showMailchimpErrorToast(error: unknown, toast: ReturnType<typeof useToast>): boolean {
   const mailchimpError = parseMailchimpSubscribeError(error);
   if (!mailchimpError) {
     return false;
@@ -134,7 +129,7 @@ function showMailchimpErrorToast(
       title: "You're already subscribed",
       description: "This email address is already in our newsletter.",
       color: "warning",
-      icon: getIcon("warn"),
+      icon: getIcon("warn")
     });
     return true;
   }
@@ -144,7 +139,7 @@ function showMailchimpErrorToast(
       title: "Sign up failed",
       description: mailchimpError.detail ?? "Check your details and try again.",
       color: "warning",
-      icon: getIcon("warn"),
+      icon: getIcon("warn")
     });
     return true;
   }
@@ -153,7 +148,7 @@ function showMailchimpErrorToast(
     title: "Something went wrong",
     description: "Please try again later.",
     color: "error",
-    icon: getIcon("error"),
+    icon: getIcon("error")
   });
   return true;
 }
