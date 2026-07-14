@@ -1,14 +1,14 @@
 import { TURNSTILE_ACTIONS } from "#layers/docus-plus/config/constants";
-import { mailchimpSubscriberSchema } from "#layers/docus-plus/schema/mailchimp/subscribe";
+import { mailchimpSubscriberSchema } from "../../../schema/subscribe";
 import { assertTurnstileToken } from "#layers/docus-plus/modules/turnstile/runtime/server/utils/turnstile";
 import { useApiResponse } from "#layers/docus-plus/server/utils/api";
-import { subscribeToMailchimp } from "#layers/docus-plus/server/utils/mailchimp/subscribe";
+import { subscribeToMailchimp } from "../../utils/mailchimp/subscribe";
 import { z } from "zod";
 
 const mailchimpConfig = z.object({
   apiKey: z.string(),
   listId: z.string(),
-  server: z.string(),
+  server: z.string()
 });
 
 export default defineEventHandler(async (event) => {
@@ -19,7 +19,7 @@ export default defineEventHandler(async (event) => {
     throw createError({
       statusCode: 500,
       statusMessage: "Mailchimp API key not configured",
-      data: z.treeifyError(error),
+      data: z.treeifyError(error)
     });
   }
 
@@ -32,16 +32,13 @@ export default defineEventHandler(async (event) => {
     throw createError({
       statusCode: 400,
       statusMessage: "Invalid data",
-      data: z.treeifyError(parsed.error),
+      data: z.treeifyError(parsed.error)
     });
   }
 
-  const response = await subscribeToMailchimp(
-    parsed.data,
-    useRuntimeConfig(event).mailchimp,
-  );
+  const response = await subscribeToMailchimp(parsed.data, useRuntimeConfig(event).mailchimp);
 
   return useApiResponse({
-    message: response,
+    message: response
   });
 });

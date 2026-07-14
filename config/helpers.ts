@@ -35,7 +35,7 @@ export function resolveEnvironment(value: string | undefined) {
     isProd,
     isPreview,
     isDev,
-    isTest,
+    isTest
   };
 }
 
@@ -50,8 +50,7 @@ export function resolveTurnstile(environment: Environment) {
   const isDevelopment = environment === "development";
 
   const turnstileSiteKey =
-    process.env.TURNSTILE_SITE_KEY ??
-    (isDevelopment ? "1x00000000000000000000BB" : undefined);
+    process.env.TURNSTILE_SITE_KEY ?? (isDevelopment ? "1x00000000000000000000BB" : undefined);
   const turnstileSecretKey =
     process.env.TURNSTILE_SECRET_KEY ??
     (isDevelopment ? "1x0000000000000000000000000000000AA" : undefined);

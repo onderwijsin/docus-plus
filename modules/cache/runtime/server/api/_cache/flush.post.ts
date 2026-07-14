@@ -4,11 +4,7 @@ import { joinURL } from "ufo";
 import { z } from "zod";
 
 import { flushSchema } from "../../../utils/schema";
-import {
-  deleteCacheKeys,
-  getCacheKeysByPath,
-  normalizeSegment,
-} from "../../utils/storage";
+import { deleteCacheKeys, getCacheKeysByPath, normalizeSegment } from "../../utils/storage";
 
 /**
  * Flushes targeted cache entries from CMS events.
@@ -21,7 +17,7 @@ export default defineEventHandler(async (event) => {
   if (!config.endpoints?.flush) {
     throw createError({
       statusCode: 403,
-      statusMessage: "Flush endpoint is disabled",
+      statusMessage: "Flush endpoint is disabled"
     });
   }
 
@@ -34,7 +30,7 @@ export default defineEventHandler(async (event) => {
     throw createError({
       statusCode: 400,
       statusMessage: "Invalid payload schema",
-      data: z.treeifyError(bodyResult.error),
+      data: z.treeifyError(bodyResult.error)
     });
   }
 
@@ -42,7 +38,7 @@ export default defineEventHandler(async (event) => {
   if (!cacheMap) {
     throw createError({
       statusCode: 403,
-      statusMessage: "Cache map not configured",
+      statusMessage: "Cache map not configured"
     });
   }
 

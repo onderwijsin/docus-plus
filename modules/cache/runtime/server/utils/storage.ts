@@ -5,7 +5,7 @@ import {
   getStorageKeys,
   getStorageKeysByPath,
   normalizeStorageSegment,
-  toStorageBaseKey,
+  toStorageBaseKey
 } from "#layers/docus-plus/server/utils/storage";
 
 import { toMetaKey } from "../../drivers/utils.mjs";
@@ -130,9 +130,6 @@ export async function clearEntireCache(): Promise<number> {
  * @param path - Route path used to locate related cache records.
  * @returns Matching cache keys to invalidate.
  */
-export async function getCacheKeysByPath(
-  base: string,
-  path: string,
-): Promise<string[]> {
+export async function getCacheKeysByPath(base: string, path: string): Promise<string[]> {
   return getStorageKeysByPath(CACHE_BASE, base, path);
 }

@@ -1,17 +1,18 @@
 import { getIcon } from "#layers/docus-plus/shared/utils/icons";
+import type { AppConfigInput } from "nuxt/schema";
 
 export default defineAppConfig({
   publisher: {
     name: "Stichting Onderwijs in",
     url: "https://onderwijsin.nl",
-    contact: "https://onderwijsin.nl/contact",
+    contact: "https://onderwijsin.nl/contact"
   },
 
   search: {
-    fts: true,
+    fts: true
   },
   socials: {
-    github: "https://github.com/onderwijsin",
+    github: "https://github.com/onderwijsin"
   },
   // @ts-expect-error upstream type mismatch
   github: false,
@@ -26,34 +27,34 @@ export default defineAppConfig({
           icon: getIcon("mail"),
           label: "Newsletter",
           to: "https://onderwijsin.nl/nieuwsbrief",
-          target: "_blank",
-        },
-      ],
-    },
+          target: "_blank"
+        }
+      ]
+    }
   },
   assistant: {
     // Show the floating input on documentation pages
     floatingInput: true,
     // Show the "Explain with AI" button in the sidebar
-    explainWithAi: true,
+    explainWithAi: true
   },
 
   ui: {
     colors: {
-      neutral: "zinc",
+      neutral: "zinc"
     },
     page: {
       slots: {
         root: "flex flex-col lg:grid lg:grid-cols-10 lg:gap-10",
         left: "lg:col-span-2",
         center: "lg:col-span-8",
-        right: "lg:col-span-2 order-first lg:order-last",
-      },
+        right: "lg:col-span-2 order-first lg:order-last"
+      }
     },
     footer: {
       slots: {
-        root: "relative",
-      },
-    },
-  },
+        root: "relative"
+      }
+    }
+  } as unknown as AppConfigInput["ui"]
 });

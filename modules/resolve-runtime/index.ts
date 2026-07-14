@@ -1,7 +1,4 @@
-import type {
-  ModuleOptions,
-  ResolvedModuleOptions,
-} from "./runtime/types/options";
+import type { ModuleOptions, ResolvedModuleOptions } from "./runtime/types/options";
 import { moduleSetup, usePrepareMode } from "#layers/docus-plus/config/modules";
 
 import {
@@ -9,7 +6,7 @@ import {
   createResolver,
   defineNuxtModule,
   extendRouteRules,
-  useLogger,
+  useLogger
 } from "@nuxt/kit";
 import { defu } from "defu";
 
@@ -20,7 +17,7 @@ const MODULE_KEY = "resolveRuntime";
 const LOG_SCOPE = "resolve-runtime";
 
 const DEFAULTS = {
-  enabled: true,
+  enabled: true
 } satisfies Partial<ModuleOptions>;
 
 /**
@@ -31,8 +28,8 @@ export default defineNuxtModule<ModuleOptions>({
     name: MODULE_NAME,
     configKey: MODULE_KEY,
     compatibility: {
-      nuxt: "^3.0.0 || ^4.0.0",
-    },
+      nuxt: "^3.0.0 || ^4.0.0"
+    }
   },
   defaults: DEFAULTS,
   setup(userOptions, nuxt) {
@@ -43,7 +40,7 @@ export default defineNuxtModule<ModuleOptions>({
       MODULE_KEY,
       userOptions,
       DEFAULTS,
-      log,
+      log
     );
 
     start();
@@ -72,11 +69,11 @@ export default defineNuxtModule<ModuleOptions>({
           extendRouteRules(route, {
             cache: {
               maxAge: lifetime,
-              swr: true,
+              swr: true
             },
             headers: {
-              "cache-control": cacheControlHeader,
-            },
+              "cache-control": cacheControlHeader
+            }
           });
         }
       }
@@ -84,9 +81,9 @@ export default defineNuxtModule<ModuleOptions>({
 
     addTypeTemplate({
       filename: "types/resolve-runtime-config.d.ts",
-      src: resolver.resolve(runtimeDir, "types/config.d.ts"),
+      src: resolver.resolve(runtimeDir, "types/config.d.ts")
     });
 
     end();
-  },
+  }
 });

@@ -1,4 +1,5 @@
 import type { Environment } from "./environment";
+import type { AssistantAiConfig } from "./ai";
 
 declare module "nuxt/schema" {
   interface SharedRuntimeConfig {
@@ -10,18 +11,10 @@ declare module "nuxt/schema" {
     mistral: {
       apiKey: string;
     };
-    mailchimp: {
-      apiKey?: string;
-      listId?: string;
-      server?: string;
-    };
+    ai: AssistantAiConfig;
   }
   interface SharedPublicRuntimeConfig {
     siteUrl: string;
-    mcp: {
-      siteName: string;
-      siteDescription: string;
-    };
     mode: {
       isDev: boolean;
       isProd: boolean;

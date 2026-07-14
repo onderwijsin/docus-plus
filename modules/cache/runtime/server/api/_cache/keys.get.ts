@@ -22,7 +22,7 @@ export default defineEventHandler(async (event) => {
     throw createError({
       statusCode: 400,
       statusMessage: "Invalid query parameters",
-      data: z.treeifyError(queryResult.error),
+      data: z.treeifyError(queryResult.error)
     });
   }
 
@@ -36,8 +36,8 @@ export default defineEventHandler(async (event) => {
   const keysWithMetadata = await Promise.all(
     keys.map(async (key) => ({
       key: toFullCacheKey(key),
-      metadata: (await storage.getMeta(key)) ?? null,
-    })),
+      metadata: (await storage.getMeta(key)) ?? null
+    }))
   );
 
   return useApiResponse(keysWithMetadata);

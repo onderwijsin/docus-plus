@@ -3,20 +3,20 @@
 # Docus Plus
 
 `docus-plus` is a reusable Nuxt layer for building documentation sites with Nuxt 4, Docus, and
-Nuxt Content. It provides the shared documentation layout, styling, search, assistant integration,
-optional API-reference support, and small Nuxt modules that can be reused by multiple sites.
+Nuxt Content. It provides an opinionated approach to Docus, and extends it with Scalar API referenced,
+enhanced search, and Vercel Gateway-free assistant integration.
 
 The repository is the layer itself. The `.playground/` application is the reference implementation
 for consuming and customising it.
 
 ## Create a documentation site
 
-Start with a Nuxt 4 application and install the dependencies used by the layer. Then extend the
+Start with a fresh Nuxt 4 project and extend the
 published layer from your project's `nuxt.config.ts`:
 
 ```ts
 export default defineNuxtConfig({
-  extends: ["github:onderwijsin/docus-plus@v0.0.1"],
+  extends: [["github:onderwijsin/docus-plus@v0.0.1", { install: true }]]
 });
 ```
 
@@ -77,25 +77,17 @@ integrations you enable, but the playground demonstrates the shared identity con
 export default defineNuxtConfig({
   site: {
     name: "Example Docs",
-    description: "Documentation for the Example platform.",
+    description: "Documentation for the Example platform."
   },
   mcp: {
     name: "Example Docs MCP",
-    description: "Read-only documentation discovery for Example Docs.",
-  },
-  runtimeConfig: {
-    public: {
-      mcp: {
-        siteName: "Example Docs MCP",
-        siteDescription: "Read-only documentation discovery for Example Docs.",
-      },
-    },
-  },
+    description: "Read-only documentation discovery for Example Docs."
+  }
 });
 ```
 
 If your site publishes structured organization metadata, provide your own `schemaOrg.identity`
-value as well. Do not inherit the layer's default organization identity for a different brand.
+value as well. Do not inherit the layer's default organization (Stichting Onderwijs in) identity for a different brand.
 
 ### Configure the UI
 
@@ -108,17 +100,43 @@ export default defineAppConfig({
   github: {
     owner: "example",
     name: "example-docs",
-    url: "https://github.com/example/example-docs",
+    url: "https://github.com/example/example-docs"
   },
   ui: {
-    colors: { primary: "indigo", neutral: "slate" },
+    colors: { primary: "brand", neutral: "slate" }
   },
   assistant: {
     floatingInput: true,
-    explainWithAi: true,
-  },
+    explainWithAi: true
+  }
 });
 ```
+
+### Configure the assistant
+
+Override AI behavior from the consuming app's `nuxt.config.ts` with the `ai` prop. Defaults
+include the Mistral medium model, high reasoning, an 8,000-token output limit, two retries, and up
+to ten tool-calling steps.
+
+```ts
+export default defineNuxtConfig({
+  ai: {
+    model: "mistral-large-latest",
+    reasoning: "high",
+    maxOutputTokens: 12000,
+    maxRetries: 3,
+    maxSteps: 12,
+    temperature: 0.2,
+    providerOptions: {
+      gateway: { caching: "auto" }
+    },
+    systemPrompt: "You are the documentation assistant for Example Docs."
+  }
+});
+```
+
+The `systemPrompt` value replaces the generated documentation-aware prompt when provided.
+See the [assistant configuration reference](docs/assistant.md) for all available options.
 
 ### Add your design tokens
 
@@ -129,6 +147,7 @@ the layer's base styles and tokens while allowing your site to add or override t
 @import "#layers/docus-plus/app/app.css";
 
 @theme {
+  /* Add your tailwind theme tokens here */
   --color-brand-500: oklch(60% 0.2 250);
 }
 ```
@@ -170,9 +189,9 @@ runtime or feature is enabled.
 | `PLAUSIBLE_DOMAIN`              | string                                         | No                                            |
 | `DISABLE_TRACKING`              | boolean                                        | No                                            |
 | `DISABLE_INDEXING`              | boolean                                        | No                                            |
-| `MAILCHIMP_API_KEY`             | string, sensitive                              | Yes                                           |
-| `MAILCHIMP_LIST`                | string                                         | Yes                                           |
-| `MAILCHIMP_SERVER`              | string                                         | Yes                                           |
+| `MAILCHIMP_API_KEY`             | string, sensitive                              | No                                            |
+| `MAILCHIMP_LIST`                | string                                         | No                                            |
+| `MAILCHIMP_SERVER`              | string                                         | No                                            |
 | `TURNSTILE_SITE_KEY`            | string                                         | No                                            |
 | `TURNSTILE_SECRET_KEY`          | string, sensitive                              | No                                            |
 | `MISTRAL_API_KEY`               | string, sensitive                              | Yes                                           |
@@ -203,6 +222,11 @@ runtime or feature is enabled.
 | `VITEST`                        | boolean                                        | No                                            |
 | `NUXT_TEST`                     | boolean                                        | No                                            |
 | `NODE_ENV`                      | `development \| test \| production`            | No                                            |
+
+Mailchimp is optional. The Mailchimp module is disabled when any of
+`MAILCHIMP_API_KEY`, `MAILCHIMP_LIST`, or `MAILCHIMP_SERVER` is missing, and its `/api/mailchimp`
+server route is not registered in that case. When all three values are set, the newsletter signup
+is enabled automatically.
 
 The schema also uses `VARLOCK_IS_CI` internally when Varlock is running in CI. `NITRO_PRESET` selects
 the deployment path supported by the layer:

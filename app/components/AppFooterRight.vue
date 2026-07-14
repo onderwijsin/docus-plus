@@ -10,22 +10,20 @@ interface FooterLink {
 }
 
 const links = computed<FooterLink[]>(() => {
-  const socialLinks = Object.entries(appConfig.socials || {}).flatMap(
-    ([key, url]) => {
-      if (typeof url !== "string" || !url) {
-        return [];
-      }
+  const socialLinks = Object.entries(appConfig.socials || {}).flatMap(([key, url]) => {
+    if (typeof url !== "string" || !url) {
+      return [];
+    }
 
-      return [
-        {
-          icon: `i-simple-icons-${key}`,
-          to: url,
-          target: "_blank" as const,
-          "aria-label": `${key} social link`,
-        },
-      ];
-    },
-  );
+    return [
+      {
+        icon: `i-simple-icons-${key}`,
+        to: url,
+        target: "_blank" as const,
+        "aria-label": `${key} social link`
+      }
+    ];
+  });
 
   const githubLink =
     appConfig.github && appConfig.github.url
@@ -34,8 +32,8 @@ const links = computed<FooterLink[]>(() => {
             icon: getIcon("github"),
             to: appConfig.github.url,
             target: "_blank" as const,
-            "aria-label": "GitHub repository",
-          },
+            "aria-label": "GitHub repository"
+          }
         ]
       : [];
 

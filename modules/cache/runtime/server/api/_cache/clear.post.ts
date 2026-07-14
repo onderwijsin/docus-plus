@@ -2,15 +2,8 @@ import { useApiResponse } from "#layers/docus-plus/server/utils/api";
 import { isAdmin } from "#layers/docus-plus/server/utils/security/admin";
 import { z } from "zod";
 
-import {
-  cacheClearBodySchema,
-  cacheClearQuerySchema,
-} from "../../../utils/schema";
-import {
-  clearCacheBase,
-  clearEntireCache,
-  normalizeSegment,
-} from "../../utils/storage";
+import { cacheClearBodySchema, cacheClearQuerySchema } from "../../../utils/schema";
+import { clearCacheBase, clearEntireCache, normalizeSegment } from "../../utils/storage";
 
 /**
  * Clears cache content.
@@ -28,18 +21,18 @@ export default defineEventHandler(async (event) => {
     throw createError({
       statusCode: 400,
       statusMessage: "Invalid query parameters",
-      data: z.treeifyError(queryResult.error),
+      data: z.treeifyError(queryResult.error)
     });
   }
 
   const bodyResult = cacheClearBodySchema.safeParse(
-    (await readBody(event).catch(() => ({}))) ?? {},
+    (await readBody(event).catch(() => ({}))) ?? {}
   );
   if (!bodyResult.success) {
     throw createError({
       statusCode: 400,
       statusMessage: "Invalid body",
-      data: z.treeifyError(bodyResult.error),
+      data: z.treeifyError(bodyResult.error)
     });
   }
 
@@ -51,9 +44,7 @@ export default defineEventHandler(async (event) => {
     : [];
 
   const bases = (
-    bodyResult.data.bases && bodyResult.data.bases.length
-      ? bodyResult.data.bases
-      : queryBases
+    bodyResult.data.bases && bodyResult.data.bases.length ? bodyResult.data.bases : queryBases
   )
     .map((base: string) => normalizeSegment(base))
     .filter(Boolean);
@@ -66,12 +57,12 @@ export default defineEventHandler(async (event) => {
   const results = await Promise.all(
     bases.map(async (base) => ({
       base,
-      cleared: await clearCacheBase(base),
-    })),
+      cleared: await clearCacheBase(base)
+    }))
   );
 
   return useApiResponse({
     message: "Cache cleared.",
-    bases: results,
+    bases: results
   });
 });

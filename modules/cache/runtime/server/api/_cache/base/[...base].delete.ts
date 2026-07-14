@@ -14,13 +14,13 @@ export default defineEventHandler(async (event) => {
   }
 
   const paramResult = cacheBaseParamSchema.safeParse({
-    base: getRouterParam(event, "base") ?? "",
+    base: getRouterParam(event, "base") ?? ""
   });
   if (!paramResult.success) {
     throw createError({
       statusCode: 400,
       statusMessage: "Invalid base",
-      data: z.treeifyError(paramResult.error),
+      data: z.treeifyError(paramResult.error)
     });
   }
 

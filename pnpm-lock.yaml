@@ -8,6 +8,7 @@ overrides:
   web-worker: 1.5.0
 
 patchedDependencies:
+  docus@5.12.3: 433981ee80e815546eef658af361e9f585f28ddec7fc47ccf934f79d859a2fb2
   web-worker@1.5.0: 859cc5fa70f7b2f4f2150f192c460ed4750088378cad4c9b8dafafa0e2b4df2c
 
 importers:
@@ -73,7 +74,7 @@ importers:
         version: 3.4.2
       docus:
         specifier: ^5.12.3
-        version: 5.12.3(47adfa859b1e3710ade711119f659b91)
+        version: 5.12.3(patch_hash=433981ee80e815546eef658af361e9f585f28ddec7fc47ccf934f79d859a2fb2)(47adfa859b1e3710ade711119f659b91)
       nuxt-schema-org:
         specifier: ^6.2.3
         version: 6.2.3(@nuxt/schema@4.4.8)(@unhead/vue@2.1.15(vue@3.5.39(typescript@6.0.3)))(magicast@0.5.3)(nuxt@4.4.8(@babel/plugin-syntax-jsx@7.29.7(@babel/core@7.29.7))(@babel/plugin-syntax-typescript@7.29.7(@babel/core@7.29.7))(@parcel/watcher@2.5.6)(@types/node@24.13.3)(@vue/compiler-sfc@3.5.39)(better-sqlite3@12.11.1)(cac@6.7.14)(db0@0.3.4(better-sqlite3@12.11.1))(esbuild@0.28.1)(eslint@10.7.0(jiti@2.7.0))(ioredis@5.11.1)(lightningcss@1.32.0)(magicast@0.5.3)(meow@13.2.0)(optionator@0.9.4)(oxlint@1.73.0)(rollup-plugin-visualizer@7.0.1(rollup@4.62.2))(rollup@4.62.2)(srvx@0.11.22)(terser@5.49.0)(typescript@6.0.3)(vite@7.3.6(@types/node@24.13.3)(jiti@2.7.0)(lightningcss@1.32.0)(terser@5.49.0)(yaml@2.9.0))(vue-tsc@3.3.7(typescript@6.0.3))(yaml@2.9.0))(unhead@2.1.15)(vite@7.3.6(@types/node@24.13.3)(jiti@2.7.0)(lightningcss@1.32.0)(terser@5.49.0)(yaml@2.9.0))(vue@3.5.39(typescript@6.0.3))(zod@4.4.3)
@@ -132,9 +133,6 @@ importers:
       eslint:
         specifier: ^10.4.1
         version: 10.7.0(jiti@2.7.0)
-      husky:
-        specifier: ^9.1.7
-        version: 9.1.7
       lint-staged:
         specifier: ^17.0.8
         version: 17.0.8
@@ -6522,11 +6520,6 @@ packages:
   human-signals@8.0.1:
     resolution: {integrity: sha512-eKCa6bwnJhvxj14kZk5NCPc6Hb6BdsU9DZcOnmQKSnO1VKrfV0zCvtttPZUsBvjmNDn8rpcJfpwSYnHBjc95MQ==}
     engines: {node: '>=18.18.0'}
-
-  husky@9.1.7:
-    resolution: {integrity: sha512-5gs5ytaNjBrh5Ow3zrvdUUY+0VxIuWVL4i9irt6friV+BqdCfmV11CQTWMiBYWHbXhco+J1kHfTOUkePhCDvMA==}
-    engines: {node: '>=18'}
-    hasBin: true
 
   iconv-lite@0.7.3:
     resolution: {integrity: sha512-IKXpvIzjnC9XTAUbVBcMfGS0EPaIXtW6v+zr+RRp+hqULEpo0owZax6wyRwPOJbWbzjYspQwusTsfVr0ifh4uQ==}
@@ -15302,7 +15295,7 @@ snapshots:
     dependencies:
       path-type: 4.0.0
 
-  docus@5.12.3(47adfa859b1e3710ade711119f659b91):
+  docus@5.12.3(patch_hash=433981ee80e815546eef658af361e9f585f28ddec7fc47ccf934f79d859a2fb2)(47adfa859b1e3710ade711119f659b91):
     dependencies:
       '@ai-sdk/gateway': 3.0.148(zod@4.4.3)
       '@ai-sdk/mcp': 1.0.61(zod@4.4.3)
@@ -16637,8 +16630,6 @@ snapshots:
   human-signals@5.0.0: {}
 
   human-signals@8.0.1: {}
-
-  husky@9.1.7: {}
 
   iconv-lite@0.7.3:
     dependencies:

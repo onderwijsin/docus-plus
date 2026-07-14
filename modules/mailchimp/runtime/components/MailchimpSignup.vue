@@ -1,17 +1,14 @@
 <script lang="ts" setup>
 import { TURNSTILE_ACTIONS } from "#layers/docus-plus/config/constants";
-import {
-  baseSubscriberSchema,
-  type MailchimpBaseSubscriberSchema,
-} from "#layers/docus-plus/schema/mailchimp/subscribe";
+import { useMailchimpSignup } from "../composables/mailchimp-signup";
+import { baseSubscriberSchema, type MailchimpBaseSubscriberSchema } from "../schema/subscribe";
 import type { FormSubmitEvent } from "@nuxt/ui";
 
 const turnstileRef = useTemplateRef("turnstile");
 const form = useTemplateRef("form");
 const input = useTemplateRef("input");
 
-const { turnstileToken, isSubmitting, isDone, submitMailchimpSignup } =
-  useMailchimpSignup();
+const { turnstileToken, isSubmitting, isDone, submitMailchimpSignup } = useMailchimpSignup();
 const hasErrors = computed(() => !!form.value?.errors.length);
 
 type RichSchema = Record<
@@ -21,12 +18,12 @@ type RichSchema = Record<
 
 const richSchema: RichSchema = {
   email: { label: "Email", placeholder: "Your email", fieldType: "email" },
-  name: { label: "Naam", placeholder: "Your name", fieldType: "text" },
+  name: { label: "Naam", placeholder: "Your name", fieldType: "text" }
 };
 
 const state = reactive<MailchimpBaseSubscriberSchema>({
   email: "",
-  name: "",
+  name: ""
 });
 
 const currentFieldTarget = ref<keyof MailchimpBaseSubscriberSchema>("email");
@@ -38,7 +35,7 @@ const activeModel = computed({
   get: () => state[currentFieldTarget.value],
   set: (value: string) => {
     state[currentFieldTarget.value] = value;
-  },
+  }
 });
 
 /**
@@ -51,9 +48,7 @@ async function setNext() {
   const keys = Object.keys(state) as (keyof MailchimpBaseSubscriberSchema)[];
   const currentIndex = keys.indexOf(currentFieldTarget.value);
   if (currentIndex < keys.length - 1) {
-    currentFieldTarget.value = keys[
-      currentIndex + 1
-    ] as keyof MailchimpBaseSubscriberSchema;
+    currentFieldTarget.value = keys[currentIndex + 1] as keyof MailchimpBaseSubscriberSchema;
     // Make sure the input field is focussed again
     input.value?.inputRef?.focus();
   }
@@ -61,7 +56,7 @@ async function setNext() {
 
 async function onSubmit(event: FormSubmitEvent<MailchimpBaseSubscriberSchema>) {
   await submitMailchimpSignup(event.data, {
-    turnstileInstance: turnstileRef.value as { reset: () => void },
+    turnstileInstance: turnstileRef.value as { reset: () => void }
   });
 }
 </script>
@@ -79,7 +74,7 @@ async function onSubmit(event: FormSubmitEvent<MailchimpBaseSubscriberSchema>) {
       v-model="turnstileToken"
       :options="{
         action: TURNSTILE_ACTIONS.mailchimp,
-        appearance: 'interaction-only',
+        appearance: 'interaction-only'
       }"
       class="pointer-events-none absolute h-0 w-0 overflow-hidden opacity-0"
     />
@@ -102,9 +97,7 @@ async function onSubmit(event: FormSubmitEvent<MailchimpBaseSubscriberSchema>) {
         variant="outline"
         color="neutral"
         class="w-full"
-        @keydown.enter.prevent="
-          buttonAction === 'set-next' ? setNext() : form?.submit()
-        "
+        @keydown.enter.prevent="buttonAction === 'set-next' ? setNext() : form?.submit()"
       />
     </UFormField>
     <div
@@ -120,7 +113,7 @@ async function onSubmit(event: FormSubmitEvent<MailchimpBaseSubscriberSchema>) {
         :ui="{
           base: 'py-2 px-1.5 sm:px-4',
           label: 'hidden sm:inline',
-          trailingIcon: 'ms-0 sm:ms-auto',
+          trailingIcon: 'ms-0 sm:ms-auto'
         }"
         :trailing-icon="getIcon(buttonAction === 'set-next' ? 'right' : 'mail')"
         :label="buttonAction === 'set-next' ? 'Next' : 'Sign up'"

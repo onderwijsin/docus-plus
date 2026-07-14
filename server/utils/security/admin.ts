@@ -18,6 +18,6 @@ export function isAdmin(event: H3Event): boolean {
   return hasMatchingRequestToken(
     event,
     useRuntimeConfig(event).apiToken,
-    SECURITY_HEADERS.adminToken,
+    SECURITY_HEADERS.adminToken
   );
 }
