@@ -1,3 +1,5 @@
+![Stichting Onderwijs in](./public/onderwijsin_banner.png)
+
 # Docus Plus
 
 `docus-plus` is a reusable Nuxt layer for building documentation sites with Nuxt 4, Docus, and
@@ -14,7 +16,7 @@ published layer from your project's `nuxt.config.ts`:
 
 ```ts
 export default defineNuxtConfig({
-  extends: ["github:onderwijsin/docus-plus@v0.0.1"]
+  extends: ["github:onderwijsin/docus-plus@v0.0.1"],
 });
 ```
 
@@ -75,20 +77,20 @@ integrations you enable, but the playground demonstrates the shared identity con
 export default defineNuxtConfig({
   site: {
     name: "Example Docs",
-    description: "Documentation for the Example platform."
+    description: "Documentation for the Example platform.",
   },
   mcp: {
     name: "Example Docs MCP",
-    description: "Read-only documentation discovery for Example Docs."
+    description: "Read-only documentation discovery for Example Docs.",
   },
   runtimeConfig: {
     public: {
       mcp: {
         siteName: "Example Docs MCP",
-        siteDescription: "Read-only documentation discovery for Example Docs."
-      }
-    }
-  }
+        siteDescription: "Read-only documentation discovery for Example Docs.",
+      },
+    },
+  },
 });
 ```
 
@@ -106,15 +108,15 @@ export default defineAppConfig({
   github: {
     owner: "example",
     name: "example-docs",
-    url: "https://github.com/example/example-docs"
+    url: "https://github.com/example/example-docs",
   },
   ui: {
-    colors: { primary: "indigo", neutral: "slate" }
+    colors: { primary: "indigo", neutral: "slate" },
   },
   assistant: {
     floatingInput: true,
-    explainWithAi: true
-  }
+    explainWithAi: true,
+  },
 });
 ```
 
