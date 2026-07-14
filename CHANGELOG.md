@@ -1,3 +1,16 @@
+# [1.1.0](https://github.com/onderwijsin/docus-plus/compare/v1.0.1...v1.1.0) (2026-07-14)
+
+
+### Bug Fixes
+
+* Add npm token ([293b0b3](https://github.com/onderwijsin/docus-plus/commit/293b0b3f3f9fbdf384b38d98a7cbaf5c27099d42))
+
+
+### Features
+
+* Add husky ([d0fe244](https://github.com/onderwijsin/docus-plus/commit/d0fe2440b011b1528980c13884ed01c9f0032c74))
+* Npm package publish ([6205cfc](https://github.com/onderwijsin/docus-plus/commit/6205cfca80012d65acbf19d176647bcf3aca53d6))
+
 ## [1.0.1](https://github.com/onderwijsin/docus-plus/compare/v1.0.0...v1.0.1) (2026-07-14)
 
 
