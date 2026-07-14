@@ -5,7 +5,6 @@ import type { AssistantAiConfig } from "../../shared/types/ai";
 
 const DEFAULTS: AssistantAiConfig = {
   model: "mistral-medium-latest",
-  reasoning: "high",
   maxOutputTokens: 8000,
   maxRetries: 2,
   maxSteps: 10,

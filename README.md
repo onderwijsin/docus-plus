@@ -1,4 +1,4 @@
-![Stichting Onderwijs in](./public/onderwijsin_banner.png)
+![Stichting Onderwijs in](https://raw.githubusercontent.com/onderwijsin/docus-plus/main/public/onderwijsin_banner.png)
 
 # Docus Plus
 
@@ -15,7 +15,7 @@ Start with a fresh Nuxt 4 project, install the package, and extend it from your 
 `nuxt.config.ts`:
 
 ```bash
-corepack pnpm add @onderwijsin/docus-plus docus better-sqlite3
+corepack pnpm add @onderwijsin/docus-plus
 ```
 
 ```ts
@@ -119,14 +119,13 @@ export default defineAppConfig({
 ### Configure the assistant
 
 Override AI behavior from the consuming app's `nuxt.config.ts` with the `ai` prop. Defaults
-include the Mistral medium model, high reasoning, an 8,000-token output limit, two retries, and up
-to ten tool-calling steps.
+include the Mistral medium model, an 8,000-token output limit, two retries, and up to ten
+tool-calling steps.
 
 ```ts
 export default defineNuxtConfig({
   ai: {
     model: "mistral-large-latest",
-    reasoning: "high",
     maxOutputTokens: 12000,
     maxRetries: 3,
     maxSteps: 12,
