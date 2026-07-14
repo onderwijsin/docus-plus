@@ -1,4 +1,4 @@
-![Stichting Onderwijs in](./public/onderwijsin_banner.png)
+![Stichting Onderwijs in](https://raw.githubusercontent.com/onderwijsin/docus-plus/main/public/onderwijsin_banner.png)
 
 # Docus Plus
 
@@ -15,7 +15,7 @@ Start with a fresh Nuxt 4 project, install the package, and extend it from your 
 `nuxt.config.ts`:
 
 ```bash
-corepack pnpm add @onderwijsin/docus-plus docus better-sqlite3
+corepack pnpm add @onderwijsin/docus-plus
 ```
 
 ```ts
