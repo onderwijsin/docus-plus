@@ -1,0 +1,24 @@
+#!/bin/bash
+
+# Load tracked development defaults used by local hooks.
+# .env.local takes precedence over .env.development for duplicate keys
+if [ -f "envs/.env.development" ]; then
+  set -a
+  . "envs/.env.development"
+  set +a
+fi
+if [ -f "envs/.env.local" ]; then
+  set -a
+  . "envs/.env.local"
+  set +a
+fi
+
+# Run typecheck unless explicitly disabled
+if [ "${DISABLE_PRE_PUSH_TYPECHECK:-false}" != "true" ]; then
+  pnpm typecheck
+fi
+
+# Run lint unless explicitly disabled
+if [ "${DISABLE_PRE_PUSH_LINT:-false}" != "true" ]; then
+  pnpm lint
+fi
