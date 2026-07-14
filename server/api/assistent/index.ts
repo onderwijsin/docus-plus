@@ -79,7 +79,6 @@ export default defineEventHandler(async (event) => {
     maxOutputTokens: aiConfig.maxOutputTokens,
     maxRetries: aiConfig.maxRetries,
     abortSignal: abortController.signal,
-    reasoning: aiConfig.reasoning,
     temperature: aiConfig.temperature,
     topP: aiConfig.topP,
     topK: aiConfig.topK,

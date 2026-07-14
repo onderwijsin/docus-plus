@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type { PatternBackgroundProps } from "#layers/docus-plus/app/composables/pattern-background";
 
-import { cn } from "@inspira-ui/plugins";
+import { cn } from "../utils/class-name";
 import {
   PATTERN_BACKGROUND_DIRECTION,
   PATTERN_BACKGROUND_SPEED,

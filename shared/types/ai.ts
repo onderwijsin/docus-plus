@@ -5,8 +5,6 @@ export interface AssistantAiConfig {
   model: string;
   /** Replaces the generated documentation assistant prompt when provided. */
   systemPrompt?: string;
-  /** Reasoning effort requested from the model. */
-  reasoning: "low" | "medium" | "high" | "none" | "provider-default";
   /** Maximum number of output tokens per model step. */
   maxOutputTokens: number;
   /** Number of times a failed model request may be retried. */

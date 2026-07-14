@@ -6,7 +6,6 @@ The assistant is configured from the consuming application's `nuxt.config.ts`:
 export default defineNuxtConfig({
   ai: {
     model: "mistral-large-latest",
-    reasoning: "high",
     systemPrompt: "You are the documentation assistant for Example Docs."
   }
 });

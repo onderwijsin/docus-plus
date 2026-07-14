@@ -208,6 +208,7 @@ export default defineNuxtConfig({
       publicToken: process.env.DIRECTUS_PUBLIC_TOKEN
     },
     public: {
+      siteUrl: appUrl,
       mode: {
         isDev,
         isProd,
