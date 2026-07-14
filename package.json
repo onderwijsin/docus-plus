@@ -1,8 +1,22 @@
 {
-  "name": "docus-plus",
+  "name": "@onderwijsin/docus-plus",
   "version": "0.0.1",
+  "files": [
+    "app",
+    "config",
+    "content.config.ts",
+    "modules",
+    "nuxt.config.ts",
+    "nuxt.schema.d.ts",
+    "server",
+    "shared",
+    "README.md"
+  ],
   "type": "module",
   "main": "./nuxt.config.ts",
+  "publishConfig": {
+    "access": "public"
+  },
   "scripts": {
     "dev": "nuxi dev .playground",
     "dev:prepare": "nuxt prepare .playground",
@@ -71,6 +85,10 @@
     "varlock": "^1.10.0",
     "vue": "^3.5.35",
     "vue-tsc": "^3.3.7"
+  },
+  "peerDependencies": {
+    "better-sqlite3": "12.x",
+    "nuxt": "4.x"
   },
   "packageManager": "pnpm@11.11.0",
   "varlock": {

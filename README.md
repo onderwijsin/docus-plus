@@ -11,17 +11,21 @@ for consuming and customising it.
 
 ## Create a documentation site
 
-Start with a fresh Nuxt 4 project and extend the
-published layer from your project's `nuxt.config.ts`:
+Start with a fresh Nuxt 4 project, install the package, and extend it from your project's
+`nuxt.config.ts`:
+
+```bash
+corepack pnpm add @onderwijsin/docus-plus docus better-sqlite3
+```
 
 ```ts
 export default defineNuxtConfig({
-  extends: [["github:onderwijsin/docus-plus@v0.0.1", { install: true }]]
+  extends: ["@onderwijsin/docus-plus"]
 });
 ```
 
-Replace the tag with the layer version you want to use. Pin a release in production so that the
-site does not change unexpectedly when the layer is updated.
+Pin the package version in production so that the site does not change unexpectedly when the layer
+is updated.
 
 ### Add the content directory
 
