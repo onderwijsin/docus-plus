@@ -1,5 +1,4 @@
 import type { NitroConfig } from "nitropack/types";
-import type { TypedEnvSchema } from "varlock/env";
 import type { ResolvedRuntime } from "./runtime/types/runtime";
 
 import { z } from "zod";
@@ -14,6 +13,13 @@ const cloudflareRuntimeEnvSchema = z.object({
   workerName: z.string().trim().min(1),
   cacheNamespaceId: z.string().trim().min(1)
 });
+
+type CloudflareRuntimeEnv = {
+  CLOUDFLARE_ACCOUNT_ID?: string;
+  CLOUDFLARE_KV_API_TOKEN?: string;
+  CLOUDFLARE_WORKER_NAME?: string;
+  CLOUDFLARE_CACHE_NAMESPACE_ID?: string;
+};
 
 /**
  * Resolves the active Nitro preset from the environment and defaults to `node-server`.
@@ -54,7 +60,7 @@ export function resolveRuntime(nitroPreset: string | undefined = "node-server"):
  */
 export function resolveCloudflareConfig(
   options: {
-    env?: Partial<TypedEnvSchema>;
+    env?: CloudflareRuntimeEnv;
     isPrepareMode?: boolean;
   } = {}
 ): NitroConfig {
@@ -121,7 +127,7 @@ export function resolveNodeServerConfig(): NitroConfig {
 export function resolveRuntimeNitroConfig(
   runtime: ResolvedRuntime,
   options: {
-    env?: Partial<TypedEnvSchema>;
+    env?: CloudflareRuntimeEnv;
     isPrepareMode?: boolean;
   } = {}
 ): NitroConfig {
