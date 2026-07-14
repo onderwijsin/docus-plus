@@ -28,10 +28,14 @@ parts by their stable discriminants instead of crossing the AI SDK 6/7 type boun
 patch and the two local `AppConfigInput["ui"]` casts when the upstream packages accept partial layer
 app config and align their assistant message types.
 
-Releases are published from the GitHub repository and consumed with a versioned layer reference:
+Releases are published to npm and consumed with a versioned package reference:
+
+```bash
+corepack pnpm add @onderwijsin/docus-plus@1.0.1 docus better-sqlite3
+```
 
 ```ts
-extends: ["github:onderwijsin/docus-plus@v0.0.1"]
+extends: ["@onderwijsin/docus-plus"]
 ```
 
 Keep release notes and commit messages in Conventional Commit format. Agents must leave commits to
