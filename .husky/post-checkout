@@ -1,0 +1,4 @@
+#!/bin/bash
+
+# Make all shell scripts executable after checkout
+find scripts -name "*.sh" -type f -exec chmod +x {} \; 2>/dev/null || true

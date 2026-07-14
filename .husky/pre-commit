@@ -1,0 +1,20 @@
+#!/bin/bash
+
+# Load tracked development defaults used by local hooks.
+# .env.local takes precedence over .env.development for duplicate keys
+if [ -f "envs/.env.development" ]; then
+  set -a
+  . "envs/.env.development"
+  set +a
+fi
+if [ -f "envs/.env.local" ]; then
+  set -a
+  . "envs/.env.local"
+  set +a
+fi
+
+# Format and lint staged files. lint-staged automatically re-stages fixes.
+if [ "${DISABLE_PRE_COMMIT_FORMAT:-false}" != "true" ] \
+  || [ "${DISABLE_PRE_COMMIT_LINT:-false}" != "true" ]; then
+  corepack pnpm exec lint-staged --concurrent false
+fi
