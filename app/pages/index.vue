@@ -1,12 +1,10 @@
 <script lang="ts" setup>
-const { data } = await useAsyncData("index", () =>
-  queryCollection("landing").first(),
-);
+const { data } = await useAsyncData("index", () => queryCollection("landing").first());
 if (!data.value) {
   throw createError({
     statusCode: 404,
     statusMessage: "Page not found",
-    fatal: true,
+    fatal: true
   });
 }
 
@@ -15,7 +13,7 @@ const page = data.value!;
 useSeo({
   title: page.seo?.title,
   description: page.seo?.description,
-  ogImage: page.seo?.ogImage,
+  ogImage: page.seo?.ogImage
 });
 </script>
 
@@ -42,7 +40,7 @@ useSeo({
         headline:
           'font-mono font-medium text-xs text-primary uppercase tracking-[0.12em] text-center',
         title: 'max-w-lg mx-auto',
-        description: 'max-w-3xl mx-auto text-dimmed',
+        description: 'max-w-3xl mx-auto text-dimmed'
       }"
     >
       <template v-if="page.features.headline" #headline>
@@ -67,11 +65,9 @@ useSeo({
             :description="feature.description"
             class="rounded-none duration-300"
             :ui="{
-              leading:
-                'mb-5 flex size-9 justify-center rounded-lg bg-primary/10',
+              leading: 'mb-5 flex size-9 justify-center rounded-lg bg-primary/10',
               title: 'text-sm tracking-tight',
-              description:
-                'text-sm leading-relaxed sm:line-clamp-2 lg:line-clamp-3 text-dimmed',
+              description: 'text-sm leading-relaxed sm:line-clamp-2 lg:line-clamp-3 text-dimmed'
             }"
           />
         </div>
@@ -83,13 +79,11 @@ useSeo({
         root: 'relative pb-24 sm:pb-32',
         container: 'max-w-3xl text-center',
         title: 'lg:text-5xl tracking-tighter whitespace-pre-line',
-        description: 'mx-auto max-w-3xl leading-relaxed text-dimmed',
+        description: 'mx-auto max-w-3xl leading-relaxed text-dimmed'
       }"
     >
       <template #top>
-        <GradientGlow
-          class="top-1/2 -translate-y-1/2 w-full h-1/2 opacity-80"
-        />
+        <GradientGlow class="top-1/2 -translate-y-1/2 w-full h-1/2 opacity-80" />
       </template>
 
       <template #title>
@@ -102,12 +96,7 @@ useSeo({
 
       <template #links>
         <div class="flex flex-wrap items-center justify-center gap-3">
-          <UButton
-            v-for="link in page.cta.links"
-            :key="link.label"
-            v-bind="link"
-            size="xl"
-          />
+          <UButton v-for="link in page.cta.links" :key="link.label" v-bind="link" size="xl" />
         </div>
       </template>
     </UPageCTA>

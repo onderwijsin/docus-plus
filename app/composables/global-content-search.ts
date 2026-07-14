@@ -1,17 +1,11 @@
-import {
-  computed,
-  shallowRef,
-  watch,
-  type MaybeRefOrGetter,
-  toValue,
-} from "vue";
+import { computed, shallowRef, watch, type MaybeRefOrGetter, toValue } from "vue";
 
 import type { ContentNavigationItem, PageCollections } from "@nuxt/content";
 
 import type { CommandPaletteGroup, CommandPaletteItem } from "@nuxt/ui";
 import {
   API_SEARCH_FTS_WEIGHTS,
-  CONTENT_SEARCH_RESULT_LIMITS,
+  CONTENT_SEARCH_RESULT_LIMITS
 } from "#layers/docus-plus/config/constants";
 
 type ContentSearchResult = {
@@ -59,10 +53,7 @@ function toSearchWords(value: string): string[] {
  */
 function getTextMatchScore(value: string, terms: string[]): number {
   const words = toSearchWords(value);
-  if (
-    !words.length ||
-    !terms.every((term) => words.some((word) => word.startsWith(term)))
-  ) {
+  if (!words.length || !terms.every((term) => words.some((word) => word.startsWith(term)))) {
     return 0;
   }
 
@@ -105,7 +96,7 @@ export function useGlobalContentSearch({
   collection,
   navigation,
   links,
-  themeItems,
+  themeItems
 }: {
   collection: MaybeRefOrGetter<keyof PageCollections>;
   navigation: MaybeRefOrGetter<ContentNavigationItem[] | undefined>;
@@ -115,11 +106,11 @@ export function useGlobalContentSearch({
   const searchTerm = shallowRef("");
   const documents = useSearchCollection(collection, {
     immediate: false,
-    ignoredTags: ["style"],
+    ignoredTags: ["style"]
   });
   const api = useSearchCollection("api", {
     immediate: false,
-    ignoredTags: ["style"],
+    ignoredTags: ["style"]
   });
   const { mapSearchResults } = useContentSearch();
   const documentResults = shallowRef<ContentSearchResult[]>([]);
@@ -127,8 +118,7 @@ export function useGlobalContentSearch({
   const apiRecords = shallowRef(new Map<string, ApiContentRecord>());
   const isMetadataReady = shallowRef(false);
   const isSearching = computed(
-    () =>
-      documents.status.value === "loading" || api.status.value === "loading",
+    () => documents.status.value === "loading" || api.status.value === "loading"
   );
   let requestId = 0;
   let searchTimeout: ReturnType<typeof setTimeout> | undefined;
@@ -139,22 +129,12 @@ export function useGlobalContentSearch({
     }
 
     const records = await queryCollection("api")
-      .select(
-        "path",
-        "title",
-        "description",
-        "kind",
-        "scalarTarget",
-        "method",
-        "operationId",
-      )
+      .select("path", "title", "description", "kind", "scalarTarget", "method", "operationId")
       .all();
     apiRecords.value = new Map(
       records.flatMap((record) =>
-        typeof record.path === "string"
-          ? [[record.path, record as ApiContentRecord] as const]
-          : [],
-      ),
+        typeof record.path === "string" ? [[record.path, record as ApiContentRecord] as const] : []
+      )
     );
     isMetadataReady.value = true;
   }
@@ -175,13 +155,13 @@ export function useGlobalContentSearch({
     const [docs, apiSearch] = await Promise.all([
       documents.search(query, {
         limit: CONTENT_SEARCH_RESULT_LIMITS.documentation,
-        snippet: { columns: ["title", "content"], around: 20 },
+        snippet: { columns: ["title", "content"], around: 20 }
       }),
       api.search(query, {
         limit: API_SEARCH_CANDIDATE_LIMIT,
         weights: API_SEARCH_FTS_WEIGHTS,
-        snippet: { columns: ["title", "content"], around: 20 },
-      }),
+        snippet: { columns: ["title", "content"], around: 20 }
+      })
     ]);
 
     if (currentRequest !== requestId) {
@@ -213,7 +193,7 @@ export function useGlobalContentSearch({
           id: "links",
           label: "Links",
           items: linkItems,
-          ignoreFilter: true,
+          ignoreFilter: true
         });
       }
       const theme = toValue(themeItems);
@@ -222,42 +202,38 @@ export function useGlobalContentSearch({
           id: "theme",
           label: "Theme",
           items: theme,
-          ignoreFilter: true,
+          ignoreFilter: true
         });
       }
       return result;
     }
 
-    const documentItems = mapSearchResults(
-      documentResults.value,
-      toValue(navigation),
-    ).flatMap((item) =>
-      typeof item.to === "string" && item.label
-        ? [
-            {
-              id: item.to,
-              label: item.label,
-              description: item.description,
-              prefix: item.prefix,
-              suffix: item.suffix,
-              icon: item.icon,
-              to: item.to,
-            },
-          ]
-        : [],
+    const documentItems = mapSearchResults(documentResults.value, toValue(navigation)).flatMap(
+      (item) =>
+        typeof item.to === "string" && item.label
+          ? [
+              {
+                id: item.to,
+                label: item.label,
+                description: item.description,
+                prefix: item.prefix,
+                suffix: item.suffix,
+                icon: item.icon,
+                to: item.to
+              }
+            ]
+          : []
     );
     if (documentItems.length) {
       result.push({
         id: "documentation",
         label: "Documentation",
         items: documentItems,
-        ignoreFilter: true,
+        ignoreFilter: true
       });
     }
 
-    const apiCandidates = new Map(
-      apiResults.value.map((item) => [item.id, item]),
-    );
+    const apiCandidates = new Map(apiResults.value.map((item) => [item.id, item]));
     const terms = toSearchWords(term);
     for (const [id, record] of apiRecords.value) {
       if (getApiResultScore(record, terms) > 0 && !apiCandidates.has(id)) {
@@ -267,7 +243,7 @@ export function useGlobalContentSearch({
           titles: [],
           content: record.description,
           level: 1,
-          rank: 0,
+          rank: 0
         });
       }
     }
@@ -276,9 +252,7 @@ export function useGlobalContentSearch({
       const leftRecord = apiRecords.value.get(left.id);
       const rightRecord = apiRecords.value.get(right.id);
       const leftScore = leftRecord ? getApiResultScore(leftRecord, terms) : 0;
-      const rightScore = rightRecord
-        ? getApiResultScore(rightRecord, terms)
-        : 0;
+      const rightScore = rightRecord ? getApiResultScore(rightRecord, terms) : 0;
 
       return rightScore - leftScore || left.rank - right.rank;
     });
@@ -293,10 +267,7 @@ export function useGlobalContentSearch({
 
       const item: GlobalSearchItem = {
         id: resultItem.id,
-        label:
-          record.kind === "operation"
-            ? (record.path ?? record.title)
-            : record.title,
+        label: record.kind === "operation" ? (record.path ?? record.title) : record.title,
         description: record.description || resultItem.content,
         icon:
           record.kind === "schema"
@@ -307,7 +278,7 @@ export function useGlobalContentSearch({
         method: record.method,
         path: record.kind === "operation" ? record.path : undefined,
         slot: record.kind === "operation" ? "api-operation" : undefined,
-        to: record.scalarTarget,
+        to: record.scalarTarget
       };
 
       if (record.kind === "operation") {
@@ -326,7 +297,7 @@ export function useGlobalContentSearch({
         id: "api-operations",
         label: "API operations",
         items: operationItems,
-        ignoreFilter: true,
+        ignoreFilter: true
       });
     }
     if (metadataItems.length) {
@@ -334,7 +305,7 @@ export function useGlobalContentSearch({
         id: "api-metadata",
         label: "API models & metadata",
         items: metadataItems,
-        ignoreFilter: true,
+        ignoreFilter: true
       });
     }
 
@@ -344,7 +315,7 @@ export function useGlobalContentSearch({
         id: "theme",
         label: "Theme",
         items: theme,
-        ignoreFilter: true,
+        ignoreFilter: true
       });
     }
 
@@ -355,6 +326,6 @@ export function useGlobalContentSearch({
     groups,
     initialize,
     isSearching,
-    searchTerm,
+    searchTerm
   };
 }

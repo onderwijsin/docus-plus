@@ -1,12 +1,12 @@
 import type {
   MailchimpSubscribeErrorCode,
-  MailchimpSubscribeErrorData,
+  MailchimpSubscribeErrorData
 } from "../../../schema/errors";
 import type { MailchimpSubscriberSchema } from "../../../schema/subscribe";
 import type {
   MailchimpErrorPayload,
   MailchimpMergeFields,
-  MailchimpRuntimeConfig,
+  MailchimpRuntimeConfig
 } from "../../../types/mailchimp";
 
 /**
@@ -18,7 +18,7 @@ import type {
  */
 export async function subscribeToMailchimp(
   input: MailchimpSubscriberSchema,
-  config: MailchimpRuntimeConfig,
+  config: MailchimpRuntimeConfig
 ): Promise<unknown> {
   const apiKey = config.apiKey;
   const listId = config.listId;
@@ -30,13 +30,13 @@ export async function subscribeToMailchimp(
       statusMessage: "Mailchimp runtime configuration is incomplete",
       data: {
         code: "MAILCHIMP_CONFIGURATION_ERROR",
-        httpStatusCode: 500,
-      } satisfies MailchimpSubscribeErrorData,
+        httpStatusCode: 500
+      } satisfies MailchimpSubscribeErrorData
     });
   }
 
   const mergeFields: MailchimpMergeFields = {
-    FNAME: input.name,
+    FNAME: input.name
   };
 
   if (input.lastName) {
@@ -54,23 +54,22 @@ export async function subscribeToMailchimp(
       method: "POST",
       headers: {
         Authorization: `apikey ${apiKey}`,
-        "Content-Type": "application/json",
+        "Content-Type": "application/json"
       },
       body: {
         email_address: input.email,
         merge_fields: mergeFields,
         status: "subscribed",
-        tags: ["signup_via_site"],
-      },
+        tags: ["signup_via_site"]
+      }
     });
   } catch (error: unknown) {
     const normalized = normalizeMailchimpError(error);
 
     throw createError({
       statusCode: normalized.httpStatusCode,
-      statusMessage:
-        normalized.title ?? normalized.detail ?? "Mailchimp subscribe failed",
-      data: normalized,
+      statusMessage: normalized.title ?? normalized.detail ?? "Mailchimp subscribe failed",
+      data: normalized
     });
   }
 }
@@ -87,13 +86,11 @@ function normalizeMailchimpError(error: unknown): MailchimpSubscribeErrorData {
     code,
     httpStatusCode,
     title: payload?.title,
-    detail: payload?.detail,
+    detail: payload?.detail
   };
 }
 
-function parseMailchimpPayload(
-  error: unknown,
-): MailchimpErrorPayload | undefined {
+function parseMailchimpPayload(error: unknown): MailchimpErrorPayload | undefined {
   const rawData =
     error && typeof error === "object" && "data" in error
       ? (error as { data?: unknown }).data
@@ -138,7 +135,7 @@ function getHttpStatusCode(error: unknown, payloadStatus?: number): number {
 
 function getMailchimpErrorCode(
   payload: MailchimpErrorPayload | undefined,
-  statusCode: number,
+  statusCode: number
 ): MailchimpSubscribeErrorCode {
   if (payload?.title === "Member Exists") {
     return "MAILCHIMP_MEMBER_EXISTS";

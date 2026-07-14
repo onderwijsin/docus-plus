@@ -1,11 +1,11 @@
-export const supportedRuntimePresets = ['node-server', 'cloudflare_module'] as const
+export const supportedRuntimePresets = ["node-server", "cloudflare_module"] as const;
 
-export type SupportedRuntimePreset = (typeof supportedRuntimePresets)[number]
+export type SupportedRuntimePreset = (typeof supportedRuntimePresets)[number];
 
 export interface ResolvedRuntime {
-	preset: SupportedRuntimePreset
+  preset: SupportedRuntimePreset;
 }
 
 export interface ResolveRuntimeRuntimeConfigShape {
-	resolveRuntime: ResolvedRuntime
+  resolveRuntime: ResolvedRuntime;
 }

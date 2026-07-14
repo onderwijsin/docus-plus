@@ -1,8 +1,8 @@
 @theme {
   --font-sans: "Figtree", sans-serif;
   --font-mono:
-    "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
-    "Liberation Mono", "Courier New", monospace;
+    "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
+    "Courier New", monospace;
 
   --animate-shimmer: shimmer 8s ease-in-out infinite alternate;
 

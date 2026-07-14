@@ -7,7 +7,7 @@ import {
   PATTERN_BACKGROUND_SPEED,
   PATTERN_BACKGROUND_VARIANT,
   patternBackgroundMaskVariants,
-  patternBackgroundVariants,
+  patternBackgroundVariants
 } from "#layers/docus-plus/app/composables/pattern-background";
 
 const props = withDefaults(defineProps<PatternBackgroundProps>(), {
@@ -15,7 +15,7 @@ const props = withDefaults(defineProps<PatternBackgroundProps>(), {
   variant: () => PATTERN_BACKGROUND_VARIANT.Grid,
   speed: () => PATTERN_BACKGROUND_SPEED.Slow,
   size: undefined,
-  mask: undefined,
+  mask: undefined
 });
 
 const durationFormSpeed = computed(() => `${props.speed}ms`);
@@ -26,10 +26,10 @@ const durationFormSpeed = computed(() => `${props.speed}ms`);
     :class="[
       patternBackgroundVariants({
         variant,
-        size,
+        size
       }),
       ` ${animate ? `move move-${direction}` : ''} `,
-      props.class,
+      props.class
     ]"
   >
     <div
@@ -37,8 +37,8 @@ const durationFormSpeed = computed(() => `${props.speed}ms`);
         cn(
           `pointer-events-none absolute inset-0 flex items-center justify-center`,
           patternBackgroundMaskVariants({
-            mask,
-          }),
+            mask
+          })
         )
       "
     />

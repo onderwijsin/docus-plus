@@ -17,7 +17,7 @@ const scalarColorModeBridge = {
     } catch {}
   })();`
     .replace(/[\n\r]/g, "")
-    .replace(/ +/g, " "),
+    .replace(/ +/g, " ")
 };
 
 /**
@@ -52,10 +52,7 @@ export default defineNuxtPlugin((nuxtApp): void => {
     }
 
     try {
-      window.localStorage.setItem(
-        SCALAR_COLOR_MODE_STORAGE_KEY,
-        colorMode.value,
-      );
+      window.localStorage.setItem(SCALAR_COLOR_MODE_STORAGE_KEY, colorMode.value);
     } catch {
       // Storage can be unavailable in private or restricted browser contexts.
     }
@@ -72,7 +69,7 @@ export default defineNuxtPlugin((nuxtApp): void => {
     }
 
     const modeClasses = [...document.body.classList].filter((className) =>
-      className.endsWith("-mode"),
+      className.endsWith("-mode")
     );
 
     document.body.classList.remove(...modeClasses);

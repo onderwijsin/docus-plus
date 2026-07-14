@@ -14,13 +14,13 @@ export default defineEventHandler(async (event) => {
   }
 
   const paramResult = cacheKeyParamSchema.safeParse({
-    key: getRouterParam(event, "key") ?? "",
+    key: getRouterParam(event, "key") ?? ""
   });
   if (!paramResult.success) {
     throw createError({
       statusCode: 400,
       statusMessage: "Invalid key",
-      data: z.treeifyError(paramResult.error),
+      data: z.treeifyError(paramResult.error)
     });
   }
 

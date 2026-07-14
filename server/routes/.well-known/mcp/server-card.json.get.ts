@@ -19,16 +19,16 @@ export default defineEventHandler(async (event) => {
     url: `${siteUrl}/mcp`,
     tools: tools.map((tool) => ({
       name: tool.name,
-      description: tool.description,
+      description: tool.description
     })),
     resources: resources.map((resource) => ({
       name: resource.name,
       uri: resource.uri,
-      description: resource.description,
+      description: resource.description
     })),
     prompts: prompts.map((prompt) => ({
       name: prompt.name,
-      description: prompt.description,
-    })),
+      description: prompt.description
+    }))
   };
 });

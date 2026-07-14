@@ -12,8 +12,5 @@ export default defineEventHandler(async (event) => {
     return;
   }
 
-  return sendRedirect(
-    event,
-    buildRawMarkdownPath(getRequestURL(event).pathname),
-  );
+  return sendRedirect(event, buildRawMarkdownPath(getRequestURL(event).pathname));
 });

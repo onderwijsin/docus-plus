@@ -1,11 +1,11 @@
-import { ofetch } from 'ofetch'
+import { ofetch } from "ofetch";
 
 interface CloudflareBulkDeleteResponse {
-	errors?: Array<{
-		code?: number
-		message?: string
-	}>
-	success: boolean
+  errors?: Array<{
+    code?: number;
+    message?: string;
+  }>;
+  success: boolean;
 }
 
 /**
@@ -17,35 +17,35 @@ interface CloudflareBulkDeleteResponse {
  * @returns Promise that resolves once every chunk has been deleted.
  */
 export async function bulkDeleteCloudflareCacheKeys(keys: string[]): Promise<void> {
-	if (!keys.length) {
-		return
-	}
+  if (!keys.length) {
+    return;
+  }
 
-	const runtimeConfig = useRuntimeConfig()
-	const { accountId, cacheNamespaceId, kvApiToken } = runtimeConfig.cache.cloudflare!
-	const client = ofetch.create({
-		baseURL: `https://api.cloudflare.com/client/v4/accounts/${accountId}`,
-		headers: {
-			Authorization: `Bearer ${kvApiToken}`
-		}
-	})
+  const runtimeConfig = useRuntimeConfig();
+  const { accountId, cacheNamespaceId, kvApiToken } = runtimeConfig.cache.cloudflare!;
+  const client = ofetch.create({
+    baseURL: `https://api.cloudflare.com/client/v4/accounts/${accountId}`,
+    headers: {
+      Authorization: `Bearer ${kvApiToken}`
+    }
+  });
 
-	for (let index = 0; index < keys.length; index += 10000) {
-		const chunk = keys.slice(index, index + 10000)
-		const response = await client<CloudflareBulkDeleteResponse>(
-			`/storage/kv/namespaces/${cacheNamespaceId}/bulk/delete`,
-			{
-				method: 'POST',
-				body: chunk
-			}
-		)
+  for (let index = 0; index < keys.length; index += 10000) {
+    const chunk = keys.slice(index, index + 10000);
+    const response = await client<CloudflareBulkDeleteResponse>(
+      `/storage/kv/namespaces/${cacheNamespaceId}/bulk/delete`,
+      {
+        method: "POST",
+        body: chunk
+      }
+    );
 
-		if (!response.success) {
-			throw createError({
-				statusCode: 502,
-				statusMessage: 'Cloudflare KV bulk delete failed',
-				data: response.errors
-			})
-		}
-	}
+    if (!response.success) {
+      throw createError({
+        statusCode: 502,
+        statusMessage: "Cloudflare KV bulk delete failed",
+        data: response.errors
+      });
+    }
+  }
 }

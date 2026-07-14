@@ -3,17 +3,8 @@ import type { ModuleOptions as ScalarModuleOptions } from "@scalar/nuxt";
 
 import { moduleSetup } from "#layers/docus-plus/config/modules";
 import { SCALAR_BASE_PATH } from "#layers/docus-plus/config/constants";
-import {
-  getOpenApiScalarUrl,
-  getOpenApiSource,
-  hasOpenApiSource,
-} from "./build/openapi";
-import {
-  addTypeTemplate,
-  createResolver,
-  defineNuxtModule,
-  useLogger,
-} from "@nuxt/kit";
+import { getOpenApiScalarUrl, getOpenApiSource, hasOpenApiSource } from "./build/openapi";
+import { addTypeTemplate, createResolver, defineNuxtModule, useLogger } from "@nuxt/kit";
 import { ofetch } from "ofetch";
 
 const MODULE_NAME = "@onderwijsin/nuxt-openapi";
@@ -21,7 +12,7 @@ const MODULE_KEY = "openApi";
 const LOG_SCOPE = "openapi";
 
 const DEFAULTS = {
-  enabled: true,
+  enabled: true
 } satisfies ModuleOptions;
 
 const scalarConfig: Partial<ScalarModuleOptions> = {
@@ -32,18 +23,18 @@ const scalarConfig: Partial<ScalarModuleOptions> = {
   searchHotKey: undefined,
   showSidebar: true,
   pathRouting: {
-    basePath: SCALAR_BASE_PATH,
+    basePath: SCALAR_BASE_PATH
   },
   hideSearch: true,
   hideDarkModeToggle: true,
   agent: {
-    disabled: true,
+    disabled: true
   },
   mcp: {
-    disabled: true,
+    disabled: true
   },
   hideClientButton: true,
-  url: hasOpenApiSource() ? getOpenApiScalarUrl(getOpenApiSource()) : undefined,
+  url: hasOpenApiSource() ? getOpenApiScalarUrl(getOpenApiSource()) : undefined
 };
 
 /**
@@ -58,15 +49,15 @@ export default defineNuxtModule<ModuleOptions>({
     name: MODULE_NAME,
     configKey: MODULE_KEY,
     compatibility: {
-      nuxt: "^3.0.0 || ^4.0.0",
-    },
+      nuxt: "^3.0.0 || ^4.0.0"
+    }
   },
   defaults: DEFAULTS,
   moduleDependencies: hasOpenApiSource()
     ? {
         "@scalar/nuxt": {
-          defaults: scalarConfig,
-        },
+          defaults: scalarConfig
+        }
       }
     : {},
   setup(userOptions, nuxt) {
@@ -76,7 +67,7 @@ export default defineNuxtModule<ModuleOptions>({
       MODULE_KEY,
       userOptions,
       DEFAULTS,
-      log,
+      log
     );
 
     start();
@@ -84,24 +75,24 @@ export default defineNuxtModule<ModuleOptions>({
     const resolver = createResolver(import.meta.url);
     addTypeTemplate({
       filename: "types/openapi-config.d.ts",
-      src: resolver.resolve("./build/types/config.d.ts"),
+      src: resolver.resolve("./build/types/config.d.ts")
     });
 
     const isConfigured = isEnabled() && hasOpenApiSource();
 
     nuxt.options.runtimeConfig.public.scalar = {
-      enabled: isConfigured,
+      enabled: isConfigured
     };
 
     nuxt.options.routeRules ??= {};
     nuxt.options.routeRules[SCALAR_BASE_PATH] = isConfigured
       ? {
           ...nuxt.options.routeRules[SCALAR_BASE_PATH],
-          ssr: false,
+          ssr: false
         }
       : {
           ...nuxt.options.routeRules[SCALAR_BASE_PATH],
-          redirect: "/",
+          redirect: "/"
         };
 
     if (!isConfigured) {
@@ -110,5 +101,5 @@ export default defineNuxtModule<ModuleOptions>({
     }
 
     end();
-  },
+  }
 });

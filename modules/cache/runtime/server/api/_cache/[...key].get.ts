@@ -17,13 +17,13 @@ export default defineEventHandler(async (event) => {
   }
 
   const paramResult = cacheKeyParamSchema.safeParse({
-    key: getRouterParam(event, "key") ?? "",
+    key: getRouterParam(event, "key") ?? ""
   });
   if (!paramResult.success) {
     throw createError({
       statusCode: 400,
       statusMessage: "Invalid key",
-      data: z.treeifyError(paramResult.error),
+      data: z.treeifyError(paramResult.error)
     });
   }
 
@@ -32,7 +32,7 @@ export default defineEventHandler(async (event) => {
     throw createError({
       statusCode: 400,
       statusMessage: "Invalid query parameters",
-      data: z.treeifyError(queryResult.error),
+      data: z.treeifyError(queryResult.error)
     });
   }
 
@@ -48,7 +48,7 @@ export default defineEventHandler(async (event) => {
     return useApiResponse({
       key: toFullCacheKey(storageKey),
       value: item,
-      metadata: metadata ?? null,
+      metadata: metadata ?? null
     });
   }
 

@@ -50,17 +50,17 @@ jobs:
       - name: Lint
         run: ${{ inputs.lint-command }}
 
-  # typecheck:
-  #   runs-on: ${{ inputs.runner }}
-  #   if: ${{ github.actor != 'dependabot[bot]' }}
-  #   steps:
-  #     - uses: actions/checkout@v7
+  typecheck:
+    runs-on: ${{ inputs.runner }}
+    if: ${{ github.actor != 'dependabot[bot]' }}
+    steps:
+      - uses: actions/checkout@v7
 
-  #     - name: Setup node, pnpm and install dependencies
-  #       uses: ./.github/actions/setup
+      - name: Setup node, pnpm and install dependencies
+        uses: ./.github/actions/setup
 
-  #     - name: Build packages before typechecking
-  #       if: ${{ inputs.build-command && inputs.build-before-typecheck }}
-  #       run: ${{ inputs.build-command }}
-  #     - name: Typecheck
-  #       run: ${{ inputs.typecheck-command }}
+      - name: Build packages before typechecking
+        if: ${{ inputs.build-command && inputs.build-before-typecheck }}
+        run: ${{ inputs.build-command }}
+      - name: Typecheck
+        run: ${{ inputs.typecheck-command }}

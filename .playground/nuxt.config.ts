@@ -11,18 +11,18 @@ export default defineNuxtConfig({
 
   site: {
     name: APP_IDENTITY.siteTitle,
-    description: APP_IDENTITY.siteDescription,
+    description: APP_IDENTITY.siteDescription
   },
 
   mcp: {
     name: SITE_MCP_NAME,
-    description: SITE_MCP_DESCRIPTION,
+    description: SITE_MCP_DESCRIPTION
   },
 
   scalar: {
     metaData: {
-      title: APP_IDENTITY.siteTitle,
+      title: APP_IDENTITY.siteTitle
     },
-    slug: OPENAPI_DOCUMENT_SLUG,
-  },
+    slug: OPENAPI_DOCUMENT_SLUG
+  }
 });

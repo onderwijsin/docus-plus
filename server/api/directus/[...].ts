@@ -9,23 +9,20 @@ export default defineEventHandler(async (event) => {
   if (!directusBase) {
     throw createError({
       status: 404,
-      statusText: "Directus base URL not configured",
+      statusText: "Directus base URL not configured"
     });
   }
 
   // Build target path in Directus
-  const directusTarget = joinURL(
-    directusBase,
-    event.path.replace(/^\/api\/directus\//, ""),
-  );
+  const directusTarget = joinURL(directusBase, event.path.replace(/^\/api\/directus\//, ""));
   const proxyHeaders = getProxyRequestHeaders(event);
 
   return proxyRequest(event, directusTarget, {
     headers: {
       ...proxyHeaders,
-      authorization: `Bearer ${config.directus.publicToken}`,
+      authorization: `Bearer ${config.directus.publicToken}`
     },
     cookieDomainRewrite: new URL(config.public.siteUrl).hostname,
-    cookiePathRewrite: "/",
+    cookiePathRewrite: "/"
   }) as Promise<Response>;
 });

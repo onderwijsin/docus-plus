@@ -6,7 +6,7 @@ import {
   addTypeTemplate,
   createResolver,
   defineNuxtModule,
-  useLogger,
+  useLogger
 } from "@nuxt/kit";
 import { defu } from "defu";
 
@@ -15,7 +15,7 @@ const MODULE_KEY = "healthcheck";
 const LOG_SCOPE = "healthcheck";
 
 const DEFAULTS = {
-  enabled: true,
+  enabled: true
 } satisfies ModuleOptions;
 
 /**
@@ -28,8 +28,8 @@ export default defineNuxtModule<ModuleOptions>({
     name: MODULE_NAME,
     configKey: MODULE_KEY,
     compatibility: {
-      nuxt: "^3.0.0 || ^4.0.0",
-    },
+      nuxt: "^3.0.0 || ^4.0.0"
+    }
   },
   defaults: DEFAULTS,
   // moduleDependencies: {
@@ -46,7 +46,7 @@ export default defineNuxtModule<ModuleOptions>({
       MODULE_KEY,
       userOptions,
       DEFAULTS,
-      log,
+      log
     );
 
     start();
@@ -58,35 +58,29 @@ export default defineNuxtModule<ModuleOptions>({
     const resolver = createResolver(import.meta.url);
     const runtimeDir = resolver.resolve("./runtime");
 
-    nuxt.options.runtimeConfig.healthcheck = defu(
-      nuxt.options.runtimeConfig.healthcheck ?? {},
-      {
-        cache: options.cache,
-        directus: options.directus,
-      },
-    );
+    nuxt.options.runtimeConfig.healthcheck = defu(nuxt.options.runtimeConfig.healthcheck ?? {}, {
+      cache: options.cache,
+      directus: options.directus
+    });
 
     nuxt.options.build.transpile.push(runtimeDir);
     addServerScanDir(resolver.resolve(runtimeDir, "server"));
     addTypeTemplate({
       filename: "types/healthcheck-config.d.ts",
-      src: resolver.resolve(runtimeDir, "types/config.d.ts"),
+      src: resolver.resolve(runtimeDir, "types/config.d.ts")
     });
     addTypeTemplate({
       filename: "types/healthcheck-runtime-config-shape.d.ts",
-      src: resolver.resolve(
-        runtimeDir,
-        "types/healthcheck-runtime-config-shape.d.ts",
-      ),
+      src: resolver.resolve(runtimeDir, "types/healthcheck-runtime-config-shape.d.ts")
     });
 
     nuxt.options.routeRules = nuxt.options.routeRules ?? {};
     nuxt.options.routeRules["/api/system/**"] = {
       ...nuxt.options.routeRules["/api/system/**"],
       cache: false,
-      prerender: false,
+      prerender: false
     };
 
     end();
-  },
+  }
 });

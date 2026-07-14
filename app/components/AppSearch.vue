@@ -15,10 +15,7 @@ const { forced: forcedColorMode } = useDocusColorMode();
 const { locale, isEnabled } = useDocusI18n();
 
 const collectionName = computed(
-  () =>
-    (isEnabled.value
-      ? `docs_${locale.value}`
-      : "docs") as keyof PageCollections,
+  () => (isEnabled.value ? `docs_${locale.value}` : "docs") as keyof PageCollections
 );
 
 const { open } = useContentSearch();
@@ -35,8 +32,8 @@ const links = computed<GlobalSearchItem[]>(() => {
           id: item.children![0]!.path,
           label: item.title,
           icon: item.icon as string,
-          to: item.children![0]!.path,
-        })),
+          to: item.children![0]!.path
+        }))
     );
   }
 
@@ -45,7 +42,7 @@ const links = computed<GlobalSearchItem[]>(() => {
       id: SCALAR_BASE_PATH,
       label: "API Reference",
       icon: getIcon("api_explorer"),
-      to: SCALAR_BASE_PATH,
+      to: SCALAR_BASE_PATH
     });
   }
 
@@ -54,7 +51,7 @@ const links = computed<GlobalSearchItem[]>(() => {
       id: publisher.contact,
       label: "Get in touch",
       icon: getIcon("mail"),
-      to: publisher.contact,
+      to: publisher.contact
     });
   }
   return items;
@@ -75,7 +72,7 @@ const themeItems = computed<GlobalSearchItem[]>(() => {
       onSelect: (event) => {
         event.preventDefault();
         colorMode.preference = "system";
-      },
+      }
     },
     {
       id: "theme-light",
@@ -86,7 +83,7 @@ const themeItems = computed<GlobalSearchItem[]>(() => {
       onSelect: (event) => {
         event.preventDefault();
         colorMode.preference = "light";
-      },
+      }
     },
     {
       id: "theme-dark",
@@ -97,8 +94,8 @@ const themeItems = computed<GlobalSearchItem[]>(() => {
       onSelect: (event) => {
         event.preventDefault();
         colorMode.preference = "dark";
-      },
-    },
+      }
+    }
   ];
 });
 
@@ -106,7 +103,7 @@ const { groups, initialize, isSearching, searchTerm } = useGlobalContentSearch({
   collection: collectionName,
   navigation: computed(() => props.navigation),
   links,
-  themeItems,
+  themeItems
 });
 
 watch(open, (isOpen) => {
@@ -120,8 +117,8 @@ defineShortcuts({
     usingInput: true,
     handler: () => {
       open.value = !open.value;
-    },
-  },
+    }
+  }
 });
 
 /**
@@ -130,7 +127,7 @@ defineShortcuts({
  * @param method HTTP method (GET, POST, PUT, PATCH, DELETE)
  */
 function getMethodBadgeColor(
-  method?: string,
+  method?: string
 ): "success" | "info" | "warning" | "error" | "neutral" {
   switch (method) {
     case "GET":
@@ -173,19 +170,12 @@ const input = ref("");
       >
         <template #api-operation="{ item }">
           <div class="flex min-w-0 items-center gap-2">
-            <UBadge
-              :color="getMethodBadgeColor(item.method)"
-              size="xs"
-              variant="subtle"
-            >
+            <UBadge :color="getMethodBadgeColor(item.method)" size="xs" variant="subtle">
               {{ item.method }}
             </UBadge>
             <span class="truncate font-mono text-sm">{{ item.path }}</span>
           </div>
-          <span
-            v-if="item.description"
-            class="line-clamp-1 text-sm text-dimmed"
-          >
+          <span v-if="item.description" class="line-clamp-1 text-sm text-dimmed">
             {{ item.description }}
           </span>
         </template>

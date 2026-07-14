@@ -5,7 +5,7 @@ const MARKDOWN_REQUEST_EXCLUDED_PREFIXES = [
   "/_nuxt",
   "/api-reference",
   "/raw",
-  "/raw.md",
+  "/raw.md"
 ] as const;
 
 interface MarkdownRequestShape {
@@ -20,9 +20,7 @@ interface MarkdownRequestShape {
  * @param request - Request method, path, and accept header.
  * @returns `true` when markdown negotiation should run.
  */
-export function shouldServeMarkdownRequest(
-  request: MarkdownRequestShape,
-): boolean {
+export function shouldServeMarkdownRequest(request: MarkdownRequestShape): boolean {
   if (request.method !== "GET" && request.method !== "HEAD") {
     return false;
   }
@@ -31,14 +29,11 @@ export function shouldServeMarkdownRequest(
 
   if (
     MARKDOWN_REQUEST_EXCLUDED_PREFIXES.some(
-      (prefix) => pathname === prefix || pathname.startsWith(`${prefix}/`),
+      (prefix) => pathname === prefix || pathname.startsWith(`${prefix}/`)
     )
   ) {
     return false;
   }
 
-  return (
-    typeof request.accept === "string" &&
-    request.accept.includes("text/markdown")
-  );
+  return typeof request.accept === "string" && request.accept.includes("text/markdown");
 }

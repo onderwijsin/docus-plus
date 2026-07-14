@@ -12,8 +12,8 @@ export default defineNuxtModule({
   meta: {
     name: "@onderwijsin/override-docus-routing",
     compatibility: {
-      nuxt: "^3.0.0 || ^4.0.0",
-    },
+      nuxt: "^3.0.0 || ^4.0.0"
+    }
   },
   setup(_options, nuxt) {
     const layerIndex = resolve(import.meta.dirname, "../../app/pages/index.vue");
@@ -28,7 +28,7 @@ export default defineNuxtModule({
           (page) =>
             page.path === "/" &&
             page.name === "index" &&
-            page.file?.includes("/docus/app/templates/landing.vue"),
+            page.file?.includes("/docus/app/templates/landing.vue")
         );
 
         if (docusLanding) {
@@ -36,5 +36,5 @@ export default defineNuxtModule({
         }
       });
     });
-  },
+  }
 });

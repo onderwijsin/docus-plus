@@ -2,10 +2,7 @@ import { useApiResponse } from "#layers/docus-plus/server/utils/api";
 import { isAdmin } from "#layers/docus-plus/server/utils/security/admin";
 import { z } from "zod";
 
-import {
-  cacheBaseParamSchema,
-  cacheQuerySchema,
-} from "../../../../utils/schema";
+import { cacheBaseParamSchema, cacheQuerySchema } from "../../../../utils/schema";
 import { getCacheKeys, normalizeSegment } from "../../../utils/storage";
 
 /**
@@ -17,13 +14,13 @@ export default defineEventHandler(async (event) => {
   }
 
   const paramResult = cacheBaseParamSchema.safeParse({
-    base: getRouterParam(event, "base") ?? "",
+    base: getRouterParam(event, "base") ?? ""
   });
   if (!paramResult.success) {
     throw createError({
       statusCode: 400,
       statusMessage: "Invalid base",
-      data: z.treeifyError(paramResult.error),
+      data: z.treeifyError(paramResult.error)
     });
   }
 
@@ -32,7 +29,7 @@ export default defineEventHandler(async (event) => {
     throw createError({
       statusCode: 400,
       statusMessage: "Invalid query parameters",
-      data: z.treeifyError(queryResult.error),
+      data: z.treeifyError(queryResult.error)
     });
   }
 
@@ -44,8 +41,8 @@ export default defineEventHandler(async (event) => {
     const items = await Promise.all(
       keys.map(async (key) => ({
         key,
-        value: await storage.getItem(key),
-      })),
+        value: await storage.getItem(key)
+      }))
     );
     return useApiResponse(items);
   }
@@ -54,8 +51,8 @@ export default defineEventHandler(async (event) => {
     keys.map(async (key) => ({
       key,
       value: await storage.getItem(key),
-      metadata: (await storage.getMeta(key)) ?? null,
-    })),
+      metadata: (await storage.getMeta(key)) ?? null
+    }))
   );
 
   return useApiResponse(itemsWithMetadata);

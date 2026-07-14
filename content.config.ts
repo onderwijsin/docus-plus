@@ -29,10 +29,10 @@ const createDocsSchema = () =>
           label: z.string(),
           icon: z.string(),
           to: z.string(),
-          target: z.string().optional(),
-        }),
+          target: z.string().optional()
+        })
       )
-      .optional(),
+      .optional()
   });
 
 const createEnum = (options: [string, ...string[]]) => z.enum(options);
@@ -53,16 +53,9 @@ const createLinkSchema = () =>
       "error",
       "warning",
       "success",
-      "info",
+      "info"
     ]).optional(),
-    variant: createEnum([
-      "solid",
-      "outline",
-      "subtle",
-      "soft",
-      "ghost",
-      "link",
-    ]).optional(),
+    variant: createEnum(["solid", "outline", "subtle", "soft", "ghost", "link"]).optional()
   });
 
 export default defineContentConfig({
@@ -73,29 +66,29 @@ export default defineContentConfig({
         cwd,
         include: "docs/**",
         prefix: "/",
-        exclude: ["index.md"],
+        exclude: ["index.md"]
       },
-      schema: createDocsSchema(),
+      schema: createDocsSchema()
     }),
 
     landing: defineCollection({
       source: {
         cwd,
-        include: "index.yml",
+        include: "index.yml"
       },
       type: "page",
       schema: z.object({
         seo: z.object({
           title: z.string(),
           description: z.string(),
-          ogImage: z.string(),
+          ogImage: z.string()
         }),
         hero: z.object({
           headline: z.string().optional(),
           title: z.string().nonempty(),
           title_as_html: z.boolean().optional().default(false),
           description: z.string().nonempty(),
-          links: z.array(createLinkSchema()),
+          links: z.array(createLinkSchema())
         }),
         features: z.object({
           headline: z.string().optional(),
@@ -105,30 +98,28 @@ export default defineContentConfig({
             z.object({
               icon: z.string(),
               title: z.string().nonempty(),
-              description: z.string().nonempty(),
-            }),
-          ),
+              description: z.string().nonempty()
+            })
+          )
         }),
         cta: z.object({
           title: z.string().nonempty(),
           description: z.string().nonempty(),
-          links: z.array(createLinkSchema()),
-        }),
-      }),
+          links: z.array(createLinkSchema())
+        })
+      })
     }),
     api: defineCollection({
       type: "page",
-      source: hasOpenApiSource()
-        ? createOpenApiContentSource(getOpenApiSource())
-        : undefined,
+      source: hasOpenApiSource() ? createOpenApiContentSource(getOpenApiSource()) : undefined,
       schema: z.object({
         kind: z.enum(["info", "tag", "operation", "schema"]),
         scalarTarget: z.string(),
         method: z.string().optional(),
         path: z.string().optional(),
         operationId: z.string().optional(),
-        tags: z.array(z.string()).optional(),
-      }),
-    }),
-  },
+        tags: z.array(z.string()).optional()
+      })
+    })
+  }
 });

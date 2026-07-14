@@ -7,7 +7,7 @@ import {
   addTypeTemplate,
   createResolver,
   defineNuxtModule,
-  useLogger,
+  useLogger
 } from "@nuxt/kit";
 import { defu } from "defu";
 
@@ -18,7 +18,7 @@ const LOG_SCOPE = "turnstile";
 const DEFAULTS = {
   enabled: true,
   siteKey: "",
-  secretKey: "",
+  secretKey: ""
 } satisfies ModuleOptions;
 
 /**
@@ -32,8 +32,8 @@ export default defineNuxtModule<ModuleOptions>({
     name: MODULE_NAME,
     configKey: MODULE_KEY,
     compatibility: {
-      nuxt: "^3.0.0 || ^4.0.0",
-    },
+      nuxt: "^3.0.0 || ^4.0.0"
+    }
   },
   defaults: DEFAULTS,
   setup(userOptions, nuxt) {
@@ -43,7 +43,7 @@ export default defineNuxtModule<ModuleOptions>({
       MODULE_KEY,
       userOptions,
       DEFAULTS,
-      log,
+      log
     );
 
     start();
@@ -57,38 +57,34 @@ export default defineNuxtModule<ModuleOptions>({
     const siteKey = options.siteKey ?? "";
     const secretKey = options.secretKey ?? "";
     nuxt.options.build.transpile.push(runtimeDir);
-    nuxt.options.runtimeConfig.turnstile = defu(
-      nuxt.options.runtimeConfig.turnstile ?? {},
-      {
-        secretKey,
-      },
-    );
+    nuxt.options.runtimeConfig.turnstile = defu(nuxt.options.runtimeConfig.turnstile ?? {}, {
+      secretKey
+    });
     nuxt.options.runtimeConfig.public.turnstile ??= defu(
       nuxt.options.runtimeConfig.public.turnstile,
       {
-        siteKey,
-      },
+        siteKey
+      }
     );
     const optionsWithTurnstile = nuxt.options as typeof nuxt.options & {
       turnstile?: unknown;
     };
     optionsWithTurnstile.turnstile = defu(
-      typeof optionsWithTurnstile.turnstile === "object" &&
-        optionsWithTurnstile.turnstile
+      typeof optionsWithTurnstile.turnstile === "object" && optionsWithTurnstile.turnstile
         ? optionsWithTurnstile.turnstile
         : {},
       {
-        siteKey,
-      },
+        siteKey
+      }
     );
 
     addImportsDir(resolver.resolve(runtimeDir, "composables"));
     addServerScanDir(resolver.resolve(runtimeDir, "server"));
     addTypeTemplate({
       filename: "types/turnstile-config.d.ts",
-      src: resolver.resolve(runtimeDir, "types/config.d.ts"),
+      src: resolver.resolve(runtimeDir, "types/config.d.ts")
     });
 
     end();
-  },
+  }
 });

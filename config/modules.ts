@@ -19,14 +19,14 @@ import { defu } from "defu";
  * @returns An object with a boolean `usePrepareMode` indicating if we are in prepare mode.
  */
 export const usePrepareMode = (
-  nuxt?: Nuxt,
+  nuxt?: Nuxt
 ): {
   isPrepareMode: boolean;
 } => {
   const isPrepareMode = !!nuxt?.options._prepare;
 
   return {
-    isPrepareMode,
+    isPrepareMode
   };
 };
 
@@ -44,7 +44,7 @@ export const moduleSetup = <T extends object>(
   MODULE_KEY: string, // For future use
   userOptions: DeepPartial<T>,
   DEFAULTS: DeepPartial<T>,
-  log: ConsolaInstance,
+  log: ConsolaInstance
 ) => {
   /**
    * Merges user options with default options.
@@ -121,20 +121,20 @@ export const moduleSetup = <T extends object>(
 
     if (!required) {
       log.warn(
-        `Missing optional configuration: ${String(optionKey)}. Please set ${MODULE_KEY}.${String(optionKey)} in your nuxt.config file.`,
+        `Missing optional configuration: ${String(optionKey)}. Please set ${MODULE_KEY}.${String(optionKey)} in your nuxt.config file.`
       );
       if (opt.message) log.warn(opt.message);
       return false;
     }
 
     log.error(
-      `Missing required configuration: ${String(optionKey)}. Please set ${MODULE_KEY}.${String(optionKey)} in your nuxt.config file.`,
+      `Missing required configuration: ${String(optionKey)}. Please set ${MODULE_KEY}.${String(optionKey)} in your nuxt.config file.`
     );
     if (opt.message) log.error(opt.message);
 
     if (exitOnMissing) {
       log.error(
-        `Cannot proceed with application setup due to missing configuration in ${MODULE_NAME}. Exiting setup.`,
+        `Cannot proceed with application setup due to missing configuration in ${MODULE_NAME}. Exiting setup.`
       );
       process.exit(1);
     }
@@ -157,7 +157,7 @@ export const moduleSetup = <T extends object>(
       required?: boolean;
       exitOnMissing?: boolean;
     },
-    runtimeConfig: { apiToken?: string },
+    runtimeConfig: { apiToken?: string }
   ): string | false => {
     const { required = false, exitOnMissing = false } = opt;
 
@@ -169,15 +169,15 @@ export const moduleSetup = <T extends object>(
     if (value) return value;
 
     log.error(
-      "API Token is not defined. This token is required to secure your Nuxt Server routes.",
+      "API Token is not defined. This token is required to secure your Nuxt Server routes."
     );
     log.error(
-      `Please set ${MODULE_KEY}.apiToken in your nuxt.config file, runtimeConfig.apiToken or set API_TOKEN env variable.`,
+      `Please set ${MODULE_KEY}.apiToken in your nuxt.config file, runtimeConfig.apiToken or set API_TOKEN env variable.`
     );
 
     if (exitOnMissing) {
       log.error(
-        `Cannot proceed with application setup due to missing API token in ${MODULE_NAME}. Exiting setup.`,
+        `Cannot proceed with application setup due to missing API token in ${MODULE_NAME}. Exiting setup.`
       );
       process.exit(1);
     }
@@ -194,6 +194,6 @@ export const moduleSetup = <T extends object>(
     isEnabled,
     options,
     checkOption,
-    checkAndGetApiToken,
+    checkAndGetApiToken
   };
 };

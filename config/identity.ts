@@ -13,12 +13,12 @@ export default defineOrganization({
   contactPoints: [
     {
       telephone: "(031) 824 01 04",
-      contactType: "Algemene vragen",
+      contactType: "Algemene vragen"
     },
     {
       email: "hallo@onderwijsin.nl",
-      contactType: "Algemene vragen",
-    },
+      contactType: "Algemene vragen"
+    }
   ],
   keywords: [
     "Onderwijs",
@@ -34,14 +34,14 @@ export default defineOrganization({
     "Lerarentekort",
     "Geschiktheidsonderszoek",
     "Adviescentrum",
-    "Informatiecentrum",
+    "Informatiecentrum"
   ],
   address: {
     addressLocality: "Ede",
     addressRegion: "Gelderland",
     postalCode: "6717HK",
     streetAddress: "Johannes Bosboomlaan 50",
-    addressCountry: "NL",
+    addressCountry: "NL"
   },
   numberOfEmployees: 16,
   nonprofitStatus: "NonprofitSBBI",
@@ -50,13 +50,13 @@ export default defineOrganization({
       type: "Organization",
       name: "Trainees in onderwijs",
       url: "https://traineesinonderwijs.nl",
-      logo: "https://res.cloudinary.com/onderwijsin/image/upload/w_600,c_scale/brand/logo_traineesindonderwijs_f2kwvx_t2wg0f.png",
+      logo: "https://res.cloudinary.com/onderwijsin/image/upload/w_600,c_scale/brand/logo_traineesindonderwijs_f2kwvx_t2wg0f.png"
     },
     {
       type: "Organization",
       name: "Onderwijsloket",
       url: "https://onderwijsloket.com",
-      logo: "https://res.cloudinary.com/onderwijsin/image/upload/w_600,c_scale/brand/logo_onderwijsloket_by0ejs.png",
-    },
-  ],
+      logo: "https://res.cloudinary.com/onderwijsin/image/upload/w_600,c_scale/brand/logo_onderwijsloket_by0ejs.png"
+    }
+  ]
 });

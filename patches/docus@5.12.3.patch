@@ -1,0 +1,93 @@
+diff --git a/app/app.config.ts b/app/app.config.ts
+index 3e72220c306f54eade3d21bbe78adabd61872edc..f34ad8fe5c6720249030443b748f5e56acd84dee 100644
+--- a/app/app.config.ts
++++ b/app/app.config.ts
+@@ -37,4 +37,4 @@ export default defineAppConfig({
+       },
+     },
+   },
+-})
++} as any)
+diff --git a/app/plugins/i18n.ts b/app/plugins/i18n.ts
+index 1d568b72d73f1b393d619b913e727e0b00d269e7..91c63b4e8a74eb266c490a5cd10402f5db66c45d 100644
+--- a/app/plugins/i18n.ts
++++ b/app/plugins/i18n.ts
+@@ -14,7 +14,7 @@ export default defineNuxtPlugin(async () => {
+   // If i18n is not enabled, fetch and provide the configured locale in app config
+   if (!i18nConfig) {
+     const appConfig = useAppConfig()
+-    const configuredLocale = appConfig.docus.locale || 'en'
++    const configuredLocale = appConfig.docus?.locale || 'en'
+ 
+     let locale = configuredLocale
+     let resolvedMessages: Record<string, unknown>
+diff --git a/modules/assistant/runtime/components/AssistantPanel.vue b/modules/assistant/runtime/components/AssistantPanel.vue
+index 8df121958d37f211c81c851ce62fe21dfcf29f95..b1a0f00edfdd80ddb44728fd126817a0971c43b0 100644
+--- a/modules/assistant/runtime/components/AssistantPanel.vue
++++ b/modules/assistant/runtime/components/AssistantPanel.vue
+@@ -1,6 +1,6 @@
+ <script setup lang="ts">
+ import type { ToolUIPart, DynamicToolUIPart } from 'ai'
+-import { DefaultChatTransport, isToolUIPart, isReasoningUIPart, isTextUIPart } from 'ai'
++import { DefaultChatTransport } from 'ai'
+ import { Chat } from '@ai-sdk/vue'
+ import { isPartStreaming, isToolStreaming } from '@nuxt/ui/utils/ai'
+ import { useDocusI18n } from '../../../../app/composables/useDocusI18n'
+@@ -78,6 +78,21 @@ watch(messages, (newMessages) => {
+ const canClear = computed(() => messages.value.length > 0)
+ 
+ type ToolPart = ToolUIPart | DynamicToolUIPart
++type TextPart = { type: 'text', text: string, state?: string }
++type ReasoningPart = { type: 'reasoning', text: string, state?: string }
++
++function isTextPart(part: unknown): part is TextPart {
++  return (part as { type?: string }).type === 'text'
++}
++
++function isReasoningPart(part: unknown): part is ReasoningPart {
++  return (part as { type?: string }).type === 'reasoning'
++}
++
++function isToolPart(part: unknown): part is ToolPart {
++  const type = (part as { type?: string }).type
++  return type === 'dynamic-tool' || Boolean(type?.startsWith('tool-'))
++}
+ 
+ function getToolOutput(part: ToolPart): string | undefined {
+   if (part.state !== 'output-available' || !part.output) return undefined
+@@ -159,7 +174,7 @@ defineShortcuts({
+           color="neutral"
+           variant="ghost"
+           aria-label="Close"
+-          @click="open = false"
++          @click="() => { open = false }"
+         />
+       </UTooltip>
+     </template>
+@@ -201,7 +216,7 @@ defineShortcuts({
+             :key="`${message.id}-${part.type}-${index}`"
+           >
+             <UChatReasoning
+-              v-if="isReasoningUIPart(part)"
++              v-if="isReasoningPart(part)"
+               :text="part.text"
+               :streaming="isPartStreaming(part)"
+               icon="i-lucide-brain"
+@@ -213,7 +228,7 @@ defineShortcuts({
+               />
+             </UChatReasoning>
+ 
+-            <template v-else-if="isTextUIPart(part) && part.text.length > 0">
++            <template v-else-if="isTextPart(part) && part.text.length > 0">
+               <AssistantComark
+                 v-if="message.role === 'assistant'"
+                 :markdown="part.text"
+@@ -228,7 +243,7 @@ defineShortcuts({
+             </template>
+ 
+             <UChatTool
+-              v-else-if="isToolUIPart(part)"
++              v-else-if="isToolPart(part)"
+               :text="getToolText(part, t)"
+               :suffix="getToolSuffix(part)"
+               :icon="getToolIcon(part)"

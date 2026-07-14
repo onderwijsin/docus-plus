@@ -12,7 +12,7 @@ const cloudflareRuntimeEnvSchema = z.object({
   accountId: z.string().trim().min(1),
   kvApiToken: z.string().trim().min(1),
   workerName: z.string().trim().min(1),
-  cacheNamespaceId: z.string().trim().min(1),
+  cacheNamespaceId: z.string().trim().min(1)
 });
 
 /**
@@ -22,9 +22,7 @@ const cloudflareRuntimeEnvSchema = z.object({
  * @returns Normalized runtime descriptor.
  * @throws When the preset is provided but not supported by the project.
  */
-export function resolveRuntime(
-  nitroPreset: string | undefined = "node-server",
-): ResolvedRuntime {
+export function resolveRuntime(nitroPreset: string | undefined = "node-server"): ResolvedRuntime {
   if (!nitroPreset?.trim()) {
     return { preset: "node-server" };
   }
@@ -33,12 +31,12 @@ export function resolveRuntime(
 
   if (!parsedPreset.success) {
     throw new Error(
-      `Unsupported NITRO_PRESET "${nitroPreset}". Supported runtimes: ${supportedRuntimePresets.join(", ")}.`,
+      `Unsupported NITRO_PRESET "${nitroPreset}". Supported runtimes: ${supportedRuntimePresets.join(", ")}.`
     );
   }
 
   return {
-    preset: parsedPreset.data,
+    preset: parsedPreset.data
   };
 }
 
@@ -58,28 +56,22 @@ export function resolveCloudflareConfig(
   options: {
     env?: Partial<TypedEnvSchema>;
     isPrepareMode?: boolean;
-  } = {},
+  } = {}
 ): NitroConfig {
   const { env = process.env, isPrepareMode = false } = options;
 
   const parsedEnv = cloudflareRuntimeEnvSchema.safeParse({
-    accountId:
-      env.CLOUDFLARE_ACCOUNT_ID ??
-      (isPrepareMode ? "prepare-account-id" : undefined),
-    kvApiToken:
-      env.CLOUDFLARE_KV_API_TOKEN ??
-      (isPrepareMode ? "prepare-kv-api-token" : undefined),
+    accountId: env.CLOUDFLARE_ACCOUNT_ID ?? (isPrepareMode ? "prepare-account-id" : undefined),
+    kvApiToken: env.CLOUDFLARE_KV_API_TOKEN ?? (isPrepareMode ? "prepare-kv-api-token" : undefined),
     workerName:
-      env.CLOUDFLARE_WORKER_NAME ??
-      (isPrepareMode ? "prepare-cloudflare-worker" : undefined),
+      env.CLOUDFLARE_WORKER_NAME ?? (isPrepareMode ? "prepare-cloudflare-worker" : undefined),
     cacheNamespaceId:
-      env.CLOUDFLARE_CACHE_NAMESPACE_ID ??
-      (isPrepareMode ? "prepare-cache-namespace" : undefined),
+      env.CLOUDFLARE_CACHE_NAMESPACE_ID ?? (isPrepareMode ? "prepare-cache-namespace" : undefined)
   });
 
   if (!parsedEnv.success) {
     throw new Error(
-      `Invalid Cloudflare runtime configuration. Configure CLOUDFLARE_ACCOUNT_ID, CLOUDFLARE_KV_API_TOKEN, CLOUDFLARE_WORKER_NAME, and CLOUDFLARE_CACHE_NAMESPACE_ID. CLOUDFLARE_KV_API_TOKEN must include KV namespace read and write access. ${z.prettifyError(parsedEnv.error)}`,
+      `Invalid Cloudflare runtime configuration. Configure CLOUDFLARE_ACCOUNT_ID, CLOUDFLARE_KV_API_TOKEN, CLOUDFLARE_WORKER_NAME, and CLOUDFLARE_CACHE_NAMESPACE_ID. CLOUDFLARE_KV_API_TOKEN must include KV namespace read and write access. ${z.prettifyError(parsedEnv.error)}`
     );
   }
 
@@ -94,17 +86,17 @@ export function resolveCloudflareConfig(
           logs: {
             enabled: true,
             head_sampling_rate: 1,
-            invocation_logs: true,
-          },
+            invocation_logs: true
+          }
         },
         kv_namespaces: [
           {
             binding: "CACHE",
-            id: parsedEnv.data.cacheNamespaceId,
-          },
-        ],
-      },
-    },
+            id: parsedEnv.data.cacheNamespaceId
+          }
+        ]
+      }
+    }
   };
 }
 
@@ -115,7 +107,7 @@ export function resolveCloudflareConfig(
  */
 export function resolveNodeServerConfig(): NitroConfig {
   return {
-    preset: "node-server",
+    preset: "node-server"
   };
 }
 
@@ -131,7 +123,7 @@ export function resolveRuntimeNitroConfig(
   options: {
     env?: Partial<TypedEnvSchema>;
     isPrepareMode?: boolean;
-  } = {},
+  } = {}
 ): NitroConfig {
   switch (runtime.preset) {
     case "cloudflare_module":
