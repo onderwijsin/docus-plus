@@ -1,3 +1,10 @@
+## [1.1.1](https://github.com/onderwijsin/docus-plus/compare/v1.1.0...v1.1.1) (2026-07-14)
+
+
+### Bug Fixes
+
+* Trigger release ([5f3e74f](https://github.com/onderwijsin/docus-plus/commit/5f3e74fb6088ddd8d3b53b95469836926bd5d263))
+
 # [1.1.0](https://github.com/onderwijsin/docus-plus/compare/v1.0.1...v1.1.0) (2026-07-14)
 
 
