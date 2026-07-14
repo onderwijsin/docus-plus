@@ -16,7 +16,7 @@ published layer from your project's `nuxt.config.ts`:
 
 ```ts
 export default defineNuxtConfig({
-  extends: [["github:onderwijsin/docus-plus@v0.0.1", { install: true }]]
+  extends: [["github:onderwijsin/docus-plus#v1.0.0", { install: true }]],
 });
 ```
 
@@ -77,12 +77,12 @@ integrations you enable, but the playground demonstrates the shared identity con
 export default defineNuxtConfig({
   site: {
     name: "Example Docs",
-    description: "Documentation for the Example platform."
+    description: "Documentation for the Example platform.",
   },
   mcp: {
     name: "Example Docs MCP",
-    description: "Read-only documentation discovery for Example Docs."
-  }
+    description: "Read-only documentation discovery for Example Docs.",
+  },
 });
 ```
 
@@ -100,15 +100,15 @@ export default defineAppConfig({
   github: {
     owner: "example",
     name: "example-docs",
-    url: "https://github.com/example/example-docs"
+    url: "https://github.com/example/example-docs",
   },
   ui: {
-    colors: { primary: "brand", neutral: "slate" }
+    colors: { primary: "brand", neutral: "slate" },
   },
   assistant: {
     floatingInput: true,
-    explainWithAi: true
-  }
+    explainWithAi: true,
+  },
 });
 ```
 
@@ -128,10 +128,10 @@ export default defineNuxtConfig({
     maxSteps: 12,
     temperature: 0.2,
     providerOptions: {
-      gateway: { caching: "auto" }
+      gateway: { caching: "auto" },
     },
-    systemPrompt: "You are the documentation assistant for Example Docs."
-  }
+    systemPrompt: "You are the documentation assistant for Example Docs.",
+  },
 });
 ```
 
