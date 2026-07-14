@@ -1,4 +1,5 @@
 import type { Environment } from "./environment";
+import type { AssistantAiConfig } from "./ai";
 
 declare module "nuxt/schema" {
   interface SharedRuntimeConfig {
@@ -10,6 +11,7 @@ declare module "nuxt/schema" {
     mistral: {
       apiKey: string;
     };
+    ai: AssistantAiConfig;
   }
   interface SharedPublicRuntimeConfig {
     siteUrl: string;

@@ -27,7 +27,12 @@ export default defineNuxtConfig({
   extends: ["docus"],
   devtools: { enabled: true },
 
-  modules: ["nuxt-schema-org", "@nuxtjs/turnstile", "@nuxtjs/plausible"],
+  modules: [
+    join(currentDir, "./modules/ai"),
+    "nuxt-schema-org",
+    "@nuxtjs/turnstile",
+    "@nuxtjs/plausible"
+  ],
 
   hooks: {
     /**

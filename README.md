@@ -112,6 +112,32 @@ export default defineAppConfig({
 });
 ```
 
+### Configure the assistant
+
+Override AI behavior from the consuming app's `nuxt.config.ts` with the `ai` prop. Defaults
+include the Mistral medium model, high reasoning, an 8,000-token output limit, two retries, and up
+to ten tool-calling steps.
+
+```ts
+export default defineNuxtConfig({
+  ai: {
+    model: "mistral-large-latest",
+    reasoning: "high",
+    maxOutputTokens: 12000,
+    maxRetries: 3,
+    maxSteps: 12,
+    temperature: 0.2,
+    providerOptions: {
+      gateway: { caching: "auto" }
+    },
+    systemPrompt: "You are the documentation assistant for Example Docs."
+  }
+});
+```
+
+The `systemPrompt` value replaces the generated documentation-aware prompt when provided.
+See the [assistant configuration reference](docs/assistant.md) for all available options.
+
 ### Add your design tokens
 
 Create `app/app.css` and import the layer stylesheet first. This import is required: it preserves

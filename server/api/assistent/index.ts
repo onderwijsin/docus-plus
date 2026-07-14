@@ -1,11 +1,17 @@
-import { streamText, convertToModelMessages, stepCountIs, smoothStream, type ToolSet } from "ai";
+import {
+  convertToModelMessages,
+  createUIMessageStreamResponse,
+  isStepCount,
+  smoothStream,
+  streamText,
+  toUIMessageStream,
+  type ToolSet
+} from "ai";
 import { createMCPClient } from "@ai-sdk/mcp";
 import type { H3Event } from "h3";
 import { createMistral } from "@ai-sdk/mistral";
 
 import { getSystemPrompt } from "../../utils/ai/system";
-
-const MAX_STEPS = 10;
 
 function createLocalFetch(event: H3Event): typeof fetch {
   const origin = getRequestURL(event).origin;
@@ -32,6 +38,8 @@ export default defineEventHandler(async (event) => {
   const siteConfig = getSiteConfig(event);
 
   const siteName = siteConfig.name || "Documentation";
+  const aiConfig = config.ai;
+  const maxSteps = aiConfig.maxSteps;
 
   const mcpServer = config.assistant.mcpServer;
   const isExternalUrl = mcpServer.startsWith("http://") || mcpServer.startsWith("https://");
@@ -66,28 +74,53 @@ export default defineEventHandler(async (event) => {
 
   const closeMcp = () => event.waitUntil(httpClient.close());
 
-  return streamText({
-    model: mistral("mistral-medium-latest"),
-    maxOutputTokens: 8000,
-    maxRetries: 2,
+  const result = streamText({
+    model: mistral(aiConfig.model),
+    maxOutputTokens: aiConfig.maxOutputTokens,
+    maxRetries: aiConfig.maxRetries,
     abortSignal: abortController.signal,
-    stopWhen: stepCountIs(MAX_STEPS),
+    reasoning: aiConfig.reasoning,
+    temperature: aiConfig.temperature,
+    topP: aiConfig.topP,
+    topK: aiConfig.topK,
+    presencePenalty: aiConfig.presencePenalty,
+    frequencyPenalty: aiConfig.frequencyPenalty,
+    stopSequences: aiConfig.stopSequences,
+    seed: aiConfig.seed,
+    timeout: aiConfig.timeout,
+    headers: aiConfig.headers,
+    stopWhen: isStepCount(maxSteps),
+    toolChoice: aiConfig.toolChoice,
+    activeTools: aiConfig.activeTools,
+    toolOrder: aiConfig.toolOrder,
+    include: aiConfig.include,
     // On the last allowed step, disable tools so the model is forced to
     // produce a final text answer instead of stopping mid tool-calling.
     prepareStep: ({ stepNumber }) => {
-      return stepNumber >= MAX_STEPS - 1 ? { toolChoice: "none" } : {};
+      return stepNumber >= maxSteps - 1 ? { toolChoice: "none" } : {};
     },
-    providerOptions: {
-      gateway: {
-        caching: "auto"
-      }
-    },
-    system: getSystemPrompt(siteName),
+    providerOptions: aiConfig.providerOptions,
+    instructions: aiConfig.systemPrompt ?? getSystemPrompt(siteName),
     messages: await convertToModelMessages(messages),
     tools: mcpTools as ToolSet,
-    experimental_transform: smoothStream(),
-    onFinish: closeMcp,
+    experimental_transform: aiConfig.smoothStream
+      ? smoothStream({
+          delayInMs: aiConfig.smoothStreamDelayInMs,
+          chunking: aiConfig.smoothStreamChunking
+        })
+      : undefined,
+    onEnd: closeMcp,
     onAbort: closeMcp,
     onError: closeMcp
-  }).toUIMessageStreamResponse();
+  });
+
+  return createUIMessageStreamResponse({
+    stream: toUIMessageStream({
+      stream: result.stream,
+      sendReasoning: aiConfig.sendReasoning,
+      sendSources: aiConfig.sendSources,
+      sendStart: aiConfig.sendStart,
+      sendFinish: aiConfig.sendFinish
+    })
+  });
 });
