@@ -9,6 +9,10 @@ enhanced search, and Vercel Gateway-free assistant integration.
 The repository is the layer itself. The `.playground/` application is the reference implementation
 for consuming and customising it.
 
+For detailed guidance on working with Docus Plus, copy the contents of `.playground/content/` into
+your consuming application. The playground contains the complete step-by-step reference articles;
+they are not automatically included when a project extends the layer.
+
 ## Create a documentation site
 
 Start with a fresh Nuxt 4 project, install the package, and extend it from your project's
