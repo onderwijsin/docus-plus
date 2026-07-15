@@ -12,12 +12,14 @@
     "create-docus-plus": "dist/main.js"
   },
   "files": [
-    "dist"
+    "dist",
+    "README.md"
   ],
   "type": "module",
   "scripts": {
     "build": "node scripts/clean-dist.mjs && tsup main.ts --format esm --out-dir dist",
     "prepack": "pnpm build && node scripts/copy-template.mjs",
+    "release": "semantic-release",
     "test": "pnpm build && node --test test/**/*.test.mjs",
     "typecheck": "tsc --noEmit"
   },

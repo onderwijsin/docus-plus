@@ -1,0 +1,22 @@
+{
+  "branches": ["main"],
+  "tagFormat": "create-docus-plus-v${version}",
+  "plugins": [
+    "@semantic-release/commit-analyzer",
+    "@semantic-release/release-notes-generator",
+    [
+      "@semantic-release/npm",
+      {
+        "pkgRoot": "."
+      }
+    ],
+    "@semantic-release/github",
+    [
+      "@semantic-release/git",
+      {
+        "assets": ["package.json"],
+        "message": "chore(cli-release): ${nextRelease.version} [skip ci]"
+      }
+    ]
+  ]
+}
