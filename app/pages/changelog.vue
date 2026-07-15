@@ -28,6 +28,9 @@ defineOgImage("Docs" as keyof OgImageComponents, {
   title: title,
   description: description
 });
+
+const { public: publicConfig } = useRuntimeConfig();
+const mailchimp = publicConfig.mailchimp;
 </script>
 
 <template>
@@ -36,13 +39,15 @@ defineOgImage("Docs" as keyof OgImageComponents, {
       :title="title"
       :description="description"
       class="md:border-b border-default"
-      :ui="{ container: 'relative py-10 sm:py-16 lg:py-24' }"
+      :ui="{ container: 'relative py-10 sm:py-16 lg:py-24 gap-8 sm:gap-y-10' }"
     >
       <template #top>
         <div
           class="absolute z-[-1] rounded-full bg-primary blur-[300px] size-60 sm:size-80 transform -translate-x-1/2 left-1/2 -translate-y-80"
         />
       </template>
+
+      <MailchimpSignup v-if="mailchimp.enabled" class="max-w-lg w-full mx-auto" />
 
       <div
         aria-hidden="true"
