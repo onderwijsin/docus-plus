@@ -1,3 +1,10 @@
+# [1.2.0](https://github.com/onderwijsin/docus-plus/compare/v1.1.3...v1.2.0) (2026-07-15)
+
+
+### Features
+
+* Add changelogs ([a339d0d](https://github.com/onderwijsin/docus-plus/commit/a339d0d3cb9d75685eeacc445d6d2a1eb801e612))
+
 ## [1.1.3](https://github.com/onderwijsin/docus-plus/compare/v1.1.2...v1.1.3) (2026-07-15)
 
 
