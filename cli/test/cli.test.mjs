@@ -35,6 +35,7 @@ test("creates a standalone project from the default starter", async () => {
   const result = run(target, "--name", "product-docs");
 
   assert.equal(result.status, 0, result.stderr);
+  assert.match(result.stdout, /Your Docus Plus site is ready/);
   const packageJson = JSON.parse(await readFile(join(target, "package.json"), "utf8"));
   const constants = await readFile(join(target, "config/constants.ts"), "utf8");
 

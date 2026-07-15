@@ -4,6 +4,7 @@ import { fileURLToPath } from "node:url";
 import { defineCommand, runMain } from "citty";
 import { promptForProject } from "./prompts";
 import { createProject, validateProjectName } from "./scaffold";
+import { showCreating, showSuccess, showWelcome } from "./ui";
 
 export function createCLI() {
   const main = defineCommand({
@@ -29,6 +30,7 @@ export function createCLI() {
       }
     },
     async setup(context) {
+      showWelcome();
       const answers = await promptForProject({
         dir: context.args.dir as string | undefined,
         name: context.args.name as string | undefined
@@ -40,6 +42,7 @@ export function createCLI() {
       }
 
       const target = resolve(answers.dir);
+      showCreating(target);
       await createProject({
         name: answers.name,
         target,
@@ -47,9 +50,7 @@ export function createCLI() {
         template: resolveTemplateDirectory()
       });
 
-      process.stdout.write(
-        `\nCreated ${answers.name} in ${target}\n\nNext steps:\n  cd ${answers.dir}\n  corepack pnpm install\n  corepack pnpm dev\n`
-      );
+      showSuccess(answers.name, answers.dir);
     }
   });
 
