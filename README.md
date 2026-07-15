@@ -4,7 +4,7 @@
 
 `docus-plus` is a reusable Nuxt layer for building documentation sites with Nuxt 4, Docus, and
 Nuxt Content. It provides an opinionated approach to Docus, and extends it with Scalar API referenced,
-enhanced search, and Vercel Gateway-free assistant integration.
+enhanced search, Vercel Gateway-free assistant integration, and release notes.
 
 The repository is the layer itself. The `.playground/` application is the reference implementation
 for consuming and customising it.
@@ -75,6 +75,33 @@ description: Create your first integration.
 
 Your guide starts here.
 ```
+
+### Add a changelog
+
+Add release entries as Markdown files in `content/changelog/`. The layer collects these files as
+data rather than individual pages, then renders them together at `/changelog`. The footer adds a
+link to that route automatically when the collection contains at least one entry.
+
+Every entry needs a display name, a tag, and an ISO 8601 publication date:
+
+```md [content/changelog/v1.2.0.md]
+---
+name: Version 1.2.0
+tag: v1.2.0
+publishedAt: 2026-07-15
+---
+
+## Added
+
+- Added a new integration guide.
+
+## Fixed
+
+- Clarified an installation step.
+```
+
+Entries are ordered by `publishedAt`, with the most recent version displayed first and marked as
+the latest release. A changelog file does not create its own route.
 
 ### Configure site identity and integrations
 

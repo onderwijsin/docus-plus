@@ -7,6 +7,7 @@ import { joinURL } from "ufo";
 
 const { options } = useNuxt();
 const cwd = joinURL(options.rootDir, "content");
+const appRootDir = options.rootDir;
 
 /**
  * Since we want to do various customization on the content collections, we are
@@ -71,6 +72,19 @@ export default defineContentConfig({
       schema: createDocsSchema()
     }),
 
+    changelogs: defineCollection({
+      type: "data",
+      source: {
+        cwd,
+        include: "changelog/**/*.md"
+      },
+      schema: z.object({
+        name: z.string(),
+        tag: z.string(),
+        publishedAt: z.date()
+      })
+    }),
+
     landing: defineCollection({
       source: {
         cwd,
@@ -111,7 +125,9 @@ export default defineContentConfig({
     }),
     api: defineCollection({
       type: "page",
-      source: hasOpenApiSource() ? createOpenApiContentSource(getOpenApiSource()) : undefined,
+      source: hasOpenApiSource()
+        ? createOpenApiContentSource(getOpenApiSource(), appRootDir)
+        : undefined,
       schema: z.object({
         kind: z.enum(["info", "tag", "operation", "schema"]),
         scalarTarget: z.string(),

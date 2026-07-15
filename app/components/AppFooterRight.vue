@@ -39,10 +39,22 @@ const links = computed<FooterLink[]>(() => {
 
   return [...socialLinks, ...githubLink];
 });
+
+const { data: changelogs } = await useAsyncData("changelog-count", () =>
+  queryCollection("changelogs").count()
+);
 </script>
 
 <template>
   <div class="flex">
+    <UButton
+      v-if="changelogs && changelogs > 0"
+      size="sm"
+      color="neutral"
+      variant="ghost"
+      to="/changelog"
+      label="Changelog"
+    />
     <UButton
       v-if="appConfig.statusPage"
       size="sm"

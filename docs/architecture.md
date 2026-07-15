@@ -9,7 +9,8 @@ with `extends: [".."]`.
 
 - `app/` contains shared Vue components, layouts, composables, and base styling.
 - `config/` contains generic defaults and helpers. Product identity belongs in the consumer.
-- `content.config.ts` defines the landing, documentation, and optional generated API collections.
+- `content.config.ts` defines the landing, documentation, changelog, and optional generated API
+  collections.
 - `modules/` contains reusable Nuxt modules and their runtime surfaces.
 - `server/` contains shared Nitro routes and server utilities that are intentionally part of the
   layer contract.
