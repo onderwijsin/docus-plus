@@ -1,0 +1,16 @@
+name: Install Proton Pass CLI
+description: Install the Proton Pass CLI and add it to the GitHub Actions path
+
+runs:
+  using: composite
+  steps:
+    - name: Install Proton Pass CLI
+      shell: bash
+      run: |
+        set -euo pipefail
+
+        export PROTON_PASS_CLI_INSTALL_DIR="$HOME/.local/bin"
+        mkdir -p "$PROTON_PASS_CLI_INSTALL_DIR"
+        curl -fsSL https://proton.me/download/pass-cli/install.sh | bash
+        echo "$PROTON_PASS_CLI_INSTALL_DIR" >> "$GITHUB_PATH"
+        "$PROTON_PASS_CLI_INSTALL_DIR/pass-cli" --version
