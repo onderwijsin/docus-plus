@@ -2,6 +2,7 @@
 import { SCALAR_BASE_PATH } from "#layers/docus-plus/config/constants";
 
 import type { ContentNavigationItem, PageCollections } from "@nuxt/content";
+import type { CommandPaletteGroup } from "@nuxt/ui";
 import type { GlobalSearchItem } from "#layers/docus-plus/app/composables/global-content-search";
 
 const { scalar } = useRuntimeConfig().public;
@@ -37,7 +38,11 @@ const links = computed<GlobalSearchItem[]>(() => {
     );
   }
 
-  if (scalar.enabled) {
+  if (
+    scalar.enabled &&
+    scalar.references.length === 1 &&
+    !scalar.references[0]!.excludeFromSearch
+  ) {
     items.push({
       id: SCALAR_BASE_PATH,
       label: "API Reference",
@@ -55,6 +60,25 @@ const links = computed<GlobalSearchItem[]>(() => {
     });
   }
   return items;
+});
+
+const scalarLinkGroups = computed<CommandPaletteGroup[]>(() => {
+  if (!scalar.enabled || scalar.references.length < 2) {
+    return [];
+  }
+
+  const items = scalar.references
+    .filter((reference) => !reference.excludeFromSearch)
+    .map((reference) => ({
+      id: reference.path,
+      label: reference.label,
+      icon: getIcon("api_explorer"),
+      to: reference.path
+    }));
+
+  return items.length
+    ? [{ id: "api-references", label: "API references", items, ignoreFilter: true }]
+    : [];
 });
 
 const themeItems = computed<GlobalSearchItem[]>(() => {
@@ -103,7 +127,8 @@ const { groups, initialize, isSearching, searchTerm } = useGlobalContentSearch({
   collection: collectionName,
   navigation: computed(() => props.navigation),
   links,
-  themeItems
+  themeItems,
+  linkGroups: scalarLinkGroups
 });
 
 watch(open, (isOpen) => {

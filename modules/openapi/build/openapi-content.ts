@@ -209,7 +209,7 @@ function addEntry(entries: ApiContentEntry[], entry: ApiContentEntry): void {
   entries.push(parsed.data);
 }
 
-function createEntries(document: UnknownRecord): ApiContentEntry[] {
+function createEntries(document: UnknownRecord, scalarBasePath: string): ApiContentEntry[] {
   const entries: ApiContentEntry[] = [];
   const info = asRecord(document.info);
   const servers = Array.isArray(document.servers) ? document.servers.map(asRecord) : [];
@@ -223,7 +223,7 @@ function createEntries(document: UnknownRecord): ApiContentEntry[] {
     kind: "info",
     title: asString(info.title) || "API reference",
     description: asString(info.description),
-    scalarTarget: getScalarInfoTarget(),
+    scalarTarget: getScalarInfoTarget(scalarBasePath),
     content: [
       asString(info.title),
       asString(info.version),
@@ -274,7 +274,7 @@ function createEntries(document: UnknownRecord): ApiContentEntry[] {
         path,
         ...(operationId ? { operationId } : {}),
         tags,
-        scalarTarget: getScalarOperationTarget({ method, path, tags }),
+        scalarTarget: getScalarOperationTarget({ method, path, tags, basePath: scalarBasePath }),
         content
       });
 
@@ -303,7 +303,7 @@ function createEntries(document: UnknownRecord): ApiContentEntry[] {
       kind: "tag",
       title: tag,
       description,
-      scalarTarget: getScalarTagTarget(tag),
+      scalarTarget: getScalarTagTarget(tag, scalarBasePath),
       content: [tag, description, ...(operationsByTag.get(tag) ?? [])].filter(Boolean).join("\n\n")
     });
   }
@@ -316,7 +316,7 @@ function createEntries(document: UnknownRecord): ApiContentEntry[] {
       kind: "schema",
       title: name,
       description: asString(resolved.description) || asString(resolved.title),
-      scalarTarget: getScalarSchemaTarget(name),
+      scalarTarget: getScalarSchemaTarget(name, scalarBasePath),
       content: [name, ...collectSchemaText(resolved, document)].filter(Boolean).join("\n\n")
     });
   }
@@ -342,6 +342,10 @@ async function loadOpenApiDocument(rootDir: string, source: OpenApiSource): Prom
         );
       }
       return response.text();
+    }
+
+    if (source.type === "inline") {
+      return typeof source.content === "string" ? source.content : JSON.stringify(source.content);
     }
 
     const publicDirectory = resolve(rootDir, "public");
@@ -373,13 +377,19 @@ async function loadOpenApiDocument(rootDir: string, source: OpenApiSource): Prom
  * The source stays memory-only: generated API records are included in the
  * Content database but are never emitted into the repository's `content/` dir.
  */
-export function createOpenApiContentSource(openApiSource: OpenApiSource, appRootDir: string) {
+export function createOpenApiContentSource(
+  openApiSource: OpenApiSource,
+  appRootDir: string,
+  scalarBasePath = "/api-reference"
+) {
   let entriesPromise: Promise<Map<string, string>> | undefined;
 
   async function getEntries(): Promise<Map<string, string>> {
     entriesPromise ??= loadOpenApiDocument(appRootDir, openApiSource).then(
       (document) =>
-        new Map(createEntries(document).map((entry) => [entry.key, createMarkdown(entry)]))
+        new Map(
+          createEntries(document, scalarBasePath).map((entry) => [entry.key, createMarkdown(entry)])
+        )
     );
     return entriesPromise;
   }

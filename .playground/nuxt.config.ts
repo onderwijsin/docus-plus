@@ -23,6 +23,28 @@ export default defineNuxtConfig({
     metaData: {
       title: APP_IDENTITY.siteTitle
     },
-    slug: OPENAPI_DOCUMENT_SLUG
+    slug: OPENAPI_DOCUMENT_SLUG,
+    configurations: [
+      {
+        title: "yaml",
+        url: "https://registry.scalar.com/@scalar/apis/galaxy?format=yaml",
+        pathRouting: {
+          basePath: "/yaml"
+        }
+      },
+      {
+        title: "json",
+        url: "https://registry.scalar.com/@scalar/apis/galaxy?format=json",
+        pathRouting: {
+          basePath: "/json"
+        },
+        badge: {
+          label: "deprecated",
+          color: "neutral",
+          variant: "soft",
+          size: "xs"
+        }
+      }
+    ]
   }
 });

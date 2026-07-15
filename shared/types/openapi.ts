@@ -12,4 +12,8 @@ export type OpenApiSource =
   | {
       type: "local";
       publicPath: string;
+    }
+  | {
+      type: "inline";
+      content: unknown;
     };

@@ -11,5 +11,19 @@ unsupported external `$ref` references.
 Consumers that need this feature configure the source in their application and should bundle
 multi-file specifications before the build.
 
+Scalar also accepts its native `configurations` array in `nuxt.config.ts`. Each configuration can
+set its own `url` (or `content`) and `pathRouting.basePath` segment. The layer appends that segment
+to `/api-reference`, so `/yaml` becomes `/api-reference/yaml`. The layer enables Scalar when this
+array contains a valid document configuration, even when the OpenAPI environment variables are
+absent.
+
+Set `indexed: true` on the configuration that should populate generated OpenAPI Content and API
+search. When no configuration is indexed, the first configuration is used. Set
+`excludeFromSearch: true` to keep a reference out of the API Reference links in AppSearch while
+leaving it available in Scalar.
+
+Configurations can provide a Nuxt UI `BadgeProps` object for the API Explorer dropdown, for example
+`badge: { label: "latest", color: "success" }`.
+
 Keep the generated record schema and Scalar links aligned. Run `corepack pnpm build` after changing
 the source configuration, parser, or generated metadata contract.
