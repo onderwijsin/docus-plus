@@ -49,8 +49,8 @@ coverage
 .grunt
 .build/
 build/
-!modules/openapi/build/
-!modules/openapi/build/**
+!layer/modules/openapi/build/
+!layer/modules/openapi/build/**
 build-info.json
 .next
 .nuxt
