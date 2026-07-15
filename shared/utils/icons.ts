@@ -7,6 +7,8 @@ const ICONS = {
   mail: "lucide:send",
   tag: "lucide:tag",
   docs: "lucide:book-open",
+  changelog: "lucide:notebook-pen",
+  sparkles: "lucide:sparkles",
 
   success: "lucide:badge-check",
   warn: "lucide:triangle-alert",

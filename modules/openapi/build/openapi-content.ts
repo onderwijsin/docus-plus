@@ -373,27 +373,24 @@ async function loadOpenApiDocument(rootDir: string, source: OpenApiSource): Prom
  * The source stays memory-only: generated API records are included in the
  * Content database but are never emitted into the repository's `content/` dir.
  */
-export function createOpenApiContentSource(openApiSource: OpenApiSource) {
+export function createOpenApiContentSource(openApiSource: OpenApiSource, appRootDir: string) {
   let entriesPromise: Promise<Map<string, string>> | undefined;
 
-  async function getEntries(rootDir: string): Promise<Map<string, string>> {
-    entriesPromise ??= loadOpenApiDocument(rootDir, openApiSource).then(
+  async function getEntries(): Promise<Map<string, string>> {
+    entriesPromise ??= loadOpenApiDocument(appRootDir, openApiSource).then(
       (document) =>
         new Map(createEntries(document).map((entry) => [entry.key, createMarkdown(entry)]))
     );
     return entriesPromise;
   }
 
-  let rootDir = "";
-
   return defineCollectionSource({
-    prepare: async (options) => {
-      rootDir = options.rootDir;
-      await getEntries(rootDir);
+    prepare: async () => {
+      await getEntries();
     },
-    getKeys: async () => [...(await getEntries(rootDir)).keys()],
+    getKeys: async () => [...(await getEntries()).keys()],
     getItem: async (key) => {
-      const item = (await getEntries(rootDir)).get(key);
+      const item = (await getEntries()).get(key);
       if (!item) {
         throw new Error(`Unknown generated OpenAPI Content entry: ${key}`);
       }
