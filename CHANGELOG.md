@@ -1,3 +1,16 @@
+# [1.3.0](https://github.com/onderwijsin/docus-plus/compare/v1.2.0...v1.3.0) (2026-07-15)
+
+
+### Bug Fixes
+
+* Update gitignore to exclude openapi build utils ([f1bc10a](https://github.com/onderwijsin/docus-plus/commit/f1bc10aa0d5e116f1178bb0cbf2ef47d0e003dd1))
+
+
+### Features
+
+* Add monorepo structure with package and starter packages ([03f50de](https://github.com/onderwijsin/docus-plus/commit/03f50dee08deb600af58c68112c7c23ff8bcabb1))
+* **cli:** Add Docus Plus project generator ([e46534d](https://github.com/onderwijsin/docus-plus/commit/e46534d77f7def0eba4a65b500c021b7e46698db))
+
 # [1.2.0](https://github.com/onderwijsin/docus-plus/compare/v1.1.3...v1.2.0) (2026-07-15)
 
 
