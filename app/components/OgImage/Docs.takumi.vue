@@ -14,11 +14,11 @@ const primaryColor = appConfig.ui?.colors?.primary ?? "emerald";
   <div class="w-full h-full flex flex-col justify-between bg-neutral-950 px-[80px] py-[60px]">
     <!-- Radial glow top-right: wide soft layer -->
     <div
-      class="absolute top-0 right-0 w-[700px] h-[700px] bg-[radial-gradient(circle_at_top_right,var(--ui-color-primary-500)_0%,var(--ui-color-primary-500)_40%,transparent_70%)]"
+      class="absolute top-0 right-0 w-[1000px] h-[1000px] bg-[radial-gradient(circle_at_top_right,rgba(255,255,255,0.10)_0%,rgba(255,255,255,0.01)_40%,transparent_50%)]"
     />
     <!-- Radial glow top-right: tight bright core -->
     <div
-      class="absolute top-0 right-0 w-[350px] h-[350px] bg-[radial-gradient(circle_at_top_right,var(--ui-color-primary-600)_0%,var(--ui-color-primary-500)_35%,transparent_65%)]"
+      class="absolute top-0 right-0 w-[350px] h-[350px] bg-[radial-gradient(circle_at_top_right,rgba(255,255,255,0.08)_0%,rgba(255,255,255,0.02)_25%,transparent_45%)]"
     />
 
     <div class="flex-1 flex flex-col justify-center items-start">
