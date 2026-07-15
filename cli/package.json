@@ -1,0 +1,33 @@
+{
+  "name": "create-docus-plus",
+  "version": "0.0.1",
+  "private": false,
+  "description": "CLI for creating Docus Plus documentation projects",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/onderwijsin/docus-plus.git"
+  },
+  "bin": {
+    "create-docus-plus": "dist/main.js"
+  },
+  "files": [
+    "dist"
+  ],
+  "type": "module",
+  "scripts": {
+    "build": "node scripts/clean-dist.mjs && tsup main.ts --format esm --out-dir dist",
+    "prepack": "pnpm build && node scripts/copy-template.mjs",
+    "test": "pnpm build && node --test test/**/*.test.mjs",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "citty": "^0.2.2"
+  },
+  "devDependencies": {
+    "@types/node": "^24.13.1",
+    "tsup": "^8.5.1",
+    "typescript": "^6.0.3"
+  },
+  "packageManager": "pnpm@11.11.0"
+}

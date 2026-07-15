@@ -9,11 +9,27 @@ enhanced search, Vercel Gateway-free assistant integration, and release notes.
 The repository contains the published layer, the official documentation site, an integration
 playground, and a standalone starter template.
 
-For detailed guidance, visit [docus-plus.onderwijsin.nl](https://docus-plus.onderwijsin.nl). The
-repository's `.starters/default/` directory is a complete starting point that you can copy into a
-new consuming application.
+For detailed guidance, visit [docus-plus.onderwijsin.nl](https://docus-plus.onderwijsin.nl).
 
 ## Create a documentation site
+
+Create a complete standalone site from the maintained default starter:
+
+```bash
+npx create-docus-plus my-docs
+cd my-docs
+corepack pnpm install
+corepack pnpm dev
+```
+
+The CLI prompts for the destination and package name when they are not supplied. For automation,
+provide both explicitly:
+
+```bash
+npx create-docus-plus ./my-docs --name my-docs
+```
+
+It refuses non-empty destinations unless you pass `--force`.
 
 Start with a fresh Nuxt 4 project, install the package, and extend it from your project's
 `nuxt.config.ts`:
@@ -218,8 +234,9 @@ corepack pnpm dev              # Run the official docs site
 corepack pnpm playground:dev   # Run the feature playground
 ```
 
-Both applications extend the local workspace package. Use `.starters/default/` for the complete
-consumer example, including app overrides, multi-source Scalar, changelog examples, and guides.
+Both applications extend the local workspace package. The `create-docus-plus` CLI packages the
+complete `.starters/default/` consumer example, including app overrides, multi-source Scalar,
+changelog examples, and guides.
 
 ## Environment variables
 
@@ -317,7 +334,8 @@ corepack pnpm build
 layer/     Published Docus Plus Nuxt layer
 docs/      Official Docus Plus documentation site and internal notes
 playground/ Feature-complete integration consumer
-.starters/ Standalone starter templates for future CLI support
+.starters/ Standalone starter templates used by the CLI
+cli/       Published create-docus-plus project generator
 ```
 
 Read [docs/internal/README.md](./docs/internal/README.md) for the maintainer documentation index. Contributions must

@@ -8,13 +8,15 @@
     "docs:build": "pnpm --filter @onderwijsin/docus-plus-docs build",
     "playground:dev": "pnpm --filter docus-plus-playground dev",
     "playground:build": "pnpm --filter docus-plus-playground build",
+    "cli:build": "pnpm --filter create-docus-plus build",
+    "cli:test": "pnpm --filter create-docus-plus test",
     "dev:prepare": "pnpm --filter @onderwijsin/docus-plus dev:prepare && pnpm --filter @onderwijsin/docus-plus-docs dev:prepare && pnpm --filter docus-plus-playground dev:prepare",
-    "typecheck": "pnpm --filter @onderwijsin/docus-plus typecheck && pnpm --filter @onderwijsin/docus-plus-docs typecheck && pnpm --filter docus-plus-playground typecheck",
+    "typecheck": "pnpm --filter create-docus-plus typecheck && pnpm --filter @onderwijsin/docus-plus typecheck && pnpm --filter @onderwijsin/docus-plus-docs typecheck && pnpm --filter docus-plus-playground typecheck",
     "fmt": "oxfmt",
     "fmt:check": "oxfmt --check",
     "lint": "oxlint",
     "lint:fix": "oxlint --fix",
-    "build": "pnpm docs:build && pnpm playground:build",
+    "build": "pnpm cli:build && pnpm docs:build && pnpm playground:build",
     "release": "semantic-release"
   },
   "devDependencies": {
