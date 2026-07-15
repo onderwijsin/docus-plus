@@ -8,6 +8,7 @@ For setup instructions aimed at layer consumers, start with the repository [READ
 - [Runtime and configuration](./runtime.md)
 - [Development and releases](./development.md)
 - [Content and UI conventions](./conventions.md)
+- [Changelog collection](./changelog.md)
 - [Local modules](./modules.md)
 - [OpenAPI support](./openapi.md)
 - [Scalar integration](./scalar.md)
