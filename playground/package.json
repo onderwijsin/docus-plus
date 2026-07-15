@@ -1,0 +1,16 @@
+{
+  "name": "docus-plus-playground",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "nuxt dev",
+    "dev:prepare": "nuxt prepare",
+    "build": "nuxt build",
+    "typecheck": "nuxt typecheck"
+  },
+  "dependencies": {
+    "@onderwijsin/docus-plus": "workspace:*",
+    "better-sqlite3": "12.x",
+    "nuxt": "^4.4.8"
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "name": "@onderwijsin/docus-plus-docs",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "nuxt dev",
+    "dev:prepare": "nuxt prepare",
+    "build": "nuxt build",
+    "build:coolify": "nuxt cleanup && NODE_OPTIONS=\"--max-old-space-size=8192\" pnpm build",
+    "start": "node .output/server/index.mjs",
+    "typecheck": "nuxt typecheck",
+    "env:check": "varlock load",
+    "env:typegen": "varlock codegen"
+  },
+  "dependencies": {
+    "@onderwijsin/docus-plus": "workspace:*",
+    "@varlock/proton-pass-plugin": "2.0.0",
+    "@varlock/vite-integration": "1.2.1",
+    "better-sqlite3": "12.11.1",
+    "nuxt": "4.4.8",
+    "varlock": "1.10.0"
+  },
+  "varlock": {
+    "loadPath": "./envs/"
+  }
+}

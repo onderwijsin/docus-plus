@@ -16,5 +16,11 @@ export default defineConfig({
       }
     ]
   },
-  ignorePatterns: [".agents/**", "content/**", "env.d.ts", "envs/env.d.ts"]
+  ignorePatterns: [
+    ".agents/**",
+    ".starters/**",
+    "docs/content/**",
+    "env.d.ts",
+    "layer/envs/env.d.ts"
+  ]
 });

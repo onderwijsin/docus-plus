@@ -6,14 +6,30 @@
 Nuxt Content. It provides an opinionated approach to Docus, and extends it with Scalar API referenced,
 enhanced search, Vercel Gateway-free assistant integration, and release notes.
 
-The repository is the layer itself. The `.playground/` application is the reference implementation
-for consuming and customising it.
+The repository contains the published layer, the official documentation site, an integration
+playground, and a standalone starter template.
 
-For detailed guidance on working with Docus Plus, copy the contents of `.playground/content/` into
-your consuming application. The playground contains the complete step-by-step reference articles;
-they are not automatically included when a project extends the layer.
+For detailed guidance, visit [docus-plus.onderwijsin.nl](https://docus-plus.onderwijsin.nl).
 
 ## Create a documentation site
+
+Create a complete standalone site from the maintained default starter:
+
+```bash
+npx create-docus-plus my-docs
+cd my-docs
+corepack pnpm install
+corepack pnpm dev
+```
+
+The CLI prompts for the destination and package name when they are not supplied. For automation,
+provide both explicitly:
+
+```bash
+npx create-docus-plus ./my-docs --name my-docs
+```
+
+It refuses non-empty destinations unless you pass `--force`.
 
 Start with a fresh Nuxt 4 project, install the package, and extend it from your project's
 `nuxt.config.ts`:
@@ -170,7 +186,7 @@ export default defineNuxtConfig({
 ```
 
 The `systemPrompt` value replaces the generated documentation-aware prompt when provided.
-See the [assistant configuration reference](docs/assistant.md) for all available options.
+See the official documentation for the complete assistant configuration reference.
 
 ### Add your design tokens
 
@@ -209,20 +225,22 @@ Nuxt's component resolution will use the application component as the override.
 
 ## Local development
 
-This repository includes the playground used to verify the layer:
+This repository is a pnpm workspace. The official docs application is the default development
+target, while the playground is the compact, feature-complete integration harness:
 
 ```bash
 corepack pnpm install
-corepack pnpm dev
+corepack pnpm dev              # Run the official docs site
+corepack pnpm playground:dev   # Run the feature playground
 ```
 
-The playground is configured in `.playground/nuxt.config.ts` and extends the local layer with
-`extends: [".."]`. Its content, app config, stylesheet, and logo override are the canonical setup
-examples for a consuming project.
+Both applications extend the local workspace package. The `create-docus-plus` CLI packages the
+complete `.starters/default/` consumer example, including app overrides, multi-source Scalar,
+changelog examples, and guides.
 
 ## Environment variables
 
-The repository keeps a Varlock schema in [`envs/`](./envs/). In this layer repository, Varlock is
+The repository keeps a Varlock schema in [`layer/envs/`](./layer/envs/). In this layer repository, Varlock is
 used for schema validation and TypeScript type generation; the schemas do not prescribe a secret
 manager. Required values are listed below. Conditional requirements apply only when the matching
 runtime or feature is enabled.
@@ -246,8 +264,6 @@ runtime or feature is enabled.
 | `MISTRAL_API_KEY`               | string, sensitive                              | Yes                                           |
 | `OPENAPI_SOURCE_TYPE`           | `local \| remote`                              | No                                            |
 | `OPENAPI_LOCATION`              | string                                         | No                                            |
-| `DIRECTUS_URL`                  | URL                                            | Yes                                           |
-| `DIRECTUS_PUBLIC_TOKEN`         | string                                         | Yes                                           |
 | `AI_GATEWAY_API_KEY`            | string, sensitive                              | Yes                                           |
 | `CLOUDFLARE_WORKER_NAME`        | string                                         | Conditional: `NITRO_PRESET=cloudflare_module` |
 | `CLOUDFLARE_ACCOUNT_ID`         | string                                         | Conditional: `NITRO_PRESET=cloudflare_module` |
@@ -295,7 +311,7 @@ Cloudflare variables listed above.
 
 ### Add secrets in a consuming project
 
-Copy the relevant files from `envs/` into the consuming repository, keep the type and required
+Copy the relevant files from `layer/envs/` into the consuming repository, keep the type and required
 annotations, and add the secret location syntax supported by your environment. For example, a
 consumer can add a Varlock plugin or a provider expression for a password manager, CI secret, or
 local development file. The layer remains independent of that choice.
@@ -315,15 +331,12 @@ corepack pnpm build
 ## Repository structure
 
 ```text
-app/       Shared components, layouts, composables, and CSS
-config/    Shared configuration helpers and defaults
-content/   Layer-owned content collection configuration
-docs/      Internal layer documentation
-modules/   Reusable local Nuxt modules
-server/    Shared Nitro routes and utilities
-shared/    Code shared by the app and server
-.playground/ Reference consuming application
+layer/     Published Docus Plus Nuxt layer
+docs/      Official Docus Plus documentation site and internal notes
+playground/ Feature-complete integration consumer
+.starters/ Standalone starter templates used by the CLI
+cli/       Published create-docus-plus project generator
 ```
 
-Read [docs/README.md](./docs/README.md) for the internal documentation index. Contributions must
+Read [docs/internal/README.md](./docs/internal/README.md) for the maintainer documentation index. Contributions must
 follow [AGENTS.md](./AGENTS.md). Agents do not commit changes in this repository.

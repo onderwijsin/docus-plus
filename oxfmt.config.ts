@@ -16,7 +16,8 @@ export default defineConfig({
     ".agents/skills",
     ".agents/**",
     "scripts/**/*.sh",
-    "envs/env.d.ts",
+    "layer/envs/env.d.ts",
+    ".starters/**",
     "content/**"
   ]
 });

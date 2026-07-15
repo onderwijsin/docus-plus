@@ -1,0 +1,41 @@
+seo:
+  title: Example Docs
+  description: A small example documentation site built with the Docus Plus layer.
+hero:
+  headline: Docus Plus starter
+  title: Build on a complete documentation foundation
+  description: Start with working content, UI overrides, multi-source API references, and integrations, then make the site your own.
+  links:
+    - label: Get started
+      to: /getting-started
+      color: primary
+      size: xl
+      trailingIcon: i-lucide-arrow-right
+    - label: Browse the guides
+      to: /guides/working-with-content
+      color: neutral
+      variant: outline
+      icon: i-lucide-book-open
+features:
+  headline: A useful starting point
+  title: Continue from a working site.
+  description: This starter is a practical reference for adding your own identity, content, integrations, and deployment settings.
+  items:
+    - icon: i-lucide-file-text
+      title: Write in Markdown
+      description: Keep guides close to the project and use frontmatter for titles, descriptions, and navigation metadata.
+    - icon: i-lucide-palette
+      title: Make it yours
+      description: Configure your identity, colors, typography, and logo from the consuming application.
+    - icon: i-lucide-layers
+      title: Extend the layer
+      description: Add pages and app behavior without changing the reusable Docus Plus foundation.
+cta:
+  title: Build on the starter
+  description: Read the guides to understand each extension point before adapting it to your product.
+  links:
+    - label: Read the guide
+      to: /getting-started
+      color: primary
+      size: xl
+      trailingIcon: i-lucide-arrow-right

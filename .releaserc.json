@@ -9,12 +9,17 @@
         "changelogFile": "CHANGELOG.md"
       }
     ],
-    "@semantic-release/npm",
+    [
+      "@semantic-release/npm",
+      {
+        "pkgRoot": "layer"
+      }
+    ],
     "@semantic-release/github",
     [
       "@semantic-release/git",
       {
-        "assets": ["CHANGELOG.md"],
+        "assets": ["CHANGELOG.md", "layer/package.json"],
         "message": "chore(release): ${nextRelease.version} [skip ci]"
       }
     ]

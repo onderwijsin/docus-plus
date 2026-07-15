@@ -1,0 +1,15 @@
+@import "#layers/docus-plus/app/app.css";
+
+@theme {
+  --color-orange-50: oklch(97.4% 0.015 54.9);
+  --color-orange-100: oklch(94.8% 0.029 50.6);
+  --color-orange-200: oklch(89.8% 0.059 50.2);
+  --color-orange-300: oklch(85% 0.09 49.7);
+  --color-orange-400: oklch(80.5% 0.122 49);
+  --color-orange-500: oklch(76.5% 0.152 48.4);
+  --color-orange-600: oklch(70.8% 0.14 48.2);
+  --color-orange-700: oklch(58.9% 0.115 48.5);
+  --color-orange-800: oklch(52.6% 0.101 48.1);
+  --color-orange-900: oklch(46.4% 0.087 48.9);
+  --color-orange-950: oklch(39.7% 0.072 48.3);
+}
