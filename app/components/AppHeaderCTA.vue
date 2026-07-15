@@ -6,18 +6,18 @@ const { scalar } = useRuntimeConfig().public;
 const route = useRoute();
 const isExplorer = computed(() => route.path.startsWith(SCALAR_BASE_PATH));
 const currentReference = computed(() =>
-  scalar.references.find((reference) => route.path.startsWith(reference.path)),
+  scalar.references.find((reference) => route.path.startsWith(reference.path))
 );
 const referenceItems = computed(() =>
   scalar.references.map((reference) => ({
     label: reference.label,
     to: reference.path,
-    badge: reference.badge as BadgeProps | undefined,
-  })),
+    badge: reference.badge as BadgeProps | undefined
+  }))
 );
 
 const { data: firstArticle } = await useAsyncData("first-article", () =>
-  queryCollection("docs").first(),
+  queryCollection("docs").first()
 );
 </script>
 
@@ -33,22 +33,13 @@ const { data: firstArticle } = await useAsyncData("first-article", () =>
     <template #item-trailing="{ item }">
       <UBadge v-if="item.badge" v-bind="item.badge" />
     </template>
-    <UButton
-      color="primary"
-      size="sm"
-      variant="soft"
-      :icon="getIcon('api_explorer')"
-    >
+    <UButton color="primary" size="sm" variant="soft" :icon="getIcon('api_explorer')">
       API Explorer
     </UButton>
   </UDropdownMenu>
   <UButton
     v-else-if="scalar.enabled"
-    :to="
-      isExplorer
-        ? firstArticle?.path || '/'
-        : currentReference?.path || SCALAR_BASE_PATH
-    "
+    :to="isExplorer ? firstArticle?.path || '/' : currentReference?.path || SCALAR_BASE_PATH"
     color="primary"
     size="sm"
     variant="soft"
