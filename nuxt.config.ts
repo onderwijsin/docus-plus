@@ -1,5 +1,7 @@
 import { fileURLToPath } from "node:url";
 import { dirname, join } from "node:path";
+import type { NitroConfig } from "nitropack";
+import { defineNuxtConfig } from "nuxt/config";
 
 const currentDir = dirname(fileURLToPath(import.meta.url));
 
@@ -40,11 +42,11 @@ export default defineNuxtConfig({
      * can take precedence over the application route at the same path.
      * Remove only Docus's duplicate so the local implementation owns it.
      */
-    "nitro:config"(nitroConfig) {
+    "nitro:config"(nitroConfig: NitroConfig) {
       const assistantApiPath = "/api/assistent";
 
       nitroConfig.handlers = nitroConfig.handlers?.filter(
-        (handler) =>
+        (handler: NonNullable<NitroConfig["handlers"]>[number]) =>
           handler?.route !== assistantApiPath ||
           !String(handler?.handler).includes("/docus/modules/assistant/")
       );
@@ -170,6 +172,10 @@ export default defineNuxtConfig({
     ]
   },
 
+  ogImage: {
+    zeroRuntime: false
+  },
+
   plausible: {
     domain: process.env.PLAUSIBLE_DOMAIN || (appUrl ? new URL(appUrl).host : undefined),
     // https://github.com/nuxt-modules/plausible?tab=readme-ov-file#proxy-configuration
@@ -207,6 +213,7 @@ export default defineNuxtConfig({
       baseUrl: process.env.DIRECTUS_URL,
       publicToken: process.env.DIRECTUS_PUBLIC_TOKEN
     },
+    buildDate: new Date().toISOString(),
     public: {
       siteUrl: appUrl,
       mode: {

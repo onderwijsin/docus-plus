@@ -144,9 +144,13 @@ function getMethodBadgeColor(
   }
 }
 
-function closeSearch() {
+function closeSearch(reset?: boolean) {
   open.value = false;
-  searchTerm.value = "";
+  if (reset) {
+    setTimeout(() => {
+      searchTerm.value = "";
+    }, 200);
+  }
 }
 
 const input = ref("");
@@ -166,7 +170,13 @@ const input = ref("");
         :groups="groups"
         :loading="isSearching"
         :input="{ fixed: true }"
-        @update:model-value="closeSearch"
+        close
+        @update:open="
+          (isOpen) => {
+            if (!isOpen) closeSearch(true);
+          }
+        "
+        @update:model-value="closeSearch(true)"
       >
         <template #api-operation="{ item }">
           <div class="flex min-w-0 items-center gap-2">

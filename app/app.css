@@ -21,7 +21,14 @@
   --scalar-font: var(--font-sans);
   --scalar-font-code: var(--font-mono);
 }
-.dark-mode {
+/*
+ * Scalar adds `dark-mode` to request example cards so their code snippets can
+ * opt into a dark presentation. Scope the layer tokens to the document body
+ * and reset those cards to the document mode; otherwise their local class
+ * overrides the consumer's chosen tokens, even when both modes are dark.
+ */
+body.dark-mode,
+body.dark-mode .scalar-app .request-card:is(.dark-mode, .light-mode) {
   color-scheme: dark;
 
   --scalar-background-1: var(--ui-color-neutral-900) !important;
@@ -40,8 +47,11 @@
   --scalar-color-orange: var(--ui-color-warning-500) !important;
   --scalar-color-purple: var(--ui-color-secondary-500) !important;
 }
-.light-mode {
-  --scalar-background-1: #fff;
+body.light-mode,
+body.light-mode .scalar-app .request-card:is(.dark-mode, .light-mode) {
+  color-scheme: light;
+
+  --scalar-background-1: #fff !important;
   --scalar-background-2: var(--ui-color-neutral-50) !important;
   --scalar-background-3: var(--ui-color-neutral-100) !important;
   --scalar-background-accent: var(--ui-color-accented) !important;

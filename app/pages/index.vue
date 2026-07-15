@@ -1,4 +1,6 @@
 <script lang="ts" setup>
+import type { OgImageComponents } from "#og-image/components";
+
 const { data } = await useAsyncData("index", () => queryCollection("landing").first());
 if (!data.value) {
   throw createError({
@@ -13,7 +15,15 @@ const page = data.value!;
 useSeo({
   title: page.seo?.title,
   description: page.seo?.description,
-  ogImage: page.seo?.ogImage
+  type: "website",
+  modifiedAt: useRuntimeConfig().public.buildDate,
+  publishedAt: useRuntimeConfig().public.publishedDate
+});
+
+defineOgImage("Docs" as keyof OgImageComponents, {
+  headline: "Docs",
+  title: page.seo?.title?.slice(0, 60),
+  description: formatOgDescription(page.seo?.title, page.seo?.description ?? page.hero.description)
 });
 </script>
 

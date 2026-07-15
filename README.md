@@ -9,6 +9,10 @@ enhanced search, and Vercel Gateway-free assistant integration.
 The repository is the layer itself. The `.playground/` application is the reference implementation
 for consuming and customising it.
 
+For detailed guidance on working with Docus Plus, copy the contents of `.playground/content/` into
+your consuming application. The playground contains the complete step-by-step reference articles;
+they are not automatically included when a project extends the layer.
+
 ## Create a documentation site
 
 Start with a fresh Nuxt 4 project, install the package, and extend it from your project's
@@ -154,6 +158,21 @@ the layer's base styles and tokens while allowing your site to add or override t
   --color-brand-500: oklch(60% 0.2 250);
 }
 ```
+
+### Customize OG images
+
+OG images are generated at runtime. To customize the generated image—for example, to add a logo—
+copy the `Docs.takumi.vue` template from the layer into your consuming application and add it at
+`app/components/OgImage/Docs.takumi.vue`. Use the copied template as the starting point for your
+changes. The corresponding landing-page template can be overridden in the same directory when the
+landing image needs different markup.
+
+If the template uses a custom font, declare the font family explicitly in the OG image component and
+configure it through `@nuxt/fonts` with `global: true`.
+
+Cloudflare deployments need additional OG image caching configuration. See the Nuxt SEO guides for
+[Cloudflare](https://nuxtseo.com/docs/og-image/guides/cloudflare) and
+[runtime caching](https://nuxtseo.com/docs/og-image/guides/runtime-cache).
 
 ### Replace the default logo when needed
 
