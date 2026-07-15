@@ -1,0 +1,24 @@
+{
+  "name": "docus-plus-starter",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "nuxt dev",
+    "build": "nuxt build",
+    "typecheck": "nuxt typecheck",
+    "fmt": "oxfmt",
+    "fmt:check": "oxfmt --check",
+    "lint": "oxlint",
+    "lint:fix": "oxlint --fix"
+  },
+  "dependencies": {
+    "@onderwijsin/docus-plus": "latest",
+    "better-sqlite3": "12.x",
+    "nuxt": "^4.4.8"
+  },
+  "devDependencies": {
+    "nuxtseo-layer-devtools": "^5.3.2",
+    "oxfmt": "^0.58.0",
+    "oxlint": "^1.73.0"
+  }
+}

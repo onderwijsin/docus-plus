@@ -1,0 +1,51 @@
+seo:
+  title: Docus Plus
+  description: A production-ready Nuxt layer for documentation sites that feel complete from day one.
+  ogImage: https://docus-plus.onderwijsin.nl/og-image.png
+hero:
+  headline: Documentation, with the hard parts included
+  title: Build polished Nuxt documentation sites faster.
+  description: Docus Plus combines Docus with ready-to-use API references, AI assistance, MCP, SEO, observability, and extensible deployment integrations.
+  links:
+    - label: Get started
+      to: /getting-started
+      color: primary
+      size: xl
+      trailingIcon: i-lucide-arrow-right
+    - label: Browse the guides
+      to: /guides/working-with-content
+      color: neutral
+      variant: outline
+      icon: i-lucide-book-open
+features:
+  headline: A complete developer experience
+  title: Start focused. Scale without rebuilding your docs stack.
+  description: Keep ownership of your content and brand while the layer handles the recurring platform work.
+  items:
+    - icon: i-lucide-file-text
+      title: Content-first authoring
+      description: Use Nuxt Content and MDC for structured guides, navigation, landing pages, and release notes.
+    - icon: i-lucide-palette
+      title: Your brand, your application
+      description: Override identity, colors, typography, components, and layout behavior from the consuming project.
+    - icon: i-lucide-layers
+      title: AI Ready with zero config
+      description: Ship an assistant and MCP discovery without hand-wiring agent integrations.
+    - icon: i-lucide-braces
+      title: Scalar API reference
+      description: Turn OpenAPI documents into interactive, multi-source API references and searchable content.
+    - icon: i-lucide-search
+      title: Enhanced search
+      description: Help readers find guides, pages, and API content quickly across the documentation site.
+    - icon: i-lucide-database
+      title: Cache utilities
+      description: Add configurable cache storage, invalidation, and operational endpoints without rebuilding common infrastructure.
+cta:
+  title: Start with the starter
+  description: Follow the setup guide, then extend a production-minded documentation foundation for your own product.
+  links:
+    - label: Read the guide
+      to: /getting-started
+      color: primary
+      size: xl
+      trailingIcon: i-lucide-arrow-right

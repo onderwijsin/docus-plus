@@ -67,7 +67,12 @@ build-info.json
 registry/
 .registry
 nuxt-build.cpuprofile
-.playground/dist
+playground/dist
+.starters/*/node_modules
+.starters/*/.nuxt
+.starters/*/.output
+.starters/*/.data
+.starters/*/pnpm-lock.yaml
 
 # ===================================
 # ⚙️ Dotenv / Config Files
@@ -82,7 +87,7 @@ nuxt-build.cpuprofile
 !.env.next
 !.env.test
 !.env.staging
-!envs/schemas/*
+!*/envs/schemas/*
 
 
 # ===================================

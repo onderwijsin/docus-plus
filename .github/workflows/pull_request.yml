@@ -20,7 +20,7 @@ jobs:
     uses: ./.github/workflows/code_quality.yml
     with:
       runner: blacksmith-4vcpu-ubuntu-2404
-      build-command: pnpm nuxt:prepare
+      build-command: pnpm dev:prepare
       build-before-lint: false
       build-before-typecheck: false
       typecheck-command: pnpm typecheck

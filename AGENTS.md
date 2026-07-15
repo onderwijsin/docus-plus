@@ -12,8 +12,8 @@
 ## Repository context
 
 This repository is a reusable Nuxt layer. It is not a customer documentation site and must not
-contain product-specific assumptions in shared defaults. The `.playground/` directory is a local
-consumer and reference implementation.
+contain product-specific assumptions in shared defaults. The `playground/` directory is a local
+feature-complete consumer, while `.starters/default/` is the standalone reference implementation.
 
 When a behavior is site-specific, put it in the consuming project or the playground. When it is
 generic and useful to every consumer, put it in the layer and document the extension point.
@@ -24,7 +24,7 @@ generic and useful to every consumer, put it in the layer and document the exten
 - Do not run `pnpm install`, change `node_modules`, or update the lockfile unless dependency work
   is explicitly requested.
 - Do not create or configure a repository-local PNPM store.
-- Do not edit `.husky/**`, `.agents/skills/**`, or `modules/*/runtime/types/**` unless explicitly
+- Do not edit `.husky/**`, `.agents/skills/**`, or `layer/modules/*/runtime/types/**` unless explicitly
   requested. Put runtime type augmentation in the supported server/runtime location.
 - Use Zod for boundary validation where applicable.
 - Wrap JSON API responses with `useApiResponse(...)`, except passthrough, proxy, and streaming

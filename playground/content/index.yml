@@ -1,0 +1,30 @@
+seo:
+  title: Docus Plus Playground
+  description: A compact integration harness for Docus Plus.
+  ogImage: /og-image.png
+hero:
+  headline: Integration harness
+  title: Exercise every Docus Plus feature.
+  description: A small consumer site with multi-source Scalar, assistant, content, and deployment integrations enabled.
+  links:
+    - label: Read the test guide
+      to: /integration-guide
+      color: primary
+features:
+  title: Full feature coverage, minimal surface area
+  description: Keep this consumer compact while validating the layer's public contract.
+  items:
+    - icon: i-lucide-git-compare
+      title: Multi-source API references
+      description: Validate Scalar routing and generated content for YAML and JSON specifications.
+    - icon: i-lucide-puzzle
+      title: Layer integrations
+      description: Exercise the assistant, MCP, content, SEO, and runtime modules together.
+cta:
+  title: Build with confidence
+  description: Use the official docs or the starter for a complete implementation example.
+  links:
+    - label: View Docus Plus docs
+      to: https://docus-plus.onderwijsin.nl
+      target: _blank
+      color: primary
