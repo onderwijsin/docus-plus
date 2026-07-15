@@ -55,6 +55,11 @@ export default defineAppConfig({
       slots: {
         root: "relative"
       }
+    },
+    prose: {
+      codeIcon: {
+        dotenv: "vscode-icons:file-type-dotenv"
+      }
     }
   } as unknown as AppConfigInput["ui"]
 });

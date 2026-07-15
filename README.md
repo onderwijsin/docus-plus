@@ -155,6 +155,21 @@ the layer's base styles and tokens while allowing your site to add or override t
 }
 ```
 
+### Customize OG images
+
+OG images are generated at runtime. To customize the generated image—for example, to add a logo—
+copy the `Docs.takumi.vue` template from the layer into your consuming application and add it at
+`app/components/OgImage/Docs.takumi.vue`. Use the copied template as the starting point for your
+changes. The corresponding landing-page template can be overridden in the same directory when the
+landing image needs different markup.
+
+If the template uses a custom font, declare the font family explicitly in the OG image component and
+configure it through `@nuxt/fonts` with `global: true`.
+
+Cloudflare deployments need additional OG image caching configuration. See the Nuxt SEO guides for
+[Cloudflare](https://nuxtseo.com/docs/og-image/guides/cloudflare) and
+[runtime caching](https://nuxtseo.com/docs/og-image/guides/runtime-cache).
+
 ### Replace the default logo when needed
 
 The layer supplies an `AppHeaderLogo` component. To use your own mark or remove the default
