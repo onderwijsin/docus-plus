@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-const { data } = useFetch("https://api.github.com/repos/nuxt/nuxt");
+const { data } = await useAsyncData(() => $fetch("https://api.github.com/repos/nuxt/nuxt"));
 </script>
 
 <template>
