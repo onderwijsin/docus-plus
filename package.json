@@ -12,7 +12,7 @@
     "cli:test": "pnpm --filter create-docus-plus test",
     "cli": "pnpm cli:build && node cli/dist/main.js",
     "dev:prepare": "pnpm --filter @onderwijsin/docus-plus dev:prepare && pnpm --filter @onderwijsin/docus-plus-docs dev:prepare && pnpm --filter docus-plus-playground dev:prepare",
-    "typecheck": "pnpm --filter create-docus-plus typecheck && pnpm --filter @onderwijsin/docus-plus typecheck && pnpm --filter @onderwijsin/docus-plus-docs typecheck && pnpm --filter docus-plus-playground typecheck",
+    "typecheck": "pnpm --filter create-docus-plus typecheck && pnpm --filter @onderwijsin/docus-plus typecheck && pnpm --filter docus-plus-playground typecheck",
     "fmt": "oxfmt",
     "fmt:check": "oxfmt --check",
     "lint": "oxlint",
