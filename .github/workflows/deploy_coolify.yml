@@ -1,0 +1,95 @@
+name: Deploy to Coolify
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  issues: write
+  pull-requests: write
+
+concurrency:
+  group: release-deploy-main
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    name: Deploy to Coolify
+    runs-on: blacksmith-2vcpu-ubuntu-2404
+    environment:
+      name: production
+
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+
+      - name: Install Proton Pass CLI
+        uses: ./.github/actions/install-pass-cli
+
+      - name: Resolve Coolify credentials from Proton Pass
+        shell: bash
+        env:
+          PROTON_PASS_PERSONAL_ACCESS_TOKEN: ${{ secrets.PROTON_PASS_PERSONAL_ACCESS_TOKEN }}
+          PROTON_VAULT: ${{ secrets.PROTON_VAULT }}
+        run: |
+          set -euo pipefail
+
+          pass-cli login --personal-access-token "$PROTON_PASS_PERSONAL_ACCESS_TOKEN"
+
+          for key in COOLIFY_URL COOLIFY_APP_UUID COOLIFY_TOKEN; do
+            value="$(pass-cli item view "pass://${PROTON_VAULT}/ci/${key}" 2>/dev/null || true)"
+
+            if [ -z "$value" ]; then
+              echo "Missing ${key} in pass://${PROTON_VAULT}/ci"
+              exit 1
+            fi
+
+            echo "::add-mask::$value"
+            echo "${key}=${value}" >> "$GITHUB_ENV"
+          done
+
+      - name: Resolve version
+        id: resolve
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          git fetch origin main --tags
+
+          sha="$(git rev-parse origin/main)"
+          echo "COMMIT_SHA=${sha}" >> "$GITHUB_OUTPUT"
+          echo "Deploying latest commit on main: ${sha}"
+
+      - name: Update commit SHA in Coolify
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          curl -fsS -X PATCH \
+            "${COOLIFY_URL}/api/v1/applications/${COOLIFY_APP_UUID}" \
+            -H "Authorization: Bearer ${COOLIFY_TOKEN}" \
+            -H "Content-Type: application/json" \
+            -d "{\"git_commit_sha\":\"${{ steps.resolve.outputs.COMMIT_SHA }}\"}"
+
+      - name: Trigger build and deploy
+        id: trigger
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          response="$(curl -fsS -X GET \
+            "${COOLIFY_URL}/api/v1/deploy?uuid=${COOLIFY_APP_UUID}" \
+            -H "Authorization: Bearer ${COOLIFY_TOKEN}")"
+
+          echo "Response: ${response}"
+
+          deployment_uuid="$(echo "${response}" | jq -r '.deployments[0].deployment_uuid // empty')"
+
+          if [ -z "$deployment_uuid" ]; then
+            echo 'No deployment UUID in response.'
+            exit 1
+          fi
+
+          echo "DEPLOYMENT_UUID=${deployment_uuid}" >> "$GITHUB_OUTPUT"
+          echo "Deployment triggered: ${deployment_uuid}"
