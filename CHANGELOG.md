@@ -1,3 +1,11 @@
+## [1.1.3](https://github.com/onderwijsin/docus-plus/compare/v1.1.2...v1.1.3) (2026-07-15)
+
+
+### Bug Fixes
+
+* Og images ([57203d4](https://github.com/onderwijsin/docus-plus/commit/57203d4cd4f8cc2f4384281fb8e169d3b29d3107))
+* **scalar:** Respect global color mode in request cards ([162b13c](https://github.com/onderwijsin/docus-plus/commit/162b13c7fb9f7177107eb4bcc4cd750564f95bd1))
+
 ## [1.1.2](https://github.com/onderwijsin/docus-plus/compare/v1.1.1...v1.1.2) (2026-07-14)
 
 
