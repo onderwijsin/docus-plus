@@ -21,6 +21,9 @@ runs:
         node-version: ${{ inputs.node-version }}
         cache: pnpm
 
+    - name: Install Proton Pass CLI
+      uses: ./.github/actions/install-pass-cli
+
     - name: Install dependencies
       shell: bash
       run: pnpm install --frozen-lockfile
