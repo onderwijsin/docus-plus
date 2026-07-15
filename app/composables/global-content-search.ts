@@ -96,12 +96,14 @@ export function useGlobalContentSearch({
   collection,
   navigation,
   links,
-  themeItems
+  themeItems,
+  linkGroups
 }: {
   collection: MaybeRefOrGetter<keyof PageCollections>;
   navigation: MaybeRefOrGetter<ContentNavigationItem[] | undefined>;
   links: MaybeRefOrGetter<GlobalSearchItem[]>;
   themeItems: MaybeRefOrGetter<GlobalSearchItem[]>;
+  linkGroups?: MaybeRefOrGetter<CommandPaletteGroup[]>;
 }) {
   const searchTerm = shallowRef("");
   const documents = useSearchCollection(collection, {
@@ -196,6 +198,8 @@ export function useGlobalContentSearch({
           ignoreFilter: true
         });
       }
+      const additionalLinkGroups = linkGroups ? toValue(linkGroups) : [];
+      result.push(...additionalLinkGroups);
       const theme = toValue(themeItems);
       if (theme.length) {
         result.push({

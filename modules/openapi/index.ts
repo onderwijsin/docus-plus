@@ -3,7 +3,13 @@ import type { ModuleOptions as ScalarModuleOptions } from "@scalar/nuxt";
 
 import { moduleSetup } from "#layers/docus-plus/config/modules";
 import { SCALAR_BASE_PATH } from "#layers/docus-plus/config/constants";
-import { getOpenApiScalarUrl, getOpenApiSource, hasOpenApiSource } from "./build/openapi";
+import {
+  getOpenApiScalarUrl,
+  getOpenApiSource,
+  getScalarConfigurations,
+  getScalarReferences,
+  hasOpenApiSource
+} from "./build/openapi";
 import { addTypeTemplate, createResolver, defineNuxtModule, useLogger } from "@nuxt/kit";
 import { ofetch } from "ofetch";
 
@@ -53,13 +59,11 @@ export default defineNuxtModule<ModuleOptions>({
     }
   },
   defaults: DEFAULTS,
-  moduleDependencies: hasOpenApiSource()
-    ? {
-        "@scalar/nuxt": {
-          defaults: scalarConfig
-        }
-      }
-    : {},
+  moduleDependencies: {
+    "@scalar/nuxt": {
+      defaults: scalarConfig
+    }
+  },
   setup(userOptions, nuxt) {
     const log = useLogger(LOG_SCOPE);
     const { start, end, isEnabled } = moduleSetup<ModuleOptions>(
@@ -78,22 +82,44 @@ export default defineNuxtModule<ModuleOptions>({
       src: resolver.resolve("./build/types/config.d.ts")
     });
 
-    const isConfigured = isEnabled() && hasOpenApiSource();
+    const scalarConfigurations = getScalarConfigurations(nuxt.options.scalar);
+    const scalarReferences = getScalarReferences(nuxt.options.scalar);
+    const hasConfiguredScalar = scalarConfigurations.length > 0;
+    const isConfigured = isEnabled() && (hasOpenApiSource() || hasConfiguredScalar);
+
+    if (hasConfiguredScalar) {
+      nuxt.options.scalar = {
+        ...nuxt.options.scalar,
+        configurations: scalarConfigurations.map((configuration, index) => ({
+          ...configuration,
+          pathRouting: {
+            ...configuration.pathRouting,
+            basePath: scalarReferences[index]!.path
+          }
+        }))
+      } as typeof nuxt.options.scalar;
+    }
 
     nuxt.options.runtimeConfig.public.scalar = {
-      enabled: isConfigured
+      enabled: isConfigured,
+      references: hasConfiguredScalar
+        ? scalarReferences
+        : [{ path: SCALAR_BASE_PATH, label: "API Reference", default: true }]
     };
 
     nuxt.options.routeRules ??= {};
-    nuxt.options.routeRules[SCALAR_BASE_PATH] = isConfigured
-      ? {
-          ...nuxt.options.routeRules[SCALAR_BASE_PATH],
-          ssr: false
-        }
-      : {
-          ...nuxt.options.routeRules[SCALAR_BASE_PATH],
-          redirect: "/"
-        };
+    const routeRules = nuxt.options.routeRules;
+    const scalarPaths = isConfigured
+      ? hasConfiguredScalar
+        ? scalarReferences.map((reference) => reference.path)
+        : [SCALAR_BASE_PATH]
+      : [SCALAR_BASE_PATH];
+
+    scalarPaths.forEach((path) => {
+      routeRules[path] = isConfigured
+        ? { ...routeRules[path], ssr: false }
+        : { ...routeRules[path], redirect: "/" };
+    });
 
     if (!isConfigured) {
       end();

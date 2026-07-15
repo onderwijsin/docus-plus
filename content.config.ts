@@ -1,6 +1,10 @@
 import { defineContentConfig, defineCollection, z } from "@nuxt/content";
 import { createOpenApiContentSource } from "./modules/openapi/build/openapi-content";
-import { getOpenApiSource, hasOpenApiSource } from "./modules/openapi/build/openapi";
+import {
+  getOpenApiSource,
+  getScalarOpenApiSource,
+  hasOpenApiSource
+} from "./modules/openapi/build/openapi";
 
 import { useNuxt } from "@nuxt/kit";
 import { joinURL } from "ufo";
@@ -8,6 +12,11 @@ import { joinURL } from "ufo";
 const { options } = useNuxt();
 const cwd = joinURL(options.rootDir, "content");
 const appRootDir = options.rootDir;
+const scalarOpenApiSource = getScalarOpenApiSource(options.scalar);
+const configuredOpenApiSource = scalarOpenApiSource?.source;
+const openApiSource =
+  configuredOpenApiSource ?? (hasOpenApiSource() ? getOpenApiSource() : undefined);
+const openApiScalarBasePath = scalarOpenApiSource?.basePath;
 
 /**
  * Since we want to do various customization on the content collections, we are
@@ -125,8 +134,8 @@ export default defineContentConfig({
     }),
     api: defineCollection({
       type: "page",
-      source: hasOpenApiSource()
-        ? createOpenApiContentSource(getOpenApiSource(), appRootDir)
+      source: openApiSource
+        ? createOpenApiContentSource(openApiSource, appRootDir, openApiScalarBasePath)
         : undefined,
       schema: z.object({
         kind: z.enum(["info", "tag", "operation", "schema"]),
