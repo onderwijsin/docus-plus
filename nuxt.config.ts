@@ -172,6 +172,10 @@ export default defineNuxtConfig({
     ]
   },
 
+  ogImage: {
+    zeroRuntime: false
+  },
+
   plausible: {
     domain: process.env.PLAUSIBLE_DOMAIN || (appUrl ? new URL(appUrl).host : undefined),
     // https://github.com/nuxt-modules/plausible?tab=readme-ov-file#proxy-configuration
@@ -209,6 +213,7 @@ export default defineNuxtConfig({
       baseUrl: process.env.DIRECTUS_URL,
       publicToken: process.env.DIRECTUS_PUBLIC_TOKEN
     },
+    buildDate: new Date().toISOString(),
     public: {
       siteUrl: appUrl,
       mode: {

@@ -67,6 +67,7 @@ build-info.json
 registry/
 .registry
 nuxt-build.cpuprofile
+.playground/dist
 
 # ===================================
 # ⚙️ Dotenv / Config Files

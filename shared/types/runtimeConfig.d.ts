@@ -15,6 +15,8 @@ declare module "nuxt/schema" {
   }
   interface SharedPublicRuntimeConfig {
     siteUrl: string;
+    buildDate: string;
+    publishedDate?: string;
     mode: {
       isDev: boolean;
       isProd: boolean;

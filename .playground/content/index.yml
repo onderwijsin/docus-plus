@@ -1,7 +1,6 @@
 seo:
   title: Example Docs
   description: A small example documentation site built with the Docus Plus layer.
-  ogImage: https://placehold.co/1200x630/png?text=Example+Docs
 hero:
   headline: Docus Plus playground
   title: Build a helpful documentation site
