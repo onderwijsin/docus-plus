@@ -6,6 +6,10 @@ declare module "nuxt/schema" {
       url: string;
       contact?: string;
     };
+    newsletter: {
+      title: string;
+      description: string;
+    };
   }
   interface AppConfig {
     statusPage?: string;
@@ -13,6 +17,10 @@ declare module "nuxt/schema" {
       name: string;
       url: string;
       contact?: string;
+    };
+    newsletter: {
+      title: string;
+      description: string;
     };
   }
 }

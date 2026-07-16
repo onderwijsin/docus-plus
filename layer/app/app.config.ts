@@ -38,6 +38,10 @@ export default defineAppConfig({
     // Show the "Explain with AI" button in the sidebar
     explainWithAi: true
   },
+  newsletter: {
+    title: "Keep in touch with the latest",
+    description: "Sign up for our monthly deep dives - straight to your inbox."
+  },
 
   ui: {
     colors: {

@@ -53,9 +53,9 @@ export default defineNuxtModule({
       from: import.meta.url,
       conditions: ["style"]
     });
-    const layerDir = resolver.resolve("../app");
-    const assistantDir = resolver.resolve("../modules/assistant");
-    const mailchimpDir = resolver.resolve("../modules/mailchimp");
+    const layerDir = resolver.resolve("../../app");
+    const assistantDir = resolver.resolve("../../modules/assistant");
+    const mailchimpDir = resolver.resolve("../../modules/mailchimp");
 
     let userDocusPath: string | null = resolve(nuxt.options.srcDir, "app.css");
     if (existsSync(userDocusPath)) {
