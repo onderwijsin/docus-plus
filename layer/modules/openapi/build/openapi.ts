@@ -98,16 +98,31 @@ export function getScalarOpenApiSource(value: unknown): ScalarOpenApiSource | un
   const reference = getScalarReferences(value)[index];
   const url = configuration.url ?? configuration.sources?.find((source) => source.url)?.url;
   const source: OpenApiSource | undefined = url
-    ? { type: "remote", url }
+    ? getOpenApiSourceFromUrl(url)
     : configuration.content
       ? { type: "inline", content: configuration.content }
       : undefined;
   return source && reference ? { source, basePath: reference.path } : undefined;
 }
 
+/** Convert a Scalar URL into an OpenAPI source usable during the Nuxt build. */
+function getOpenApiSourceFromUrl(url: string): OpenApiSource {
+  try {
+    new URL(url);
+    return { type: "remote", url };
+  } catch {
+    return { type: "local", publicPath: url };
+  }
+}
+
+/** Read the supported source location, falling back to the legacy variable. */
+function getOpenApiSourceLocation(): string | undefined {
+  return process.env.OPENAPI_SOURCE_LOCATION || process.env.OPENAPI_LOCATION;
+}
+
 /** Whether the environment contains a complete OpenAPI source definition. */
 export function hasOpenApiSource(): boolean {
-  return !!process.env.OPENAPI_SOURCE_TYPE && !!process.env.OPENAPI_LOCATION;
+  return !!process.env.OPENAPI_SOURCE_TYPE && !!getOpenApiSourceLocation();
 }
 
 /** Resolve the browser URL that Scalar should use to load the configured spec. */
@@ -119,9 +134,14 @@ export function getOpenApiScalarUrl(source: OpenApiSource): string {
 
 /** Get the OpenAPI source configuration. */
 export function getOpenApiSource(): OpenApiSource {
+  const location = getOpenApiSourceLocation();
+  if (!location) {
+    throw new Error("An OpenAPI source location must be configured.");
+  }
+
   return process.env.OPENAPI_SOURCE_TYPE === "remote"
-    ? { type: "remote", url: process.env.OPENAPI_LOCATION! }
-    : { type: "local", publicPath: process.env.OPENAPI_LOCATION! };
+    ? { type: "remote", url: location }
+    : { type: "local", publicPath: location };
 }
 
 function toScalarSegment(value: string, preserveCase = false): string {

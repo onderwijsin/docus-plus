@@ -1,18 +1,17 @@
 @import "#layers/docus-plus/app/app.css";
 
 @theme {
-  --color-pink-25: oklch(97.3% 0.01 338);
-  --color-pink-50: oklch(95.1% 0.02 339);
-  --color-pink-100: oklch(89.9% 0.05 339);
-  --color-pink-200: oklch(80% 0.1 340);
-  --color-pink-300: oklch(70.9% 0.15 342);
-  --color-pink-400: oklch(62.8% 0.2 344);
-  --color-pink-500: oklch(56.7% 0.22 347);
-  --color-pink-600: oklch(46% 0.18 347);
-  --color-pink-700: oklch(39.3% 0.15 347);
-  --color-pink-800: oklch(34.6% 0.13 346);
-  --color-pink-900: oklch(29.9% 0.11 345);
-  --color-pink-950: oklch(19.2% 0.06 343);
+  --color-orange-50: oklch(97.4% 0.015 54.9);
+  --color-orange-100: oklch(94.8% 0.029 50.6);
+  --color-orange-200: oklch(89.8% 0.059 50.2);
+  --color-orange-300: oklch(85% 0.09 49.7);
+  --color-orange-400: oklch(80.5% 0.122 49);
+  --color-orange-500: oklch(76.5% 0.152 48.4);
+  --color-orange-600: oklch(70.8% 0.14 48.2);
+  --color-orange-700: oklch(58.9% 0.115 48.5);
+  --color-orange-800: oklch(52.6% 0.101 48.1);
+  --color-orange-900: oklch(46.4% 0.087 48.9);
+  --color-orange-950: oklch(39.7% 0.072 48.3);
 
   --color-purple-25: oklch(98.1% 0.01 298);
   --color-purple-50: oklch(96.4% 0.01 292);

@@ -46,6 +46,9 @@ importers:
 
   cli:
     dependencies:
+      '@nuxt/cli':
+        specifier: 3.36.1
+        version: 3.36.1(@nuxt/schema@4.4.8)(cac@6.7.14)(magicast@0.5.3)
       citty:
         specifier: ^0.2.2
         version: 0.2.2

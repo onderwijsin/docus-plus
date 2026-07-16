@@ -3,24 +3,26 @@ seo:
   description: A production-ready Nuxt layer for documentation sites that feel complete from day one.
   ogImage: https://docus-plus.onderwijsin.nl/og-image.png
 hero:
-  headline: Documentation, with the hard parts included
-  title: Build polished Nuxt documentation sites faster.
-  description: Docus Plus combines Docus with ready-to-use API references, AI assistance, MCP, SEO, observability, and extensible deployment integrations.
+  headline: Batteries included
+  title: Build <span class="gradient-text">beautiful documentation</span> sites with ease
+  title_as_html: true
+  description: Docus Plus combines the best of Docus with ready-to-use Scalar API references, smart AI assistant, read-only MCP, enhanced search capabilities, and much more.
   links:
     - label: Get started
       to: /getting-started
       color: primary
       size: xl
       trailingIcon: i-lucide-arrow-right
-    - label: Browse the guides
-      to: /guides/working-with-content
+    - label: Star on Github
+      to: https://github.com/onderwijsin/docus-plus
       color: neutral
       variant: outline
-      icon: i-lucide-book-open
+      target: _blank
+      icon: simple-icons-github
 features:
   headline: A complete developer experience
   title: Start focused. Scale without rebuilding your docs stack.
-  description: Keep ownership of your content and brand while the layer handles the recurring platform work.
+  description: Keep ownership of your content, brand and project specifics. Let Docus Plus handle the parts you don't want to worry about.
   items:
     - icon: i-lucide-file-text
       title: Content-first authoring
@@ -41,8 +43,8 @@ features:
       title: Cache utilities
       description: Add configurable cache storage, invalidation, and operational endpoints without rebuilding common infrastructure.
 cta:
-  title: Start with the starter
-  description: Follow the setup guide, then extend a production-minded documentation foundation for your own product.
+  title: From starter to production in no time
+  description: Create a project from the template, add your configuration, content, and assets. You'll be ready to ship before you know it.
   links:
     - label: Read the guide
       to: /getting-started

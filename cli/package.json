@@ -12,18 +12,18 @@
     "create-docus-plus": "dist/main.js"
   },
   "files": [
-    "dist",
-    "README.md"
+    "dist"
   ],
   "type": "module",
   "scripts": {
     "build": "node scripts/clean-dist.mjs && tsup main.ts --format esm --out-dir dist",
-    "prepack": "pnpm build && node scripts/copy-template.mjs",
+    "prepack": "pnpm build",
     "release": "semantic-release",
     "test": "pnpm build && node --test test/**/*.test.mjs",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
+    "@nuxt/cli": "3.36.1",
     "citty": "^0.2.2"
   },
   "devDependencies": {

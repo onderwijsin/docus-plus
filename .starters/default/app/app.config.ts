@@ -61,10 +61,14 @@ export default defineAppConfig({
       }
     ]
   },
+  newsletter: {
+    title: "Keep in touch with the latest",
+    description: "Sign up for our monthly deep dives - straight to your inbox."
+  },
 
   ui: {
     colors: {
-      primary: "pink",
+      primary: "orange",
       secondary: "purple",
       neutral: "zinc"
     }

@@ -47,8 +47,8 @@ const scalarConfig: Partial<ScalarModuleOptions> = {
  * Configures Scalar from the OpenAPI environment variables.
  *
  * The API reference remains unavailable unless both `OPENAPI_SOURCE_TYPE` and
- * `OPENAPI_LOCATION` are present, so consumers can use this layer unchanged
- * with and without an API reference.
+ * `OPENAPI_SOURCE_LOCATION` are present, so consumers can use this layer
+ * unchanged with and without an API reference.
  */
 export default defineNuxtModule<ModuleOptions>({
   meta: {

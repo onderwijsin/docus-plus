@@ -20,6 +20,9 @@ features:
     - icon: i-lucide-puzzle
       title: Layer integrations
       description: Exercise the assistant, MCP, content, SEO, and runtime modules together.
+    - icon: i-lucide-sparkles
+      title: Your next feature
+      description: Anything and everything you build can end up here
 cta:
   title: Build with confidence
   description: Use the official docs or the starter for a complete implementation example.

@@ -1,11 +1,13 @@
-import { SITE_MCP_DESCRIPTION, SITE_MCP_NAME } from "./config/siteMcp";
-import { OPENAPI_DOCUMENT_SLUG } from "./config/openapi";
-import { APP_IDENTITY } from "./config/constants";
+import { APP_IDENTITY } from "./constants";
+
+// Uncomment this if you want to use Varlock!
+// import { varlockVitePlugin } from "varlock/vite";
 
 export default defineNuxtConfig({
   extends: ["@onderwijsin/docus-plus"],
 
   vite: {
+    // Uncomment this if you want to use Varlock!
     // plugins: [varlockVitePlugin({ ssrInjectMode: "auto-load" })],
   },
 
@@ -15,15 +17,16 @@ export default defineNuxtConfig({
   },
 
   mcp: {
-    name: SITE_MCP_NAME,
-    description: SITE_MCP_DESCRIPTION
+    name: "Example Docs Public MCP",
+    description:
+      "Read-only content discovery for Example Docs, including guides and reference materials."
   },
 
   scalar: {
     metaData: {
       title: APP_IDENTITY.siteTitle
     },
-    slug: OPENAPI_DOCUMENT_SLUG,
+    slug: "example-api-reference",
     configurations: [
       {
         title: "yaml",
