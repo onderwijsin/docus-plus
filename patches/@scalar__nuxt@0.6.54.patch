@@ -1,0 +1,15 @@
+diff --git a/dist/runtime/components/ScalarApiReference.vue b/dist/runtime/components/ScalarApiReference.vue
+index 83588767805f0072cfe8758d5e93a90098abc45a..8a649d45b2285d771a727252b42d80812b0ab304 100644
+--- a/dist/runtime/components/ScalarApiReference.vue
++++ b/dist/runtime/components/ScalarApiReference.vue
+@@ -24,7 +24,9 @@ const content = props.configuration.spec?.content ?? props.configuration.content
+ const url = props.configuration.spec?.url ?? props.configuration.url;
+ const currentRoute = useRoute();
+ const meta = currentRoute.meta;
+-const document = useState("document", () => null);
++// Each configured Scalar route needs its own document state. A shared key causes
++// client-side navigation between configurations to reuse the first fetched spec.
++const document = useState(`scalar-document:${String(currentRoute.name)}`, () => null);
+ if (!document.value) {
+   if (typeof content === "function") {
+     document.value = content();
