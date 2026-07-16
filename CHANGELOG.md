@@ -1,3 +1,10 @@
+## [1.3.2](https://github.com/onderwijsin/docus-plus/compare/v1.3.1...v1.3.2) (2026-07-16)
+
+
+### Bug Fixes
+
+* Update docs build command ([cc4a5bc](https://github.com/onderwijsin/docus-plus/commit/cc4a5bc987cdcde4ef3740efd893329be25c6216))
+
 ## [1.3.1](https://github.com/onderwijsin/docus-plus/compare/v1.3.0...v1.3.1) (2026-07-16)
 
 
