@@ -1,0 +1,24 @@
+{
+  "$schema": "https://schema.railpack.com",
+  "steps": {
+    "install": {
+      "secrets": ["*"],
+      "commands": [
+        {
+          "cmd": "sh -c 'export PROTON_PASS_CLI_INSTALL_DIR=/usr/local/bin && curl -fsSL https://proton.me/download/pass-cli/install.sh | bash'",
+          "customName": "install pass-cli"
+        },
+        "..."
+      ]
+    }
+  },
+  "deploy": {
+    "inputs": [
+      "...",
+      {
+        "step": "install",
+        "include": ["/usr/local/bin/pass-cli"]
+      }
+    ]
+  }
+}
