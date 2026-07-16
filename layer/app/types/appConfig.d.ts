@@ -1,5 +1,8 @@
+import type { OpenApiSourceMenuItem } from "../../modules/openapi/build/openapi";
+
 declare module "nuxt/schema" {
   interface AppConfigInput {
+    openApiSources?: OpenApiSourceMenuItem[];
     statusPage?: string;
     publisher: {
       name: string;
@@ -12,6 +15,7 @@ declare module "nuxt/schema" {
     };
   }
   interface AppConfig {
+    openApiSources: OpenApiSourceMenuItem[];
     statusPage?: string;
     publisher: {
       name: string;

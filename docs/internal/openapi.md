@@ -11,7 +11,7 @@ unsupported external `$ref` references.
 Consumers that need this feature configure the source in their application and should bundle
 multi-file specifications before the build.
 
-Scalar also accepts its native `configurations` array in `nuxt.config.ts`. Each configuration can
+The layer accepts API documents through `openApi.configurations` in `nuxt.config.ts`. Each configuration can
 set its own `url` (or `content`) and `pathRouting.basePath` segment. The layer appends that segment
 to `/api-reference`, so `/yaml` becomes `/api-reference/yaml`. The layer enables Scalar when this
 array contains a valid document configuration, even when the OpenAPI environment variables are

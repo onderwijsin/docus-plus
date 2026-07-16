@@ -6,7 +6,8 @@ import { SCALAR_BASE_PATH } from "#layers/docus-plus/config/constants";
 import {
   getOpenApiScalarUrl,
   getOpenApiSource,
-  getScalarConfigurations,
+  getOpenApiConfigurations,
+  getOpenApiSources,
   getScalarReferences,
   hasOpenApiSource
 } from "./build/openapi";
@@ -77,13 +78,17 @@ export default defineNuxtModule<ModuleOptions>({
     start();
 
     const resolver = createResolver(import.meta.url);
-    addTypeTemplate({
-      filename: "types/openapi-config.d.ts",
-      src: resolver.resolve("./build/types/config.d.ts")
-    });
+    addTypeTemplate(
+      {
+        filename: "types/openapi-config.d.ts",
+        src: resolver.resolve("./build/types/config.d.ts")
+      },
+      { node: true, shared: true }
+    );
 
-    const scalarConfigurations = getScalarConfigurations(nuxt.options.scalar);
-    const scalarReferences = getScalarReferences(nuxt.options.scalar);
+    const scalarConfigurations = getOpenApiConfigurations(nuxt.options.openApi);
+    const scalarReferences = getScalarReferences(nuxt.options.openApi);
+    const openApiSources = getOpenApiSources(nuxt.options.openApi);
     const hasConfiguredScalar = scalarConfigurations.length > 0;
     const isConfigured = isEnabled() && (hasOpenApiSource() || hasConfiguredScalar);
 
@@ -100,11 +105,21 @@ export default defineNuxtModule<ModuleOptions>({
       } as typeof nuxt.options.scalar;
     }
 
+    (nuxt.options.appConfig as { openApiSources?: typeof openApiSources }).openApiSources =
+      openApiSources;
+
     nuxt.options.runtimeConfig.public.scalar = {
       enabled: isConfigured,
       references: hasConfiguredScalar
         ? scalarReferences
-        : [{ path: SCALAR_BASE_PATH, label: "API Reference", default: true }]
+        : [
+            {
+              path: SCALAR_BASE_PATH,
+              label: "API Reference",
+              default: true,
+              excludeFromSearch: false
+            }
+          ]
     };
 
     nuxt.options.routeRules ??= {};
