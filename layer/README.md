@@ -243,7 +243,7 @@ runtime or feature is enabled.
 | `TURNSTILE_SECRET_KEY`          | string, sensitive                              | No                                            |
 | `MISTRAL_API_KEY`               | string, sensitive                              | Yes                                           |
 | `OPENAPI_SOURCE_TYPE`           | `local \| remote`                              | No                                            |
-| `OPENAPI_LOCATION`              | string                                         | No                                            |
+| `OPENAPI_SOURCE_LOCATION`       | string                                         | No                                            |
 | `AI_GATEWAY_API_KEY`            | string, sensitive                              | Yes                                           |
 | `CLOUDFLARE_WORKER_NAME`        | string                                         | Conditional: `NITRO_PRESET=cloudflare_module` |
 | `CLOUDFLARE_ACCOUNT_ID`         | string                                         | Conditional: `NITRO_PRESET=cloudflare_module` |

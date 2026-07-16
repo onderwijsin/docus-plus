@@ -16,6 +16,7 @@
   ],
   "type": "module",
   "main": "./nuxt.config.ts",
+  "types": "./nuxt.schema.d.ts",
   "publishConfig": {
     "access": "public"
   },
