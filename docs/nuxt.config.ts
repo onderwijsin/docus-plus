@@ -22,22 +22,21 @@ export default defineNuxtConfig({
   openApi: {
     configurations: [
       {
-        title: "Example API Reference",
+        title: "Scalar Galaxy API",
         url: "https://registry.scalar.com/@scalar/apis/galaxy?format=yaml",
         pathRouting: {
           basePath: "/"
         }
       },
       {
-        title: "Another API Reference",
-        // url: "https://registry.scalar.com/@scalar/apis/galaxy?format=yaml",
-        url: "https://registry.scalar.com/@onderwijsin/apis/dynamic-onderwijsloket-api-specification@latest",
+        title: "PokéAPI",
+        url: "https://raw.githubusercontent.com/PokeAPI/pokeapi/master/openapi.yml",
         pathRouting: {
           basePath: "/v1"
         },
         badge: {
-          label: "deprecated",
-          color: "neutral",
+          label: "new",
+          color: "success",
           variant: "soft",
           size: "xs"
         }
