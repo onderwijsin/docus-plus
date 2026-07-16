@@ -16,12 +16,6 @@ export default defineNuxtConfig({
   },
 
   vite: {
-    // Layer source is compiled from the workspace, but its tsconfig references
-    // generated layer-local Nuxt files that are not present in this app build.
-    // Type checking still uses the packages' tsconfig files via `nuxt typecheck`.
-    esbuild: {
-      tsconfigRaw: "{}"
-    },
     plugins: [varlockVitePlugin({ ssrInjectMode: "auto-load" })]
   },
 
