@@ -1,5 +1,5 @@
 seo:
-  title: Example Docs
+  title: Starter Docs
   description: A small example documentation site built with the Docus Plus layer.
 hero:
   headline: Docus Plus starter
@@ -12,7 +12,7 @@ hero:
       color: primary
       size: xl
       trailingIcon: i-lucide-arrow-right
-    - label: Browse the guides
+    - label: Write Content
       to: /guides/working-with-content
       color: neutral
       variant: outline
