@@ -128,7 +128,8 @@ export default defineContentConfig({
         cta: z.object({
           title: z.string().nonempty(),
           description: z.string().nonempty(),
-          links: z.array(createLinkSchema())
+          links: z.array(createLinkSchema()),
+          command: z.string().optional()
         })
       })
     }),

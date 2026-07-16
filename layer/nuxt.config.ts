@@ -33,7 +33,8 @@ export default defineNuxtConfig({
     join(currentDir, "./modules/ai"),
     "nuxt-schema-org",
     "@nuxtjs/turnstile",
-    "@nuxtjs/plausible"
+    "@nuxtjs/plausible",
+    "@vueuse/nuxt"
   ],
 
   hooks: {

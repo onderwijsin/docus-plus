@@ -45,6 +45,7 @@ features:
 cta:
   title: From starter to production in no time
   description: Create a project from the template, add your configuration, content, and assets. You'll be ready to ship before you know it.
+  command: npx create-docus-plus
   links:
     - label: Read the guide
       to: /getting-started

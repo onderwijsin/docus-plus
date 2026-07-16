@@ -42,6 +42,8 @@
     "@scalar/openapi-parser": "^0.28.8",
     "@types/cloudflare-turnstile": "^0.2.2",
     "@varlock/vite-integration": "^1.2.1",
+    "@vueuse/core": "^14.3.0",
+    "@vueuse/nuxt": "^14.3.0",
     "ai": "^7.0.22",
     "better-sqlite3": "^12.11.1",
     "class-variance-authority": "^0.7.1",
