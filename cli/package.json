@@ -1,6 +1,6 @@
 {
   "name": "create-docus-plus",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "private": false,
   "description": "CLI for creating Docus Plus documentation projects",
   "license": "MIT",
