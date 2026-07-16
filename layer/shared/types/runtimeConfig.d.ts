@@ -21,6 +21,9 @@ declare module "nuxt/schema" {
       isTest: boolean;
       value: Environment;
     };
+    tracking: {
+      disabled: boolean;
+    };
   }
 }
 
