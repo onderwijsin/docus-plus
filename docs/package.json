@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "nuxt dev",
     "dev:prepare": "nuxt prepare",
-    "build": "nuxt cleanup && NODE_OPTIONS=\"--max-old-space-size=8192\" pnpm build",
+    "build": "nuxt cleanup && NODE_OPTIONS=\"--max-old-space-size=8192\" nuxt build",
     "start": "node .output/server/index.mjs",
     "start:cloudflare": "node .output/server/index.mjs",
     "typecheck": "nuxt typecheck",
