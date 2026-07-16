@@ -1,3 +1,10 @@
+## [1.4.1](https://github.com/onderwijsin/docus-plus/compare/v1.4.0...v1.4.1) (2026-07-16)
+
+
+### Bug Fixes
+
+* Remove root ts config and fix ts config extensions ([134f0be](https://github.com/onderwijsin/docus-plus/commit/134f0be90f3fec2c1bd592b3e7ec628ffe158175))
+
 # [1.4.0](https://github.com/onderwijsin/docus-plus/compare/v1.3.2...v1.4.0) (2026-07-16)
 
 
