@@ -5,9 +5,9 @@
   "scripts": {
     "dev": "nuxt dev",
     "dev:prepare": "nuxt prepare",
-    "build": "nuxt build",
-    "build:coolify": "nuxt cleanup && NODE_OPTIONS=\"--max-old-space-size=8192\" pnpm build",
+    "build": "nuxt cleanup && NODE_OPTIONS=\"--max-old-space-size=8192\" pnpm build",
     "start": "node .output/server/index.mjs",
+    "start:cloudflare": "node .output/server/index.mjs",
     "typecheck": "nuxt typecheck",
     "env:check": "varlock load",
     "env:typegen": "varlock codegen"

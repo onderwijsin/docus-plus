@@ -55,6 +55,7 @@ export default defineNuxtModule({
     });
     const layerDir = resolver.resolve("../app");
     const assistantDir = resolver.resolve("../modules/assistant");
+    const mailchimpDir = resolver.resolve("../modules/mailchimp");
 
     let userDocusPath: string | null = resolve(nuxt.options.srcDir, "app.css");
     if (existsSync(userDocusPath)) {
@@ -84,6 +85,7 @@ export default defineNuxtModule({
     @source "${layerDir.replace(/\\/g, "/")}/**/*";
     @source "${appConfigPath.replace(/\\/g, "/")}";
     @source "${assistantDir.replace(/\\/g, "/")}/**/*";
+    @source "${mailchimpDir.replace(/\\/g, "/")}/**/*";
 
     html.dark .shiki span {
       color: var(--shiki-dark) !important;
