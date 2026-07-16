@@ -1,4 +1,4 @@
-![Stichting Onderwijs in](https://raw.githubusercontent.com/onderwijsin/docus-plus/main/public/onderwijsin_banner.png)
+![Stichting Onderwijs in](https://raw.githubusercontent.com/onderwijsin/.github/main/banner.png)
 
 # Create Docus Plus
 
@@ -11,8 +11,8 @@ content, UI overrides, multi-source Scalar references, Oxlint, and Oxfmt.
 ```bash
 npx create-docus-plus my-docs
 cd my-docs
-corepack pnpm install
-corepack pnpm dev
+pnpm install
+pnpm dev
 ```
 
 The command asks for a package name when one is not supplied. It also works fully interactively:
@@ -45,6 +45,6 @@ npx create-docus-plus ./my-docs --name my-docs --force
 
 ## Next steps
 
-After installing dependencies, start the development server with `corepack pnpm dev`. See the
+After installing dependencies, start the development server with `pnpm dev`. See the
 [Docus Plus documentation](https://docus-plus.onderwijsin.nl) for configuration and deployment
 guidance.

@@ -35,8 +35,8 @@ export function showSuccess(name: string, dir: string) {
     `\n${green(bold("✓ Your Docus Plus site is ready!"))}\n\n` +
       `${bold("Next steps")}\n` +
       `  ${cyan("1.")} cd ${dir}\n` +
-      `  ${cyan("2.")} corepack pnpm install\n` +
-      `  ${cyan("3.")} corepack pnpm dev\n\n` +
+      `  ${cyan("2.")} pnpm install\n` +
+      `  ${cyan("3.")} pnpm dev\n\n` +
       `Happy documenting, ${bold(name)}.\n`
   );
 }

@@ -1,13 +1,10 @@
-![Stichting Onderwijs in](https://raw.githubusercontent.com/onderwijsin/docus-plus/main/public/onderwijsin_banner.png)
+![Stichting Onderwijs in](https://raw.githubusercontent.com/onderwijsin/.github/main/banner.png)
 
 # Docus Plus
 
 `docus-plus` is a reusable Nuxt layer for building documentation sites with Nuxt 4, Docus, and
-Nuxt Content. It provides an opinionated approach to Docus, and extends it with Scalar API referenced,
-enhanced search, Vercel Gateway-free assistant integration, and release notes.
-
-The repository contains the published layer, the official documentation site, an integration
-playground, and a standalone starter template.
+Nuxt Content. It provides an opinionated approach to Docus, and extends it with Scalar API reference,
+enhanced search, Vercel Gateway-free assistant integration, and a release notes timeline.
 
 For detailed guidance, visit [docus-plus.onderwijsin.nl](https://docus-plus.onderwijsin.nl). The
 repository's `.starters/default/` directory is a complete starting point that you can copy into a
@@ -19,7 +16,7 @@ Start with a fresh Nuxt 4 project, install the package, and extend it from your 
 `nuxt.config.ts`:
 
 ```bash
-corepack pnpm add @onderwijsin/docus-plus
+pnpm add @onderwijsin/docus-plus
 ```
 
 ```ts
@@ -213,9 +210,9 @@ This repository is a pnpm workspace. The official docs application is the defaul
 target, while the playground is the compact, feature-complete integration harness:
 
 ```bash
-corepack pnpm install
-corepack pnpm dev              # Run the official docs site
-corepack pnpm playground:dev   # Run the feature playground
+pnpm install
+pnpm dev              # Run the official docs site
+pnpm playground:dev   # Run the feature playground
 ```
 
 Both applications extend the local workspace package. Use `.starters/default/` for the complete
@@ -305,10 +302,10 @@ the generated type contract in version control.
 Useful checks are:
 
 ```bash
-corepack pnpm typecheck
-corepack pnpm fmt:check
-corepack pnpm lint
-corepack pnpm build
+pnpm typecheck
+pnpm fmt:check
+pnpm lint
+pnpm build
 ```
 
 ## Repository structure
