@@ -66,7 +66,7 @@ async function onSubmit(event: FormSubmitEvent<MailchimpBaseSubscriberSchema>) {
     ref="form"
     :state="state"
     :schema="baseSubscriberSchema"
-    class="floating-error-message relative flex sm:-mr-1"
+    class="floating-error-message relative flex"
     @submit="onSubmit"
   >
     <NuxtTurnstile

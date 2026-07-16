@@ -46,7 +46,6 @@ const mailchimp = publicConfig.mailchimp;
           class="absolute z-[-1] rounded-full bg-primary blur-[300px] size-60 sm:size-80 transform -translate-x-1/2 left-1/2 -translate-y-80"
         />
       </template>
-
       <MailchimpSignup v-if="mailchimp.enabled" class="max-w-lg w-full mx-auto" />
 
       <div
