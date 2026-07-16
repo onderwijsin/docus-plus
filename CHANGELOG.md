@@ -1,3 +1,11 @@
+## [1.4.2](https://github.com/onderwijsin/docus-plus/compare/v1.4.1...v1.4.2) (2026-07-16)
+
+
+### Bug Fixes
+
+* Force layer prepare before running consumer ([91ee961](https://github.com/onderwijsin/docus-plus/commit/91ee96186480630531789ad9706fd67bf7ef117b))
+* Prevent vite from following auto generated tsconfig in prod build ([884e44f](https://github.com/onderwijsin/docus-plus/commit/884e44f20cd80762e5bed3a09a96dbb5ee79ea44))
+
 ## [1.4.1](https://github.com/onderwijsin/docus-plus/compare/v1.4.0...v1.4.1) (2026-07-16)
 
 
