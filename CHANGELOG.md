@@ -1,3 +1,17 @@
+# [1.4.0](https://github.com/onderwijsin/docus-plus/compare/v1.3.2...v1.4.0) (2026-07-16)
+
+
+### Bug Fixes
+
+* First article fetch for header; ([e11b3ac](https://github.com/onderwijsin/docus-plus/commit/e11b3ac184efc7340f4e5a60db80371d74920f03))
+* **openapi:** Isolate Scalar document state per configuration ([66d14a4](https://github.com/onderwijsin/docus-plus/commit/66d14a4693325c40f162cfe0c431c139937803dc))
+* Recursive build script ([a33ee85](https://github.com/onderwijsin/docus-plus/commit/a33ee859c4cb3619fe597385bb939dc0e0834388))
+
+
+### Features
+
+* Add tracking composable ([9a9ebd8](https://github.com/onderwijsin/docus-plus/commit/9a9ebd8dfdeff6f20e2f22fb2ddcfb8c82da734e))
+
 ## [1.3.2](https://github.com/onderwijsin/docus-plus/compare/v1.3.1...v1.3.2) (2026-07-16)
 
 
