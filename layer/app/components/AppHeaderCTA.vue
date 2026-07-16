@@ -10,7 +10,7 @@ const currentReference = computed(() =>
 );
 
 const { data: firstArticle } = await useAsyncData("first-article", () =>
-  queryCollection("docs").first()
+  queryCollection("docs").where("extension", "=", "md").select("path").first()
 );
 </script>
 

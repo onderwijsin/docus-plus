@@ -30,7 +30,8 @@ export default defineNuxtConfig({
       },
       {
         title: "Another API Reference",
-        url: "https://registry.scalar.com/@scalar/apis/galaxy?format=yaml",
+        // url: "https://registry.scalar.com/@scalar/apis/galaxy?format=yaml",
+        url: "https://registry.scalar.com/@onderwijsin/apis/dynamic-onderwijsloket-api-specification@latest",
         pathRouting: {
           basePath: "/v1"
         },

@@ -25,6 +25,8 @@ defineOgImage("Docs" as keyof OgImageComponents, {
   title: page.seo?.title?.slice(0, 60),
   description: formatOgDescription(page.seo?.title, page.seo?.description ?? page.hero.description)
 });
+
+const { copy, copied } = useClipboard();
 </script>
 
 <template>
@@ -120,6 +122,17 @@ defineOgImage("Docs" as keyof OgImageComponents, {
       <template #links>
         <div class="flex flex-wrap items-center justify-center gap-3">
           <UButton v-for="link in page.cta.links" :key="link.label" v-bind="link" size="xl" />
+          <UButton
+            v-if="page.cta.command"
+            :label="page.cta.command"
+            :trailing-icon="copied ? 'i-lucide-copy-check' : 'i-lucide-copy'"
+            color="neutral"
+            variant="subtle"
+            class="font-mono font-light text-toned gap-4"
+            size="xl"
+            :ui="{ trailingIcon: 'size-4' }"
+            @click="copy(page.cta.command)"
+          />
         </div>
       </template>
     </UPageCTA>
