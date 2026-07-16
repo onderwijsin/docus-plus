@@ -3,8 +3,8 @@
 # Create Docus Plus
 
 Create a complete, standalone Docus Plus documentation site from the maintained default starter.
-The generated project extends the published `@onderwijsin/docus-plus` package and includes working
-content, UI overrides, multi-source Scalar references, Oxlint, and Oxfmt.
+The CLI delegates project creation to Nuxt's initializer, which downloads the starter directly from
+the Docus Plus repository.
 
 ## Quick start
 
@@ -15,33 +15,14 @@ pnpm install
 pnpm dev
 ```
 
-The command asks for a package name when one is not supplied. It also works fully interactively:
+When no destination is supplied, it creates a project in `./docs`:
 
 ```bash
 npx create-docus-plus
 ```
 
-## Automation
-
-Pass both the destination and a valid npm package name in non-interactive environments:
-
-```bash
-npx create-docus-plus ./my-docs --name my-docs
-```
-
-Project names may contain lowercase letters, numbers, dots, hyphens, and underscores. Scoped names
-such as `@example/my-docs` are also supported.
-
-## Existing directories
-
-The generator refuses to write to a non-empty directory. To intentionally copy the starter into an
-existing directory, use `--force`:
-
-```bash
-npx create-docus-plus ./my-docs --name my-docs --force
-```
-
-`--force` may overwrite files supplied by the starter. Review the target directory first.
+Nuxt's initializer handles prompts, package metadata, and an existing destination consistently with
+other Nuxt starters.
 
 ## Next steps
 
