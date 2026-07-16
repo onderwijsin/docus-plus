@@ -26,6 +26,9 @@ export default defineNuxtConfig({
   $meta: {
     name: "docus-plus"
   },
+  alias: {
+    "#layers/docus-plus": currentDir
+  },
   extends: ["docus"],
   devtools: { enabled: true },
 
