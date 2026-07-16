@@ -19,11 +19,7 @@ export default defineNuxtConfig({
     plugins: [varlockVitePlugin({ ssrInjectMode: "auto-load" })]
   },
 
-  scalar: {
-    metaData: {
-      title: "Docus Plus"
-    },
-    slug: "scalar-galaxy",
+  openApi: {
     configurations: [
       {
         title: "Example API Reference",
@@ -46,5 +42,12 @@ export default defineNuxtConfig({
         }
       }
     ]
+  },
+
+  scalar: {
+    metaData: {
+      title: "Docus Plus"
+    },
+    slug: "scalar-galaxy"
   }
 });

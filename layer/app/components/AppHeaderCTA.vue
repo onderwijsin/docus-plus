@@ -1,19 +1,12 @@
 <script lang="ts" setup>
 import { SCALAR_BASE_PATH } from "#layers/docus-plus/config/constants";
-import type { BadgeProps } from "@nuxt/ui";
 
 const { scalar } = useRuntimeConfig().public;
+const appConfig = useAppConfig();
 const route = useRoute();
 const isExplorer = computed(() => route.path.startsWith(SCALAR_BASE_PATH));
 const currentReference = computed(() =>
-  scalar.references.find((reference) => route.path.startsWith(reference.path))
-);
-const referenceItems = computed(() =>
-  scalar.references.map((reference) => ({
-    label: reference.label,
-    to: reference.path,
-    badge: reference.badge as BadgeProps | undefined
-  }))
+  appConfig.openApiSources.find((reference) => route.path.startsWith(reference.to))
 );
 
 const { data: firstArticle } = await useAsyncData("first-article", () =>
@@ -23,8 +16,8 @@ const { data: firstArticle } = await useAsyncData("first-article", () =>
 
 <template>
   <UDropdownMenu
-    v-if="scalar.enabled && scalar.references.length > 1 && !isExplorer"
-    :items="referenceItems"
+    v-if="scalar.enabled && appConfig.openApiSources.length > 1 && !isExplorer"
+    :items="appConfig.openApiSources"
     :content="{ align: 'end' }"
     open-on-hover
     class="hidden lg:inline-flex"
@@ -39,7 +32,7 @@ const { data: firstArticle } = await useAsyncData("first-article", () =>
   </UDropdownMenu>
   <UButton
     v-else-if="scalar.enabled"
-    :to="isExplorer ? firstArticle?.path || '/' : currentReference?.path || SCALAR_BASE_PATH"
+    :to="isExplorer ? firstArticle?.path || '/' : currentReference?.to || SCALAR_BASE_PATH"
     color="primary"
     size="sm"
     variant="soft"

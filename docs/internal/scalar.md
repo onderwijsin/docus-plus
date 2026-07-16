@@ -10,3 +10,7 @@ encoded consistently.
 
 Scalar styling follows the layer's color-mode and CSS token conventions. Consumers should import
 the layer stylesheet before adding their own tokens in `app/app.css`.
+
+Configure multiple documents through `openApi.configurations`. The OpenAPI module translates them
+to Scalar's native `scalar.configurations` option after Nuxt reads the consumer configuration, while
+the app receives the API Explorer dropdown data through `appConfig.openApiSources`.

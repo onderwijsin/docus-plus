@@ -22,11 +22,7 @@ export default defineNuxtConfig({
       "Read-only content discovery for Example Docs, including guides and reference materials."
   },
 
-  scalar: {
-    metaData: {
-      title: APP_IDENTITY.siteTitle
-    },
-    slug: "example-api-reference",
+  openApi: {
     configurations: [
       {
         title: "yaml",
@@ -49,5 +45,12 @@ export default defineNuxtConfig({
         }
       }
     ]
+  },
+
+  scalar: {
+    metaData: {
+      title: APP_IDENTITY.siteTitle
+    },
+    slug: "example-api-reference"
   }
 });

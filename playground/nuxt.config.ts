@@ -11,11 +11,7 @@ export default defineNuxtConfig({
     description: "Feature-complete local documentation integration testing."
   },
 
-  scalar: {
-    metaData: {
-      title: "Docus Plus Playground API"
-    },
-    slug: "api-reference",
+  openApi: {
     configurations: [
       {
         title: "Galaxy YAML",
@@ -34,5 +30,12 @@ export default defineNuxtConfig({
         }
       }
     ]
+  },
+
+  scalar: {
+    metaData: {
+      title: "Docus Plus Playground API"
+    },
+    slug: "api-reference"
   }
 });

@@ -12,7 +12,7 @@ import { joinURL } from "ufo";
 const { options } = useNuxt();
 const cwd = joinURL(options.rootDir, "content");
 const appRootDir = options.rootDir;
-const scalarOpenApiSource = getScalarOpenApiSource(options.scalar);
+const scalarOpenApiSource = getScalarOpenApiSource(options.openApi);
 const configuredOpenApiSource = scalarOpenApiSource?.source;
 const openApiSource =
   configuredOpenApiSource ?? (hasOpenApiSource() ? getOpenApiSource() : undefined);

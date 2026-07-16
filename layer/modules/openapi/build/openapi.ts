@@ -44,24 +44,29 @@ export type ScalarReference = {
   excludeFromSearch: boolean;
   badge?: BadgeProps;
 };
+export type OpenApiSourceMenuItem = {
+  label: string;
+  to: string;
+  badge?: BadgeProps;
+};
 export type ScalarOpenApiSource = { source: OpenApiSource; basePath: string };
 
-/** Return configured Scalar documents supplied through Nuxt config. */
-export function getScalarConfigurations(
+/** Return configured OpenAPI documents supplied through the layer config. */
+export function getOpenApiConfigurations(
   value: unknown
 ): z.infer<typeof scalarOptionsSchema>["configurations"] {
   const parsed = scalarOptionsSchema.safeParse(value);
   return parsed.success ? parsed.data.configurations : [];
 }
 
-/** Whether Nuxt config contains at least one usable Scalar document configuration. */
-export function hasScalarConfigurations(value: unknown): boolean {
-  return getScalarConfigurations(value).length > 0;
+/** Whether the layer config contains at least one usable document configuration. */
+export function hasOpenApiConfigurations(value: unknown): boolean {
+  return getOpenApiConfigurations(value).length > 0;
 }
 
 /** Return the configuration used to populate the generated OpenAPI search collection. */
-export function getIndexedScalarConfiguration(value: unknown): ScalarConfiguration | undefined {
-  const configurations = getScalarConfigurations(value);
+export function getIndexedOpenApiConfiguration(value: unknown): ScalarConfiguration | undefined {
+  const configurations = getOpenApiConfigurations(value);
   return configurations.find((configuration) => configuration.indexed) ?? configurations[0];
 }
 
@@ -72,7 +77,7 @@ function normalizeScalarBasePath(basePath: string | undefined, fallback: string)
 
 /** Normalize Scalar documents into the small public shape needed by the app header. */
 export function getScalarReferences(value: unknown): ScalarReference[] {
-  const configurations = getScalarConfigurations(value);
+  const configurations = getOpenApiConfigurations(value);
   return configurations.map((configuration, index) => ({
     path: normalizeScalarBasePath(
       configuration.pathRouting?.basePath,
@@ -88,9 +93,18 @@ export function getScalarReferences(value: unknown): ScalarReference[] {
   }));
 }
 
+/** Build the API Explorer dropdown items exposed through app config. */
+export function getOpenApiSources(value: unknown): OpenApiSourceMenuItem[] {
+  return getScalarReferences(value).map(({ label, path, badge }) => ({
+    label,
+    to: path,
+    badge
+  }));
+}
+
 /** Resolve the selected Scalar configuration into a source for build-time OpenAPI indexing. */
 export function getScalarOpenApiSource(value: unknown): ScalarOpenApiSource | undefined {
-  const configurations = getScalarConfigurations(value);
+  const configurations = getOpenApiConfigurations(value);
   const indexedIndex = configurations.findIndex((configuration) => configuration.indexed);
   const index = indexedIndex >= 0 ? indexedIndex : 0;
   const configuration = configurations[index];
