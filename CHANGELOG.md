@@ -1,3 +1,10 @@
+## [1.4.3](https://github.com/onderwijsin/docus-plus/compare/v1.4.2...v1.4.3) (2026-07-16)
+
+
+### Bug Fixes
+
+* Newsletter signup alignment ([0a72f26](https://github.com/onderwijsin/docus-plus/commit/0a72f2656ef5c9400e64a931a06cbf3810fe6059))
+
 ## [1.4.2](https://github.com/onderwijsin/docus-plus/compare/v1.4.1...v1.4.2) (2026-07-16)
 
 
