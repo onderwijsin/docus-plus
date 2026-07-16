@@ -3,7 +3,8 @@ seo:
   description: A small example documentation site built with the Docus Plus layer.
 hero:
   headline: Docus Plus starter
-  title: Build on a complete documentation foundation
+  title: Build on a <span class="gradient-text">complete documentation</span> foundation
+  title_as_html: true
   description: Start with working content, UI overrides, multi-source API references, and integrations, then make the site your own.
   links:
     - label: Get started

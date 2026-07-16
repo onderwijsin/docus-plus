@@ -29,9 +29,22 @@ defineOgImage("Docs" as keyof OgImageComponents, {
 
 <template>
   <div>
-    <UPageHero :links="page.hero.links">
+    <UPageHero
+      :links="page.hero.links"
+      :ui="{
+        title: 'max-w-5xl mx-auto',
+        description: 'max-w-6xl mx-auto',
+        headline: 'font-mono'
+      }"
+    >
       <template #top>
         <GradientGlow class="top-1/2 -translate-y-1/2 w-full h-2/3" />
+      </template>
+      <template v-if="page.hero.headline" #headline>
+        <UBadge class="rounded-full px-3" color="neutral" variant="soft" chip="primary" size="lg">
+          <UChip standalone inset class="mr-2 animate-pulse" />
+          <span>{{ page.hero.headline }}</span>
+        </UBadge>
       </template>
       <template #title>
         <span v-if="page.hero.title_as_html" v-html="page.hero.title"></span>

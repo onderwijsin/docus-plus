@@ -17,5 +17,34 @@ export default defineNuxtConfig({
 
   vite: {
     plugins: [varlockVitePlugin({ ssrInjectMode: "auto-load" })]
+  },
+
+  scalar: {
+    metaData: {
+      title: "Docus Plus"
+    },
+    slug: "scalar-galaxy",
+    configurations: [
+      {
+        title: "Example API Reference",
+        url: "https://registry.scalar.com/@scalar/apis/galaxy?format=yaml",
+        pathRouting: {
+          basePath: "/"
+        }
+      },
+      {
+        title: "Another API Reference",
+        url: "https://registry.scalar.com/@scalar/apis/galaxy?format=yaml",
+        pathRouting: {
+          basePath: "/v1"
+        },
+        badge: {
+          label: "deprecated",
+          color: "neutral",
+          variant: "soft",
+          size: "xs"
+        }
+      }
+    ]
   }
 });
