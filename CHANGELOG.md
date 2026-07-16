@@ -1,3 +1,11 @@
+## [1.3.1](https://github.com/onderwijsin/docus-plus/compare/v1.3.0...v1.3.1) (2026-07-16)
+
+
+### Bug Fixes
+
+* Newsletter banner styles and config ([bdbaf93](https://github.com/onderwijsin/docus-plus/commit/bdbaf93b4e5099f666de62e42a309838edffc554))
+* **openapi:** Support local scalar configurations ([0695dd3](https://github.com/onderwijsin/docus-plus/commit/0695dd3779af3215b8e242df4f0aadafdde8b907))
+
 # [1.3.0](https://github.com/onderwijsin/docus-plus/compare/v1.2.0...v1.3.0) (2026-07-15)
 
 
