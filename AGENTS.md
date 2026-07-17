@@ -25,7 +25,8 @@ generic and useful to every consumer, put it in the layer and document the exten
   is explicitly requested.
 - Do not create or configure a repository-local PNPM store.
 - Do not edit `.husky/**`, `.agents/skills/**`, or `layer/modules/*/runtime/types/**` unless explicitly
-  requested. Put runtime type augmentation in the supported server/runtime location.
+  requested.
+- Put runtime type augmentation in the supported server/runtime location.
 - Use Zod for boundary validation where applicable.
 - Wrap JSON API responses with `useApiResponse(...)`, except passthrough, proxy, and streaming
   responses.
